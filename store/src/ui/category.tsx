@@ -3,7 +3,7 @@ import { MoveRightIcon } from 'lucide-react'
 import Link from 'next/link'
 
 function Category({ className, ...props }: DivProps) {
-  return <div className={clsx('lg:w-8xl max-w-full  ', className)} {...props} />
+  return <div className={clsx('lg:w-7xl max-w-full  ', className)} {...props} />
 }
 function CategoryHeader({
   href,

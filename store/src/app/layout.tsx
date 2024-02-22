@@ -1,9 +1,8 @@
-import { getCategoriesWithProducts } from '@/db/category'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Footer } from './footer'
 import './globals.css'
-import { Header } from './header'
+import { Header, TopBanner } from './header'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,12 +16,12 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const categories = await getCategoriesWithProducts()
   return (
-    <html lang="fr" className="scroll-smooth">
+    <html lang="fr" className="scroll-smooth text-gray-900">
       <body className={inter.className}>
-        <Header categories={categories} />
-        <div className="max-w-8xl mx-auto">{children}</div>
+        <TopBanner />
+        <Header />
+        <div className="mx-auto">{children}</div>
         <Footer />
       </body>
     </html>

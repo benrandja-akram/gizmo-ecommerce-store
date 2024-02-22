@@ -8,6 +8,7 @@ import {
   type DialogProps as HeadlessDialogProps,
 } from '@headlessui/react'
 import clsx from 'clsx'
+import { XIcon } from 'lucide-react'
 import type React from 'react'
 import { Fragment } from 'react'
 import { Text } from './text'
@@ -47,11 +48,11 @@ export function Dialog({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 flex w-screen justify-center overflow-y-auto bg-zinc-950/25 px-2 py-2 focus:outline-0 sm:px-6 sm:py-8 lg:px-8 lg:py-16 dark:bg-zinc-950/50" />
+          <div className="fixed inset-0 z-20 flex w-screen justify-center overflow-y-auto bg-zinc-950/25 px-2 py-2 focus:outline-0 sm:px-6 sm:py-8 lg:px-8 lg:py-16 dark:bg-zinc-950/50" />
         </HeadlessTransitionChild>
 
         <HeadlessTransitionChild
-          className="fixed inset-0 w-screen overflow-y-auto pt-6 sm:pt-0"
+          className="fixed inset-0 z-50 w-screen overflow-y-auto pt-6 sm:pt-0"
           enter="ease-out duration-100"
           enterFrom="opacity-0 translate-y-12 sm:translate-y-0"
           enterTo="opacity-100 translate-y-0"
@@ -115,7 +116,7 @@ export function DialogBody({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<'div'>) {
-  return <div {...props} className={clsx(className, 'mt-6')} />
+  return <div {...props} className={clsx(className, 'mt-6 first:mt-0')} />
 }
 
 export function DialogActions({
@@ -130,5 +131,24 @@ export function DialogActions({
         'mt-8 flex flex-col-reverse items-center justify-end gap-3 *:w-full sm:flex-row sm:*:w-auto',
       )}
     />
+  )
+}
+
+export function DialogClose({
+  className,
+  ...props
+}: React.ComponentPropsWithoutRef<'button'>) {
+  return (
+    <div className={'-mt-5 flex justify-end py-2'}>
+      <button
+        {...props}
+        className={clsx(
+          'text-gray-700 hover:text-gray-900 active:text-gray-900',
+          className,
+        )}
+      >
+        <XIcon className="h-6 w-6" />
+      </button>
+    </div>
   )
 }
