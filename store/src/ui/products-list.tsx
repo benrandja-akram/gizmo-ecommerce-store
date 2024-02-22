@@ -41,7 +41,7 @@ function ProductsList({ className, ...props }: DivProps) {
     >
       <ul
         role="list"
-        className="space grid items-center justify-center gap-10 sm:grid-cols-2 md:mx-0 md:gap-x-8 md:gap-y-8 lg:grid-cols-4"
+        className="space grid grid-cols-2 items-center justify-center gap-4 gap-y-8 md:mx-0 md:gap-x-8 md:gap-y-8 lg:grid-cols-4"
       >
         {props.children}
       </ul>
@@ -49,4 +49,4 @@ function ProductsList({ className, ...props }: DivProps) {
   )
 }
 
-export { ProductsRoot, ProductsHeader, ProductsList }
+export { ProductsHeader, ProductsList, ProductsRoot }

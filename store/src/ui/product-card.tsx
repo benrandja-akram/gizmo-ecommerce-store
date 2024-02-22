@@ -24,7 +24,7 @@ function ProductCard({ ...product }: Props) {
         </Link>
         <Link
           href={`/product/${product.id}`}
-          className="mt-6 block cursor-pointer"
+          className="mt-6 block cursor-pointer text-xs sm:text-base"
         >
           {product.model && (
             <p className="mb-1 text-sm text-gray-500">{product.model}</p>
@@ -32,7 +32,7 @@ function ProductCard({ ...product }: Props) {
 
           <div>
             <h3 className="font-semibold text-gray-900">{product.name}</h3>
-            <p className="mt-1 text-lg font-bold tabular-nums text-gray-900">
+            <p className="mt-1 text-sm font-bold tabular-nums text-gray-900 sm:text-lg">
               {product.price} DA
             </p>
           </div>
@@ -54,8 +54,8 @@ function ProductCard({ ...product }: Props) {
         </Link>
       </div>
       <div className="flex flex-1 flex-col justify-end">
-        <Button className={'mt-4 gap-x-3'} color="white">
-          <ShoppingCartIcon className="w-5 text-gray-500" />
+        <Button className={'mt-4 gap-x-3'}>
+          <ShoppingCartIcon className="hidden w-5 text-gray-500 sm:block" />
           Add to bag
         </Button>
       </div>
