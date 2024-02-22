@@ -5,10 +5,11 @@ import {
   MagnifyingGlassIcon,
   ShoppingCartIcon,
 } from '@heroicons/react/24/outline'
+import type { Category } from '@prisma/client'
 import Link from 'next/link'
 import { useState } from 'react'
 
-export function Header() {
+export function Header({ categories }: { categories: Category[] }) {
   const [open, setOpen] = useState(false)
 
   return (
@@ -28,8 +29,8 @@ export function Header() {
           <div className="border-b border-gray-200 px-4 sm:px-6 lg:px-8">
             <div className="max-w-8xl mx-auto flex h-16 items-center justify-between">
               {/* Logo (lg+) */}
-              <div className="hidden lg:flex lg:items-center">
-                <Link href="/">
+              <div className="hidden space-x-4 lg:flex lg:items-center">
+                <Link href="/" className="mr-12">
                   <span className="sr-only">Your Company</span>
                   <img
                     className="h-8 w-auto"
@@ -37,6 +38,18 @@ export function Header() {
                     alt=""
                   />
                 </Link>
+                {categories.map((category) => {
+                  return (
+                    <Link
+                      key={category.id}
+                      href={`/#category-${category.id}`}
+                      type="button"
+                      className="flex-1 whitespace-nowrap border-b-2  border-transparent px-1 py-4 text-base font-medium  text-gray-700 transition-all hover:text-gray-900"
+                    >
+                      {category.name}
+                    </Link>
+                  )
+                })}
               </div>
 
               {/* Mobile menu and search (lg-) */}

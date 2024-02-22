@@ -1,3 +1,6 @@
+import { Button } from '@/components/button'
+import type { Product } from '@/db'
+import { ShoppingCartIcon } from 'lucide-react'
 import Link from 'next/link'
 
 type Props = Product
@@ -9,40 +12,52 @@ function ProductCard({ ...product }: Props) {
       className="inline-flex w-full flex-col text-center md:w-auto"
     >
       <div className="group relative">
-        <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200">
+        <Link
+          href={`/product/${product.id}`}
+          className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200"
+        >
           <img
-            src={product.imageSrc}
-            alt={product.imageAlt}
-            className="h-full w-full object-cover object-center group-hover:opacity-75"
+            src={product.image}
+            alt={''}
+            className="h-full w-full rounded-md object-cover object-center group-hover:opacity-75"
           />
-        </div>
-        <div className="mt-6">
-          <p className="text-sm text-gray-500">{product.color}</p>
-          <h3 className="mt-1 font-semibold text-gray-900">
-            <Link href={product.href}>
-              <span className="absolute inset-0" />
-              {product.name}
-            </Link>
-          </h3>
-          <p className="mt-1 text-gray-900">{product.price}</p>
-        </div>
+        </Link>
+        <Link
+          href={`/product/${product.id}`}
+          className="mt-6 block cursor-pointer"
+        >
+          {product.model && (
+            <p className="mb-1 text-sm text-gray-500">{product.model}</p>
+          )}
+
+          <div>
+            <h3 className="font-semibold text-gray-900">{product.name}</h3>
+            <p className="mt-1 text-lg font-bold tabular-nums text-gray-900">
+              {product.price} DA
+            </p>
+          </div>
+
+          {!!product.colors?.length && (
+            <ul
+              role="list"
+              className="mt-auto flex items-center justify-center space-x-3 pt-2"
+            >
+              {product.colors.map((color) => (
+                <li
+                  key={color}
+                  className="h-4 w-4 rounded-full border border-black border-opacity-10"
+                  style={{ backgroundColor: color }}
+                />
+              ))}
+            </ul>
+          )}
+        </Link>
       </div>
 
-      <h4 className="sr-only">Available colors</h4>
-      <ul
-        role="list"
-        className="mt-auto flex items-center justify-center space-x-3 pt-6"
-      >
-        {product.availableColors.map((color) => (
-          <li
-            key={color.name}
-            className="h-4 w-4 rounded-full border border-black border-opacity-10"
-            style={{ backgroundColor: color.colorBg }}
-          >
-            <span className="sr-only">{color.name}</span>
-          </li>
-        ))}
-      </ul>
+      <Button className={'mt-4 gap-x-3'} color="white">
+        <ShoppingCartIcon className="w-5 text-gray-500" />
+        Add to bag
+      </Button>
     </div>
   )
 }

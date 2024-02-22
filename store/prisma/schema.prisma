@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator json {
+  provider = "prisma-json-types-generator"
+  // namespace = "PrismaJson"
+  // clientOutput = "<finds it automatically>"
+  // (./ -> relative to schema, or an importable path to require() it)
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id       Int       @id @default(autoincrement())
+  name     String
+  image    String?
+  products Product[]
+
+  @@map("categories")
+}
+
+model Product {
+  id         Int      @id @default(autoincrement())
+  name       String
+  /// [ProductVariant]
+  colors     Json?
+  /// [ProductVariant]
+  sizes      Json?
+  image      String
+  thumbnail  String?
+  price      Int
+  model      String?
+  categoryId Int
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@map("products")
+}

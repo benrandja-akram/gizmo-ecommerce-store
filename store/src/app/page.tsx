@@ -1,3 +1,4 @@
+import { getCategoriesWithProducts } from '@/db/category'
 import { Category, CategoryHeader, CategoryList } from '@/ui/category'
 import { ProductCard } from '@/ui/product-card'
 const offers = [
@@ -14,7 +15,9 @@ const offers = [
     description: '15% off your first order',
   },
 ]
-export default function Home() {
+export default async function Home() {
+  const categories = await getCategoriesWithProducts()
+
   return (
     <main className="grid gap-8 px-4 pb-4 sm:px-6 sm:pb-6 lg:px-8 lg:pb-8">
       <div aria-label="Offers" className="-mx-4 border-b sm:-mx-6 lg:-mx-8">
@@ -44,57 +47,23 @@ export default function Home() {
         </span>
       </h1>
       <div className="grid gap-8 md:gap-16">
-        <Category>
-          <CategoryHeader>Trending products</CategoryHeader>
-          <CategoryList>
-            {products.map((product) => (
-              <li key={product.id}>
-                <ProductCard {...product} />
-              </li>
-            ))}
-          </CategoryList>
-        </Category>
-        <Category>
-          <CategoryHeader>Trending products</CategoryHeader>
-          <CategoryList>
-            {products.map((product) => (
-              <li key={product.id}>
-                <ProductCard {...product} />
-              </li>
-            ))}
-          </CategoryList>
-        </Category>
-        <Category>
-          <CategoryHeader>Trending products</CategoryHeader>
-          <CategoryList>
-            {products.map((product) => (
-              <li key={product.id}>
-                <ProductCard {...product} />
-              </li>
-            ))}
-          </CategoryList>
-        </Category>
+        {categories
+          .filter((c) => c.products.length)
+          .map((category) => {
+            return (
+              <Category key={category.id} id={`category-${category.id}`}>
+                <CategoryHeader>{category.name}</CategoryHeader>
+                <CategoryList>
+                  {category.products.map((product) => (
+                    <li key={product.id}>
+                      <ProductCard {...product} />
+                    </li>
+                  ))}
+                </CategoryList>
+              </Category>
+            )
+          })}
       </div>
     </main>
   )
 }
-
-let products = [
-  {
-    id: 1,
-    name: 'Machined Pen',
-    color: 'Black',
-    price: '$35',
-    href: '/p/id',
-    imageSrc:
-      'https://tailwindui.com/img/ecommerce-images/home-page-02-product-01.jpg',
-    imageAlt:
-      'Black machined steel pen with hexagonal grip and small white logo at top.',
-    availableColors: [
-      { name: 'Black', colorBg: '#111827' },
-      { name: 'Brass', colorBg: '#FDE68A' },
-      { name: 'Chrome', colorBg: '#E5E7EB' },
-    ],
-  },
-]
-products = new Array(4).fill(products[0])
