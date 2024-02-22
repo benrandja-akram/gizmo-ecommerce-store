@@ -1,4 +1,5 @@
 import { getCategories } from '@/db/category'
+import { Logo } from '@/ui/logo'
 import {
   MagnifyingGlassIcon,
   ShoppingCartIcon,
@@ -8,20 +9,16 @@ import { MobileMenu } from './mobile-menu'
 
 async function Header() {
   const categories = await getCategories()
+
   return (
     <header className="sticky top-0 z-10">
-      {/* Secondary navigation */}
-      <nav className=" border-b border-gray-200 bg-white px-4 sm:px-6 lg:px-8">
+      <nav className="border-b border-gray-200 bg-white px-4 shadow-sm sm:px-6 lg:px-8">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between">
           {/* Logo (lg+) */}
           <div className="hidden space-x-4 lg:flex lg:items-center">
             <Link href="/" className="mr-12">
               <span className="sr-only">Your Company</span>
-              <img
-                className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                alt=""
-              />
+              <Logo width={28} height={28} />
             </Link>
             {categories.map((category) => {
               return (
@@ -42,11 +39,7 @@ async function Header() {
           {/* Logo (lg-) */}
           <Link href="/" className="lg:hidden">
             <span className="sr-only">Your Company</span>
-            <img
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-              alt=""
-              className="h-8 w-auto"
-            />
+            <Logo width={28} height={28} />
           </Link>
 
           <div className="flex flex-1 items-center justify-end">

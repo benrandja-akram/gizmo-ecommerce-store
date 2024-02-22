@@ -2,10 +2,10 @@ import clsx from 'clsx'
 import { MoveRightIcon } from 'lucide-react'
 import Link from 'next/link'
 
-function Category({ className, ...props }: DivProps) {
+function ProductsRoot({ className, ...props }: DivProps) {
   return <div className={clsx('lg:w-7xl max-w-full  ', className)} {...props} />
 }
-function CategoryHeader({
+function ProductsHeader({
   href,
   className,
   ...props
@@ -33,7 +33,7 @@ function CategoryHeader({
   )
 }
 
-function CategoryList({ className, ...props }: DivProps) {
+function ProductsList({ className, ...props }: DivProps) {
   return (
     <div
       className={clsx('relative mt-8 w-full overflow-x-auto pb-6', className)}
@@ -49,4 +49,4 @@ function CategoryList({ className, ...props }: DivProps) {
   )
 }
 
-export { Category, CategoryHeader, CategoryList }
+export { ProductsRoot, ProductsHeader, ProductsList }

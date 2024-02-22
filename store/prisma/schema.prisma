@@ -18,6 +18,7 @@ model Category {
   id       Int       @id @default(autoincrement())
   name     String
   image    String?
+  position Int
   products Product[]
 
   @@map("categories")

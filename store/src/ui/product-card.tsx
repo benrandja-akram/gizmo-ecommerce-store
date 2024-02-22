@@ -9,17 +9,17 @@ function ProductCard({ ...product }: Props) {
   return (
     <div
       key={product.id}
-      className="inline-flex w-full flex-col text-center md:w-auto"
+      className="inline-flex h-full w-full flex-col text-center md:w-auto"
     >
       <div className="group relative">
         <Link
           href={`/product/${product.id}`}
-          className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200"
+          className="flex aspect-square w-full items-center justify-center overflow-hidden rounded-md border"
         >
           <img
             src={product.image}
             alt={''}
-            className="h-full w-full rounded-md object-cover object-center group-hover:opacity-75"
+            className="h-[80%] w-[80%] rounded-md object-cover object-center group-hover:opacity-75"
           />
         </Link>
         <Link
@@ -53,11 +53,12 @@ function ProductCard({ ...product }: Props) {
           )}
         </Link>
       </div>
-
-      <Button className={'mt-4 gap-x-3'} color="white">
-        <ShoppingCartIcon className="w-5 text-gray-500" />
-        Add to bag
-      </Button>
+      <div className="flex flex-1 flex-col justify-end">
+        <Button className={'mt-4 gap-x-3'} color="white">
+          <ShoppingCartIcon className="w-5 text-gray-500" />
+          Add to bag
+        </Button>
+      </div>
     </div>
   )
 }

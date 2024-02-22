@@ -5,9 +5,10 @@ async function main() {
   db.$transaction(async (db) => {
     await db.category.deleteMany()
     await db.category.createMany({
-      data: new Array(3).fill(null).map(() => ({
+      data: new Array(5).fill(null).map((_, position) => ({
         name: faker.commerce.department(),
         image: null,
+        position,
       })),
     })
     const categories = await db.category.findMany()

@@ -1,6 +1,6 @@
 import { getCategoriesWithProducts } from '@/db/category'
-import { Category, CategoryHeader, CategoryList } from '@/ui/category'
 import { ProductCard } from '@/ui/product-card'
+import { ProductsHeader, ProductsList, ProductsRoot } from '@/ui/products-list'
 const offers = [
   {
     name: 'Laivraison ',
@@ -57,16 +57,16 @@ export default async function Home() {
             .filter((c) => c.products.length)
             .map((category) => {
               return (
-                <Category key={category.id} id={`category-${category.id}`}>
-                  <CategoryHeader>{category.name}</CategoryHeader>
-                  <CategoryList>
+                <ProductsRoot key={category.id} id={`category-${category.id}`}>
+                  <ProductsHeader>{category.name}</ProductsHeader>
+                  <ProductsList>
                     {category.products.map((product) => (
-                      <li key={product.id}>
+                      <li className="h-full" key={product.id}>
                         <ProductCard {...product} />
                       </li>
                     ))}
-                  </CategoryList>
-                </Category>
+                  </ProductsList>
+                </ProductsRoot>
               )
             })}
         </div>
