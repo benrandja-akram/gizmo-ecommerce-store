@@ -3,7 +3,12 @@ import { MoveRightIcon } from 'lucide-react'
 import Link from 'next/link'
 
 function ProductsRoot({ className, ...props }: DivProps) {
-  return <div className={clsx('lg:w-7xl max-w-full  ', className)} {...props} />
+  return (
+    <div
+      className={clsx('lg:w-7xl max-w-full  target:scroll-mt-60 ', className)}
+      {...props}
+    />
+  )
 }
 function ProductsHeader({
   href,

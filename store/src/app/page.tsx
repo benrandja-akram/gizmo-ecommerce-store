@@ -15,6 +15,7 @@ const offers = [
     description: '15% off your first order',
   },
 ]
+
 export default async function Home() {
   const categories = await getCategoriesWithProducts()
 
@@ -52,12 +53,16 @@ export default async function Home() {
           </div>
         </div>
 
-        <div className="grid gap-8 md:gap-16">
+        <div className="grid">
           {categories
             .filter((c) => c.products.length)
             .map((category) => {
               return (
-                <ProductsRoot key={category.id} id={`category-${category.id}`}>
+                <ProductsRoot
+                  key={category.id}
+                  id={`category-${category.id}`}
+                  className="pt-8 md:pt-16"
+                >
                   <ProductsHeader>{category.name}</ProductsHeader>
                   <ProductsList>
                     {category.products.map((product) => (

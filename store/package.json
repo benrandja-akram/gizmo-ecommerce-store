@@ -12,14 +12,21 @@
   "dependencies": {
     "@headlessui/react": "^2.0.0-alpha.4",
     "@prisma/client": "^5.10.2",
+    "@types/js-cookie": "^3.0.6",
     "clsx": "^2.1.0",
+    "js-cookie": "^3.0.5",
     "lucide-react": "^0.336.0",
     "next": "14.1.0",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-markdown": "^9.0.1",
+    "react-medium-image-zoom": "^5.1.10",
+    "tailwindcss-animate": "^1.0.7",
+    "zustand": "^4.5.1"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
+    "@tailwindcss/typography": "^0.5.10",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

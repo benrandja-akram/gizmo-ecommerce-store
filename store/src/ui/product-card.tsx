@@ -1,7 +1,6 @@
-import { Button } from '@/components/button'
 import type { Product } from '@/db'
-import { ShoppingCartIcon } from 'lucide-react'
 import Link from 'next/link'
+import { AddToCart } from './cart'
 
 type Props = Product
 
@@ -53,11 +52,8 @@ function ProductCard({ ...product }: Props) {
           )}
         </Link>
       </div>
-      <div className="flex flex-1 flex-col justify-end">
-        <Button className={'mt-4 gap-x-3'}>
-          <ShoppingCartIcon className="hidden w-5 text-gray-500 sm:block" />
-          Add to bag
-        </Button>
+      <div className="mt-3 flex flex-1 flex-col justify-end">
+        <AddToCart size="sm" product={product.id} />
       </div>
     </div>
   )

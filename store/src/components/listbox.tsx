@@ -67,16 +67,16 @@ export function Listbox<T>({
           }
           className={clsx([
             // Basic layout
-            'relative block w-full appearance-none rounded-lg py-[calc(theme(spacing[2.5])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)]',
+            'relative block w-full appearance-none rounded-lg py-[calc(theme(spacing[1.5])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)]',
 
             // Set minimum height for when no value is selected
-            'min-h-11 sm:min-h-9',
+            'min-h-9',
 
             // Horizontal padding
             'pl-[calc(theme(spacing[3.5])-1px)] pr-[calc(theme(spacing.7)-1px)] sm:pl-[calc(theme(spacing.3)-1px)]',
 
             // Typography
-            'text-left text-base/6 text-zinc-950 placeholder:text-zinc-500 sm:text-sm/6 dark:text-white forced-colors:text-[CanvasText]',
+            'text-left text-sm/6 text-zinc-950 placeholder:text-zinc-500 dark:text-white forced-colors:text-[CanvasText]',
 
             // Border
             'border border-zinc-950/10 group-data-[active]:border-zinc-950/20 group-data-[hover]:border-zinc-950/20 dark:border-white/10 dark:group-data-[active]:border-white/20 dark:group-data-[hover]:border-white/20',
@@ -131,7 +131,7 @@ export function Listbox<T>({
             '[--anchor-offset:-1.625rem] [--anchor-padding:theme(spacing.4)] sm:[--anchor-offset:-1.375rem]',
 
             // Base styles
-            'isolate w-max min-w-[calc(var(--button-width)+1.75rem)] select-none scroll-py-1 rounded-xl p-1',
+            'isolate z-50 w-max min-w-[calc(var(--button-width)+1.75rem)] select-none scroll-py-1 rounded-xl p-1',
 
             // Invisible border that is only visible in `forced-colors` mode for accessibility purposes
             'outline outline-1 outline-transparent focus:outline-none',
@@ -182,10 +182,10 @@ export function ListboxOption<T>({
           <div
             className={clsx(
               // Basic layout
-              'group/option grid cursor-default grid-cols-[theme(spacing.5),1fr] items-baseline gap-x-1.5 rounded-lg py-2.5 pl-2.5 pr-3.5 sm:grid-cols-[theme(spacing.4),1fr] sm:py-1.5 sm:pl-2 sm:pr-3',
+              'group/option grid cursor-default grid-cols-[theme(spacing.4),1fr] items-baseline gap-x-1.5 rounded-lg py-1.5 pl-2 pr-3',
 
               // Typography
-              'text-base/6 text-zinc-950 sm:text-sm/6 dark:text-white forced-colors:text-[CanvasText]',
+              'text-sm/6 text-zinc-950 dark:text-white forced-colors:text-[CanvasText]',
 
               // Focus
               'outline-none data-[focus]:bg-blue-500 data-[focus]:text-white',
