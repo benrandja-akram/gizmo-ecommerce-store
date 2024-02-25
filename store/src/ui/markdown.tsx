@@ -1,4 +1,4 @@
-import clsx from 'clsx'
+import { clsx } from '@/utils/clsx'
 import ReactMarkdown from 'react-markdown'
 
 function Markdown({

@@ -1,3 +1,4 @@
+import { clsx } from '@/utils/clsx'
 import {
   Description as HeadlessDescription,
   Field as HeadlessField,
@@ -10,7 +11,6 @@ import {
   type LabelProps as HeadlessLabelProps,
   type LegendProps as HeadlessLegendProps,
 } from '@headlessui/react'
-import clsx from 'clsx'
 import type React from 'react'
 
 export function Fieldset({

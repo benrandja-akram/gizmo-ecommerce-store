@@ -1,3 +1,4 @@
+import { clsx } from '@/utils/clsx'
 import {
   Description as HeadlessDescription,
   Dialog as HeadlessDialog,
@@ -7,7 +8,6 @@ import {
   TransitionChild as HeadlessTransitionChild,
   type DialogProps as HeadlessDialogProps,
 } from '@headlessui/react'
-import clsx from 'clsx'
 import { XIcon } from 'lucide-react'
 import type React from 'react'
 import { Fragment } from 'react'

@@ -4,10 +4,10 @@ import { Button } from '@/components/button'
 import { Drawer } from '@/components/drawer'
 import { Listbox, ListboxLabel, ListboxOption } from '@/components/listbox'
 import { useCart } from '@/hooks/use-cart'
+import { clsx } from '@/utils/clsx'
 import { Dialog } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Product } from '@prisma/client'
-import clsx from 'clsx'
 import cookies from 'js-cookie'
 import { CheckCheckIcon, ShoppingCartIcon, TrashIcon } from 'lucide-react'
 import Link from 'next/link'
@@ -147,7 +147,7 @@ function Cart() {
                 className="mt-6"
                 onClick={() => setOpen(false)}
               >
-                <Button className={'w-full !py-2.5'}>Checkout</Button>
+                <Button className={'w-full py-2.5'}>Checkout</Button>
               </Link>
             </div>
           )}
@@ -204,7 +204,7 @@ function CartProducts({ products }: { products: Product[] }) {
                 </p>
 
                 <div className="">
-                  <div className="ml-4 !min-w-[80px]">
+                  <div className="ml-4 min-w-[80px]">
                     <Listbox
                       defaultValue={product.quantity ?? 1}
                       onChange={(value) =>
@@ -247,10 +247,10 @@ function AddToCart({
         else cart.removeItem(product)
       }}
       className={clsx(
-        '!w-full   ',
+        'w-full',
         size === 'base'
-          ? '!px-3 !py-3'
-          : '!px-1 !py-1.5 !text-xs sm:!px-2 sm:!py-2',
+          ? 'px-3 py-3'
+          : 'px-1 py-1.5 text-xs sm:!px-2 sm:!py-2 sm:text-sm/6',
       )}
     >
       {!selected ? (

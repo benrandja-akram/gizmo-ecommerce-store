@@ -1,6 +1,6 @@
 'use client'
 
-import { clsx } from 'clsx'
+import { clsx } from '@/utils/clsx'
 import type React from 'react'
 import { createContext, useContext, useState } from 'react'
 import { Link } from './link'

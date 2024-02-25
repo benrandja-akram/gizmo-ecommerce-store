@@ -1,8 +1,8 @@
 'use client'
 import { Input } from '@/components/input'
+import { clsx } from '@/utils/clsx'
 import { RadioGroup } from '@headlessui/react'
 import { CheckCircleIcon, TrashIcon } from '@heroicons/react/20/solid'
-import clsx from 'clsx'
 import { useState } from 'react'
 
 const products = [

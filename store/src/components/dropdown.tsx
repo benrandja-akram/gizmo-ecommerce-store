@@ -1,5 +1,6 @@
 'use client'
 
+import { clsx } from '@/utils/clsx'
 import {
   Description as HeadlessDescription,
   Label as HeadlessLabel,
@@ -20,7 +21,6 @@ import {
   type MenuSectionProps as HeadlessMenuSectionProps,
   type MenuSeparatorProps as HeadlessMenuSeparatorProps,
 } from '@headlessui/react'
-import clsx from 'clsx'
 import type React from 'react'
 import { Fragment } from 'react'
 import { Button } from './button'

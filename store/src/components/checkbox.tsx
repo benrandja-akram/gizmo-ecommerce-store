@@ -1,10 +1,10 @@
+import { clsx } from '@/utils/clsx'
 import {
   Checkbox as HeadlessCheckbox,
   Field as HeadlessField,
   type CheckboxProps as HeadlessCheckboxProps,
   type FieldProps as HeadlessFieldProps,
 } from '@headlessui/react'
-import { clsx } from 'clsx'
 import type React from 'react'
 
 export function CheckboxGroup({
