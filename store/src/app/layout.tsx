@@ -1,8 +1,10 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import Image from 'next/image'
 import { Footer } from './footer'
 import './globals.css'
 import { Header, TopBanner } from './header'
+import messageUs from './messenger.webp'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,6 +21,13 @@ export default async function RootLayout({
   return (
     <html lang="fr" className="scroll-smooth text-gray-900">
       <body className={inter.className}>
+        <a
+          target="_blank"
+          href="//m.me/226796627192300"
+          className="fixed bottom-4 right-4 z-20 animate-bounce lg:bottom-10 lg:right-10"
+        >
+          <Image src={messageUs} width={52} height={52} alt="" unoptimized />
+        </a>
         <TopBanner />
         <Header />
         <div className="mx-auto">{children}</div>
