@@ -9,7 +9,12 @@ import { Dialog } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Product } from '@prisma/client'
 import cookies from 'js-cookie'
-import { CheckCheckIcon, ShoppingCartIcon, TrashIcon } from 'lucide-react'
+import {
+  CheckCheckIcon,
+  MoveRight,
+  ShoppingCartIcon,
+  TrashIcon,
+} from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useMemo, useState } from 'react'
 import { ProductFallback } from './product-fallback'
@@ -95,17 +100,7 @@ function Cart() {
                 </button>
               </div>
             </div>
-            {!products.length && !ids.length && (
-              <div className="mt-8 grid items-center justify-center gap-2 rounded-lg border border-dashed p-6 text-sm">
-                <h3 className="text-center text-base font-bold">
-                  Cart is empty!!
-                </h3>
-
-                <p className="text-gray-700">
-                  Get started by adding products into cart
-                </p>
-              </div>
-            )}
+            {!products.length && !ids.length && <EmptyCart />}
             {!!products.length && (
               <div className="-mx-4 mt-8 sm:-mx-6 ">
                 <CartProducts
@@ -157,6 +152,22 @@ function Cart() {
   )
 }
 
+function EmptyCart() {
+  return (
+    <div className="mt-8 grid items-center justify-center gap-2 rounded-lg border border-dashed bg-gray-50 p-6 text-sm">
+      <h3 className="text-center text-lg font-bold">Cart is empty!!</h3>
+
+      <p className="text-gray-700">
+        Get started by adding products into your cart
+      </p>
+      <Link href="/" className="mx-auto mt-6">
+        <Button>
+          Browse products <MoveRight className="w-5" />
+        </Button>
+      </Link>
+    </div>
+  )
+}
 function CartProducts({ products }: { products: Product[] }) {
   const cart = useCart()
 
@@ -199,12 +210,12 @@ function CartProducts({ products }: { products: Product[] }) {
               </div>
 
               <div className="flex flex-1 items-end justify-between pt-2">
-                <p className="mt-1 text-sm font-medium text-gray-900">
-                  {product.price}
+                <p className="mt-1 text-sm font-bold tabular-nums text-gray-900">
+                  {product.price}DA
                 </p>
 
                 <div className="">
-                  <div className="ml-4 min-w-[80px]">
+                  <div className="ml-4 min-w-[60px]">
                     <Listbox
                       defaultValue={product.quantity ?? 1}
                       onChange={(value) =>
@@ -268,4 +279,4 @@ function AddToCart({
   )
 }
 
-export { AddToCart, Cart, CartProducts }
+export { AddToCart, Cart, CartProducts, EmptyCart }

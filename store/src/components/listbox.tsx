@@ -67,7 +67,7 @@ export function Listbox<T>({
           }
           className={clsx([
             // Basic layout
-            'relative block w-full appearance-none rounded-lg py-[calc(theme(spacing[1.5])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)]',
+            'relative block w-full appearance-none rounded-lg py-[calc(theme(spacing[2])-1px)] sm:py-[calc(theme(spacing[2])-1px)]',
 
             // Set minimum height for when no value is selected
             'min-h-9',
@@ -127,11 +127,8 @@ export function Listbox<T>({
             padding: 'var(--anchor-padding)',
           }}
           className={clsx(
-            // Anchor positioning
-            '[--anchor-offset:-1.625rem] [--anchor-padding:theme(spacing.4)] sm:[--anchor-offset:-1.375rem]',
-
             // Base styles
-            'isolate z-50 w-max min-w-[calc(var(--button-width)+1.75rem)] select-none scroll-py-1 rounded-xl p-1',
+            'isolate z-50 w-max min-w-[calc(var(--button-width))] select-none scroll-py-1 rounded-xl p-1',
 
             // Invisible border that is only visible in `forced-colors` mode for accessibility purposes
             'outline outline-1 outline-transparent focus:outline-none',
