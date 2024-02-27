@@ -10,10 +10,6 @@ const offers = [
     name: 'Fast delivery',
     description: '1~2 Days delivery',
   },
-  {
-    name: 'Sign up for our newsletter',
-    description: '15% off your first order',
-  },
 ]
 
 export default async function Home() {
@@ -21,17 +17,17 @@ export default async function Home() {
 
   return (
     <div className="grid gap-8 px-4 pb-4 sm:px-6 sm:pb-6 lg:px-8 lg:pb-8 ">
-      <main className="mx-auto max-w-7xl pt-8">
-        <h1 className="mb-8 px-4 text-center text-4xl font-extrabold leading-tight tracking-tighter sm:text-4xl sm:leading-tight md:text-5xl md:leading-tight lg:mb-16 lg:text-6xl lg:leading-tight">
-          The best place to shop <br />
+      <main className="mx-auto max-w-7xl pt-6 sm:pt-8">
+        <h1 className="mb-6 px-4 text-center text-3xl font-extrabold leading-tight tracking-tighter sm:mb-8 sm:text-4xl sm:leading-tight md:text-5xl md:leading-tight lg:mb-16 lg:text-6xl lg:leading-tight">
+          The best place to shop{' '}
           <span className="bg-gradient-to-br from-indigo-400 to-indigo-600 bg-clip-text text-transparent">
-            PS gift cards
+            PC components
           </span>
         </h1>
 
         <div
           aria-label="Offers"
-          className="mb-8 overflow-hidden rounded-lg border lg:-mt-2 lg:mb-16"
+          className="mb-4 overflow-hidden rounded-lg border sm:mb-8 lg:-mt-2 lg:mb-16"
         >
           <div className="mx-auto max-w-7xl lg:px-8">
             <ul
@@ -61,7 +57,7 @@ export default async function Home() {
                 <ProductsRoot
                   key={category.id}
                   id={`category-${category.id}`}
-                  className="pt-8 md:pt-16"
+                  className="pt-8 first:pt-4 md:pt-16"
                 >
                   <ProductsHeader>{category.name}</ProductsHeader>
                   <ProductsList>

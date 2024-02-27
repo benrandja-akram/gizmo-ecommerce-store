@@ -6,15 +6,14 @@ import { Listbox, ListboxLabel, ListboxOption } from '@/components/listbox'
 import { useCart } from '@/hooks/use-cart'
 import { clsx } from '@/utils/clsx'
 import { Dialog } from '@headlessui/react'
-import { XMarkIcon } from '@heroicons/react/24/outline'
+import {
+  ShoppingBagIcon,
+  TrashIcon,
+  XMarkIcon,
+} from '@heroicons/react/24/solid'
 import { Product } from '@prisma/client'
 import cookies from 'js-cookie'
-import {
-  CheckCheckIcon,
-  MoveRight,
-  ShoppingCartIcon,
-  TrashIcon,
-} from 'lucide-react'
+import { CheckCheckIcon, MoveRight } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useMemo, useState } from 'react'
 import { ProductFallback } from './product-fallback'
@@ -66,14 +65,19 @@ function Cart() {
         className={'group relative -m-2 flex items-center p-2'}
         onClick={() => setOpen(true)}
       >
-        <ShoppingCartIcon
-          className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
+        <ShoppingBagIcon
+          className={clsx(
+            'h-6 w-6 flex-shrink-0 ',
+            cart.items.length
+              ? 'text-teal-500 group-hover:text-teal-600'
+              : 'text-gray-700 group-hover:text-gray-900',
+          )}
           aria-hidden="true"
         />
         {!!cart.items.length && (
           <span
             className={
-              'fade-in-0 zoom-in-0 absolute -right-2 -top-1 flex h-5 w-5 animate-bounce items-center justify-center rounded-full bg-green-500 text-xs font-bold text-white'
+              'fade-in-0 zoom-in-0 absolute -right-2 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-teal-500 text-xs font-bold text-white'
             }
           >
             {cart.items.length}
@@ -141,8 +145,9 @@ function Cart() {
                 href="/checkout"
                 className="mt-6"
                 onClick={() => setOpen(false)}
+                scroll
               >
-                <Button className={'w-full py-2.5'}>Checkout</Button>
+                <Button className={'w-full sm:py-2.5'}>Checkout</Button>
               </Link>
             </div>
           )}
@@ -189,7 +194,7 @@ function CartProducts({ products }: { products: Product[] }) {
                 <div className="min-w-0 flex-1">
                   <h4 className="text-sm">
                     <Link
-                      href={`/products/${product.id}`}
+                      href={`/product/${product.id}`}
                       className="font-medium text-gray-700 hover:text-gray-800"
                     >
                       {product.name}
@@ -204,7 +209,7 @@ function CartProducts({ products }: { products: Product[] }) {
                     className="-m-2.5  flex items-center justify-center bg-white p-2.5 text-gray-600 hover:text-red-500"
                   >
                     <span className="sr-only">Remove</span>
-                    <TrashIcon className="h-5 w-5" aria-hidden="true" />
+                    <TrashIcon className="h-6 w-6" aria-hidden="true" />
                   </button>
                 </div>
               </div>
@@ -215,7 +220,7 @@ function CartProducts({ products }: { products: Product[] }) {
                 </p>
 
                 <div className="">
-                  <div className="ml-4 min-w-[60px]">
+                  <div className="ml-4 min-w-[70px]">
                     <Listbox
                       defaultValue={product.quantity ?? 1}
                       onChange={(value) =>
@@ -260,13 +265,13 @@ function AddToCart({
       className={clsx(
         'w-full',
         size === 'base'
-          ? 'px-3 py-3'
-          : 'px-1 py-1.5 text-xs sm:!px-2 sm:!py-2 sm:text-sm/6',
+          ? 'sm:px-3 sm:py-3'
+          : 'px-1 py-1.5 text-xs sm:px-2 sm:py-2 sm:text-sm/6',
       )}
     >
       {!selected ? (
         <>
-          <ShoppingCartIcon className="w-4 sm:w-5" />
+          <ShoppingBagIcon className="w-4 sm:w-5" />
           Ajouter au panier
         </>
       ) : (
