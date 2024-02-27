@@ -23,7 +23,7 @@ function ProductCard({ ...product }: Props) {
         </Link>
         <Link
           href={`/product/${product.id}`}
-          className="mt-6 block cursor-pointer text-xs sm:text-base"
+          className="mt-4 block cursor-pointer text-xs sm:mt-6 sm:text-base"
         >
           {product.model && (
             <p className="mb-1 text-sm text-gray-500">{product.model}</p>

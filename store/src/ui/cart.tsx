@@ -4,6 +4,7 @@ import { Button } from '@/components/button'
 import { Drawer } from '@/components/drawer'
 import { Listbox, ListboxLabel, ListboxOption } from '@/components/listbox'
 import { useCart } from '@/hooks/use-cart'
+import { useDialog } from '@/hooks/use-dialog'
 import { clsx } from '@/utils/clsx'
 import { Dialog } from '@headlessui/react'
 import {
@@ -20,7 +21,7 @@ import { ProductFallback } from './product-fallback'
 
 function Cart() {
   const cart = useCart()
-  const [open, setOpen] = useState(false)
+  const { isOpen, onOpen, onClose } = useDialog('cart')
   const [products, setProducts] = useState<Product[]>([])
 
   useEffect(() => {
@@ -44,7 +45,7 @@ function Cart() {
   const ids = useMemo(() => cart.items.map((item) => item.id), [cart.items])
 
   useEffect(() => {
-    if (open && ids.length) {
+    if (isOpen && ids.length) {
       const search = new URLSearchParams()
       ids.forEach((id) => search.append('product', id.toString()))
       fetch(`/api/products?${search}`)
@@ -56,14 +57,14 @@ function Cart() {
         setProducts([])
       }, 500)
     }
-  }, [open, ids])
+  }, [isOpen, ids])
 
   return (
     <>
       <button
         type="button"
         className={'group relative -m-2 flex items-center p-2'}
-        onClick={() => setOpen(true)}
+        onClick={onOpen}
       >
         <ShoppingBagIcon
           className={clsx(
@@ -85,7 +86,7 @@ function Cart() {
         )}
       </button>
 
-      <Drawer show={open} onClose={setOpen}>
+      <Drawer show={isOpen} onClose={onClose}>
         <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
           <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
             <div className="flex items-start justify-between">
@@ -96,7 +97,7 @@ function Cart() {
                 <button
                   type="button"
                   className="relative -m-2 p-2 text-gray-400 hover:text-gray-500"
-                  onClick={() => setOpen(false)}
+                  onClick={onClose}
                 >
                   <span className="absolute -inset-0.5" />
                   <span className="sr-only">Close panel</span>
@@ -141,12 +142,7 @@ function Cart() {
                 </p>
               </div>
 
-              <Link
-                href="/checkout"
-                className="mt-6"
-                onClick={() => setOpen(false)}
-                scroll
-              >
+              <Link href="/checkout" className="mt-6" onClick={onClose} scroll>
                 <Button className={'w-full sm:py-2.5'}>Checkout</Button>
               </Link>
             </div>
@@ -276,7 +272,7 @@ function AddToCart({
         </>
       ) : (
         <>
-          <CheckCheckIcon className="w-4 sm:w-5" />
+          <CheckCheckIcon className="fade-in-0 animate-in zoom-in-0 slide-in-from-bottom-4 w-5 sm:w-5" />
           En panier
         </>
       )}

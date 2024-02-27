@@ -3,6 +3,7 @@ import { Cart } from '@/ui/cart'
 import { Logo } from '@/ui/logo'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
+import { Suspense } from 'react'
 import { MobileMenu } from './mobile-menu'
 
 async function Header() {
@@ -33,7 +34,9 @@ async function Header() {
           </div>
 
           {/* Mobile menu and search (lg-) */}
-          <MobileMenu categories={categories} />
+          <Suspense>
+            <MobileMenu categories={categories} />
+          </Suspense>
           {/* Logo (lg-) */}
           <Link href="/" className="lg:hidden">
             <span className="sr-only">Your Company</span>
@@ -46,8 +49,9 @@ async function Header() {
                 <span className="sr-only">Search</span>
                 <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
               </a>
-
-              <Cart />
+              <Suspense>
+                <Cart />
+              </Suspense>
             </div>
           </div>
         </div>

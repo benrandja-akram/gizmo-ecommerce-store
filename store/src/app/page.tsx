@@ -18,10 +18,10 @@ export default async function Home() {
   return (
     <div className="grid gap-8 px-4 pb-4 sm:px-6 sm:pb-6 lg:px-8 lg:pb-8 ">
       <main className="mx-auto max-w-7xl pt-6 sm:pt-8">
-        <h1 className="mb-6 px-4 text-center text-3xl font-extrabold leading-tight tracking-tighter sm:mb-8 sm:text-4xl sm:leading-tight md:text-5xl md:leading-tight lg:mb-16 lg:text-6xl lg:leading-tight">
-          The best place to shop{' '}
+        <h1 className="mb-6 text-center text-3xl font-extrabold leading-tight tracking-tighter sm:mb-8 sm:text-4xl sm:leading-tight md:text-5xl md:leading-tight lg:mb-16 lg:text-6xl lg:leading-tight">
+          le meilleur endroit pour acheter{' '}
           <span className="bg-gradient-to-br from-indigo-400 to-indigo-600 bg-clip-text text-transparent">
-            PC components
+            des composants PC
           </span>
         </h1>
 
@@ -37,7 +37,7 @@ export default async function Home() {
               {offers.map((offer) => (
                 <li
                   key={offer.name}
-                  className="flex flex-1 flex-col justify-center bg-white px-4 py-6 text-center focus:z-10"
+                  className="flex flex-1 flex-col justify-center bg-white px-4 py-4 text-center focus:z-10 sm:py-6"
                 >
                   <p className="text-sm text-gray-500">{offer.name}</p>
                   <p className="font-semibold text-gray-900">
