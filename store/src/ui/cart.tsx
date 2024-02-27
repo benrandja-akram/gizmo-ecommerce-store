@@ -6,6 +6,7 @@ import { Listbox, ListboxLabel, ListboxOption } from '@/components/listbox'
 import { useCart } from '@/hooks/use-cart'
 import { useDialog } from '@/hooks/use-dialog'
 import { clsx } from '@/utils/clsx'
+import { useAutoAnimate } from '@formkit/auto-animate/react'
 import { Dialog } from '@headlessui/react'
 import {
   ShoppingBagIcon,
@@ -171,16 +172,20 @@ function EmptyCart() {
 }
 function CartProducts({ products }: { products: Product[] }) {
   const cart = useCart()
+  const [ref] = useAutoAnimate()
 
   return (
-    <ul role="list" className="divide-y divide-gray-200">
+    <ul ref={ref} role="list" className="divide-y divide-gray-200">
       {products
         .map((p) => ({
           ...p,
           quantity: cart.items.find((i) => i.id === p.id)?.quantity,
         }))
         .map((product) => (
-          <li key={product.id} className="flex px-4 py-6 sm:px-6">
+          <li
+            key={product.id}
+            className="animate-in fade-in-0 flex px-4 py-6 sm:px-6"
+          >
             <div className="flex-shrink-0">
               <img src={product.image} alt={''} className="w-20 rounded-md" />
             </div>
