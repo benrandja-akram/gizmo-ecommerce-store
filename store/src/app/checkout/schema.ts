@@ -1,15 +1,14 @@
+import { STOP_DESK, TO_HOME } from '@/utils/constants'
 import * as zod from 'zod'
 
 const schema = zod
   .object({
-    phone: zod.string(),
+    phone: zod.string().min(1, 'Phone is required'),
     name: zod.string().min(1, 'Name is required'),
     wilaya: zod
       .string({ required_error: 'Wilaya type is required' })
       .min(1, 'Wilaya is required'),
-    deliveryType: zod
-      .string({ required_error: 'Delivery type is required' })
-      .min(1, 'Delivery type is required'),
+    deliveryType: zod.union([zod.literal(STOP_DESK), zod.literal(TO_HOME)]),
     commune: zod.string().optional(),
     stopDesk: zod.string().optional(),
     address: zod.string().optional(),
@@ -17,7 +16,7 @@ const schema = zod
   })
   .superRefine(({ wilaya, deliveryType, commune, stopDesk, address }, ctx) => {
     if (wilaya) {
-      if (deliveryType === 'to-home') {
+      if (deliveryType === TO_HOME) {
         if (!commune) {
           ctx.addIssue({
             code: zod.ZodIssueCode.custom,
@@ -33,7 +32,7 @@ const schema = zod
           })
         }
       }
-      if (deliveryType === 'to-stop-desk' && !stopDesk) {
+      if (deliveryType === stopDesk && !stopDesk) {
         ctx.addIssue({
           code: zod.ZodIssueCode.custom,
           path: ['stopDesk'],

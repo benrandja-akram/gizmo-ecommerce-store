@@ -59,7 +59,6 @@ function Cart() {
       }, 500)
     }
   }, [isOpen, ids])
-
   return (
     <>
       <button
@@ -112,6 +111,7 @@ function Cart() {
                 <CartProducts
                   products={cart.items
                     .map((item) => products.find((p) => p.id === item.id)!)
+                    .filter(Boolean)
                     .filter((p) => p.id)}
                 />
               </div>

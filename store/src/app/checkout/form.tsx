@@ -1,5 +1,6 @@
 'use client'
 
+import { Button } from '@/components/button'
 import {
   Description,
   ErrorMessage,
@@ -17,10 +18,15 @@ import { Textarea } from '@/components/textarea'
 import { useCart } from '@/hooks/use-cart'
 import { CartProducts, EmptyCart } from '@/ui/cart'
 import { ProductFallback } from '@/ui/product-fallback'
+import { clsx } from '@/utils/clsx'
+import { STOP_DESK, TO_HOME } from '@/utils/constants'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { Product } from '@prisma/client'
 import { useEffect, useMemo, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import useSWRMutation from 'swr/mutation'
+import { checkout } from './actions'
+import { OrderConfirmed } from './order-confirmed'
 import { SchemaValue, checkoutSchema } from './schema'
 
 type Props = {
@@ -30,6 +36,15 @@ type Props = {
 }
 function CheckoutForm({ fees, centers, communes }: Props) {
   const [mounted, setMounted] = useState(false)
+  const { data, isMutating, trigger } = useSWRMutation(
+    '/actions/checkout',
+    (
+      _,
+      data: {
+        arg: Parameters<typeof checkout>
+      },
+    ) => checkout(data.arg[0], data.arg[1]),
+  )
   const cart = useCart()
   const {
     register,
@@ -37,10 +52,11 @@ function CheckoutForm({ fees, centers, communes }: Props) {
     setValue,
     watch,
     formState: { errors },
+    getValues,
   } = useForm<SchemaValue>({
     resolver: zodResolver(checkoutSchema),
     defaultValues: {
-      deliveryType: 'to-home',
+      deliveryType: TO_HOME,
     },
   })
   const [products, setProducts] = useState<Product[]>()
@@ -59,7 +75,12 @@ function CheckoutForm({ fees, centers, communes }: Props) {
     }
   }, [ids])
 
-  if (!mounted) return <div className="min-h-[600px] bg-gray-50" />
+  if (!mounted) {
+    return <div className="min-h-[600px] bg-gray-50" />
+  }
+  if (data?.success) {
+    return <OrderConfirmed name={getValues().name} />
+  }
   if ((products && !products?.length) || !ids.length) {
     return (
       <div className="mx-4">
@@ -86,7 +107,7 @@ function CheckoutForm({ fees, centers, communes }: Props) {
     ) ?? 0
 
   const deliveryFee =
-    (deliveryType === 'to-home'
+    (deliveryType === TO_HOME
       ? selectedWilayaFee?.home_fee
       : selectedWilayaFee?.desk_fee) ?? 0
 
@@ -96,14 +117,16 @@ function CheckoutForm({ fees, centers, communes }: Props) {
         <h2 className="sr-only">Checkout</h2>
 
         <form
-          onSubmit={handleSubmit(console.log)}
+          onSubmit={handleSubmit((values) => {
+            trigger([cart.items, values]).then(() => cart.clearCart())
+          })}
           className="items-start lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16"
         >
           <div className="grid gap-4">
             <h2 className="text-lg font-medium text-gray-900">
               Les détails de livraison
             </h2>
-            <Fieldset>
+            <Fieldset disabled={isMutating}>
               <FieldGroup>
                 <Field>
                   <Label>Numéro de téléphone</Label>
@@ -177,15 +200,15 @@ function CheckoutForm({ fees, centers, communes }: Props) {
                       <Label>Type de livraison</Label>
                       <RadioGroup
                         name="deliveryType"
-                        onChange={(value) =>
+                        onChange={(value: SchemaValue['deliveryType']) =>
                           setValue('deliveryType', value, {
                             shouldValidate: true,
                           })
                         }
-                        defaultValue="to-home"
+                        defaultValue={TO_HOME}
                       >
                         <RadioField>
-                          <Radio value="to-home" />
+                          <Radio value={TO_HOME} />
                           <Label>
                             Livraison à domicile -{' '}
                             <strong>{selectedWilayaFee?.home_fee}DA</strong>
@@ -196,7 +219,7 @@ function CheckoutForm({ fees, centers, communes }: Props) {
                           </Description>
                         </RadioField>
                         <RadioField>
-                          <Radio value="to-stop-desk" />
+                          <Radio value={STOP_DESK} />
                           <Label>
                             Bureau d'agence Yalidine -{' '}
                             <strong>{selectedWilayaFee?.desk_fee}DA</strong>
@@ -214,7 +237,7 @@ function CheckoutForm({ fees, centers, communes }: Props) {
                         </ErrorMessage>
                       )}
                     </Field>
-                    {deliveryType === 'to-stop-desk' && (
+                    {deliveryType === STOP_DESK && (
                       <Field>
                         <Label>Bureau d'agence Yalidine</Label>
 
@@ -256,7 +279,7 @@ function CheckoutForm({ fees, centers, communes }: Props) {
                         )}
                       </Field>
                     )}
-                    {deliveryType === 'to-home' && (
+                    {deliveryType === TO_HOME && (
                       <>
                         <Field>
                           <Label>Commune</Label>
@@ -317,7 +340,7 @@ function CheckoutForm({ fees, centers, communes }: Props) {
                 )}
               </FieldGroup>
             </Fieldset>
-            <Fieldset>
+            <Fieldset disabled={isMutating}>
               <Legend>Shipping details</Legend>
               <Text>Without this your odds of getting your order are low.</Text>
               <FieldGroup>
@@ -347,6 +370,7 @@ function CheckoutForm({ fees, centers, communes }: Props) {
                 <CartProducts
                   products={cart.items
                     .map((item) => products.find((p) => p.id === item.id)!)
+                    .filter(Boolean)
                     .filter((p) => p.id)}
                 />
               )}
@@ -386,12 +410,13 @@ function CheckoutForm({ fees, centers, communes }: Props) {
               </dl>
 
               <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
-                <button
+                <Button
+                  className={clsx('w-full sm:py-3')}
+                  disabled={isMutating}
                   type="submit"
-                  className="w-full rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
                 >
-                  Confirm order
-                </button>
+                  {!isMutating ? 'Confirm order' : 'Confirming ...'}
+                </Button>
               </div>
             </div>
           </div>

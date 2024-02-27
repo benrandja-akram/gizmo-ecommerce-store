@@ -25,19 +25,69 @@ model Category {
 }
 
 model Product {
-  id          Int      @id @default(autoincrement())
-  name        String
-  description String?  @db.Text
+  id            Int             @id @default(autoincrement())
+  name          String
+  description   String?         @db.Text
   /// [ProductVariant]
-  colors      Json?
+  colors        Json?
   /// [ProductVariant]
-  sizes       Json?
-  image       String
-  thumbnail   String?
-  price       Int
-  model       String?
-  categoryId  Int
-  category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  sizes         Json?
+  image         String
+  thumbnail     String?
+  price         Int
+  model         String?
+  categoryId    Int
+  category      Category        @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  OrderProducts OrderProducts[]
 
   @@map("products")
+}
+
+model Order {
+  id           Int          @id @default(autoincrement())
+  phone        String
+  name         String
+  wilaya       String
+  deliveryType DeliveryType
+  commune      String?
+  stopDesk     String?
+  address      String?
+  notes        String
+  subtotal     Int
+  deliveryFee  Int
+
+  status   OrderStatus
+  products OrderProducts[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("orders")
+}
+
+enum OrderStatus {
+  PENDING
+  SHIPPED
+  CANCELLED_BY_STORE
+  CANCELLED_BY_USER
+}
+
+enum DeliveryType {
+  TO_HOME
+  STOP_DESK
+}
+
+model OrderProducts {
+  order   Order   @relation(fields: [orderId], references: [id])
+  product Product @relation(fields: [productId], references: [id])
+
+  orderId   Int
+  productId Int
+
+  price    Int
+  quantity Int
+  color    String?
+  size     String?
+
+  @@unique([orderId, productId])
 }
