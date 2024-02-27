@@ -27,12 +27,12 @@ export default async function Home() {
 
         <div
           aria-label="Offers"
-          className="mb-4 overflow-hidden rounded-lg border sm:mb-8 lg:-mt-2 lg:mb-16"
+          className="mx-auto mb-4 max-w-3xl overflow-hidden rounded-lg border sm:mb-8 lg:-mt-2 lg:mb-16"
         >
-          <div className="mx-auto max-w-7xl lg:px-8">
+          <div className=" lg:px-8">
             <ul
               role="list"
-              className="grid grid-cols-1 divide-y divide-gray-200 lg:grid-cols-3 lg:divide-x lg:divide-y-0"
+              className="grid grid-cols-1 divide-y divide-gray-200 lg:grid-cols-2 lg:divide-x lg:divide-y-0"
             >
               {offers.map((offer) => (
                 <li

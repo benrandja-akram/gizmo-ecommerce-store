@@ -70,7 +70,7 @@ function Cart() {
           className={clsx(
             'h-6 w-6 flex-shrink-0 ',
             cart.items.length
-              ? 'text-teal-500 group-hover:text-teal-600'
+              ? 'text-green-500 group-hover:text-green-600'
               : 'text-gray-700 group-hover:text-gray-900',
           )}
           aria-hidden="true"
@@ -78,7 +78,7 @@ function Cart() {
         {!!cart.items.length && (
           <span
             className={
-              'fade-in-0 zoom-in-0 absolute -right-2 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-teal-500 text-xs font-bold text-white'
+              'fade-in-0 animate-in zoom-in-0 absolute -right-2 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-green-500 text-xs font-bold text-white group-hover:bg-green-600'
             }
           >
             {cart.items.length}
@@ -259,7 +259,7 @@ function AddToCart({
         else cart.removeItem(product)
       }}
       className={clsx(
-        'w-full',
+        'w-full truncate',
         size === 'base'
           ? 'sm:px-3 sm:py-3'
           : 'px-1 py-1.5 text-xs sm:px-2 sm:py-2 sm:text-sm/6',
@@ -267,12 +267,12 @@ function AddToCart({
     >
       {!selected ? (
         <>
-          <ShoppingBagIcon className="w-4 sm:w-5" />
+          <ShoppingBagIcon className="xs:w-5 !w-4" />
           Ajouter au panier
         </>
       ) : (
         <>
-          <CheckCheckIcon className="fade-in-0 animate-in zoom-in-0 slide-in-from-bottom-4 w-5 sm:w-5" />
+          <CheckCheckIcon className="fade-in-0 animate-in zoom-in-0 slide-in-from-bottom-4 xs:w-5 w-4" />
           En panier
         </>
       )}
