@@ -19,11 +19,5 @@
     "store",
     "apps/*",
     "packages/*"
-  ],
-  "dependencies": {
-    "@heroicons/react": "^2.1.1",
-    "i": "^0.3.7",
-    "npm": "^10.4.0",
-    "swr": "^2.2.5"
-  }
+  ]
 }

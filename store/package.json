@@ -12,6 +12,7 @@
   "dependencies": {
     "@formkit/auto-animate": "^0.8.1",
     "@headlessui/react": "^2.0.0-alpha.4",
+    "@heroicons/react": "^2.1.1",
     "@hookform/resolvers": "^3.3.4",
     "@prisma/client": "^5.10.2",
     "@types/js-cookie": "^3.0.6",
@@ -24,6 +25,7 @@
     "react-hook-form": "^7.50.1",
     "react-markdown": "^9.0.1",
     "react-medium-image-zoom": "^5.1.10",
+    "swr": "^2.2.5",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.22.4",
