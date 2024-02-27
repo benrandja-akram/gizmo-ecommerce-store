@@ -16,13 +16,12 @@ import { Radio, RadioField, RadioGroup } from '@/components/radio'
 import { Text } from '@/components/text'
 import { Textarea } from '@/components/textarea'
 import { useCart } from '@/hooks/use-cart'
+import { useCartProducts } from '@/hooks/use-cart-products'
 import { CartProducts, EmptyCart } from '@/ui/cart'
 import { ProductFallback } from '@/ui/product-fallback'
 import { clsx } from '@/utils/clsx'
 import { STOP_DESK, TO_HOME } from '@/utils/constants'
 import { zodResolver } from '@hookform/resolvers/zod'
-import type { Product } from '@prisma/client'
-import { useEffect, useMemo, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import useSWRMutation from 'swr/mutation'
 import { checkout } from './actions'
@@ -35,7 +34,6 @@ type Props = {
   communes: CommunesRoot['data']
 }
 function CheckoutForm({ fees, centers, communes }: Props) {
-  const [mounted, setMounted] = useState(false)
   const { data, isMutating, trigger } = useSWRMutation(
     '/actions/checkout',
     (
@@ -46,6 +44,8 @@ function CheckoutForm({ fees, centers, communes }: Props) {
     ) => checkout(data.arg[0], data.arg[1]),
   )
   const cart = useCart()
+  const { products } = useCartProducts({ enabled: true })
+
   const {
     register,
     handleSubmit,
@@ -59,29 +59,11 @@ function CheckoutForm({ fees, centers, communes }: Props) {
       deliveryType: TO_HOME,
     },
   })
-  const [products, setProducts] = useState<Product[]>()
-  const ids = useMemo(() => cart.items.map((item) => item.id), [cart.items])
 
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-  useEffect(() => {
-    if (ids.length) {
-      const search = new URLSearchParams()
-      ids.forEach((id) => search.append('product', id.toString()))
-      fetch(`/api/products?${search}`)
-        .then((res) => res.json())
-        .then(setProducts)
-    }
-  }, [ids])
-
-  if (!mounted) {
-    return <div className="min-h-[600px] bg-gray-50" />
-  }
   if (data?.success) {
     return <OrderConfirmed name={getValues().name} />
   }
-  if ((products && !products?.length) || !ids.length) {
+  if (products && !products.length) {
     return (
       <div className="mx-4">
         <div className="mx-auto my-12 mb-96 max-w-lg">
@@ -366,58 +348,65 @@ function CheckoutForm({ fees, centers, communes }: Props) {
 
             <div className="mt-4 rounded-lg border border-gray-200 bg-white shadow-sm">
               <h3 className="sr-only">Items in your cart</h3>
-              {!!products?.length && (
-                <CartProducts
-                  products={cart.items
-                    .map((item) => products.find((p) => p.id === item.id)!)
-                    .filter(Boolean)
-                    .filter((p) => p.id)}
-                />
+              {products ? (
+                <>
+                  <CartProducts
+                    products={cart.items
+                      .map((item) => products.find((p) => p.id === item.id)!)
+                      .filter(Boolean)
+                      .filter((p) => p.id)}
+                  />
+
+                  <dl className="space-y-6 border-t border-gray-200 px-4 py-6 sm:px-6">
+                    <div className="flex items-center justify-between">
+                      <dt className="text-sm">Subtotal</dt>
+                      <dd className="text-sm font-medium text-gray-900">
+                        {subtotal} DA
+                      </dd>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <dt className="text-sm">Shipping</dt>
+                      <dd className="text-sm font-medium text-gray-900">
+                        {deliveryFee ? (
+                          `${deliveryFee} DA`
+                        ) : (
+                          <span className="text-red-500">
+                            Enter your address
+                          </span>
+                        )}
+                      </dd>
+                    </div>
+
+                    <div className="flex items-center justify-between border-t border-gray-200 pt-6">
+                      <dt className="text-base font-medium">Total</dt>
+                      <dd className="text-base font-bold text-gray-900">
+                        {deliveryFee + subtotal} DA
+                      </dd>
+                    </div>
+                  </dl>
+
+                  <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
+                    <Button
+                      className={clsx('w-full sm:py-3')}
+                      disabled={isMutating}
+                      type="submit"
+                    >
+                      {!isMutating ? 'Confirm order' : 'Confirming ...'}
+                    </Button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="divide-y">
+                    {new Array(3).fill(null).map((_, i) => {
+                      return <ProductFallback key={i} />
+                    })}
+                  </div>
+                  <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
+                    <div className="h-10 animate-pulse rounded bg-slate-200"></div>
+                  </div>
+                </>
               )}
-
-              {!products?.length && (
-                <div className="mt-8 divide-y">
-                  {new Array(ids.length).fill(null).map((_, i) => {
-                    return <ProductFallback key={i} />
-                  })}
-                </div>
-              )}
-
-              <dl className="space-y-6 border-t border-gray-200 px-4 py-6 sm:px-6">
-                <div className="flex items-center justify-between">
-                  <dt className="text-sm">Subtotal</dt>
-                  <dd className="text-sm font-medium text-gray-900">
-                    {subtotal} DA
-                  </dd>
-                </div>
-                <div className="flex items-center justify-between">
-                  <dt className="text-sm">Shipping</dt>
-                  <dd className="text-sm font-medium text-gray-900">
-                    {deliveryFee ? (
-                      `${deliveryFee} DA`
-                    ) : (
-                      <span className="text-red-500">Enter your address</span>
-                    )}
-                  </dd>
-                </div>
-
-                <div className="flex items-center justify-between border-t border-gray-200 pt-6">
-                  <dt className="text-base font-medium">Total</dt>
-                  <dd className="text-base font-bold text-gray-900">
-                    {deliveryFee + subtotal} DA
-                  </dd>
-                </div>
-              </dl>
-
-              <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
-                <Button
-                  className={clsx('w-full sm:py-3')}
-                  disabled={isMutating}
-                  type="submit"
-                >
-                  {!isMutating ? 'Confirm order' : 'Confirming ...'}
-                </Button>
-              </div>
             </div>
           </div>
         </form>
@@ -425,19 +414,5 @@ function CheckoutForm({ fees, centers, communes }: Props) {
     </div>
   )
 }
-
-const products = [
-  {
-    id: 1,
-    title: 'Basic Tee',
-    href: '#',
-    price: '$32.00',
-    color: 'Black',
-    size: 'Large',
-    imageSrc:
-      'https://tailwindui.com/img/ecommerce-images/checkout-page-02-product-01.jpg',
-    imageAlt: "Front of men's Basic Tee in black.",
-  },
-]
 
 export { CheckoutForm }

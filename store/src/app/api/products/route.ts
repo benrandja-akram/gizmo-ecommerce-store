@@ -11,6 +11,8 @@ async function GET(request: NextRequest) {
         },
       },
     })
+    if (process.env.NODE_ENV === 'development')
+      await new Promise((res) => setTimeout(res, 1000))
     return NextResponse.json(products)
   } catch (error) {
     NextResponse.json({ message: 'Internal Server Error' }, { status: 500 })

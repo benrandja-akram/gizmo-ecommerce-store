@@ -1,6 +1,6 @@
 function ProductFallback() {
   return (
-    <div className="flex h-[140px] items-center p-3">
+    <div className="flex h-[120px] items-center p-3">
       <div className="flex flex-1 animate-pulse space-x-4">
         <div className="h-12 w-12 rounded-full bg-slate-200"></div>
         <div className="flex-1 space-y-6 py-1">

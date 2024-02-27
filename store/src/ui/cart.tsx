@@ -4,6 +4,7 @@ import { Button } from '@/components/button'
 import { Drawer } from '@/components/drawer'
 import { Listbox, ListboxLabel, ListboxOption } from '@/components/listbox'
 import { useCart } from '@/hooks/use-cart'
+import { useCartProducts } from '@/hooks/use-cart-products'
 import { useDialog } from '@/hooks/use-dialog'
 import { clsx } from '@/utils/clsx'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
@@ -17,13 +18,14 @@ import { Product } from '@prisma/client'
 import cookies from 'js-cookie'
 import { CheckCheckIcon, MoveRight } from 'lucide-react'
 import Link from 'next/link'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect } from 'react'
 import { ProductFallback } from './product-fallback'
 
 function Cart() {
   const cart = useCart()
   const { isOpen, onOpen, onClose } = useDialog('cart')
-  const [products, setProducts] = useState<Product[]>([])
+
+  const { products, isLoading, ids } = useCartProducts({ enabled: isOpen })
 
   useEffect(() => {
     useCart.setState((state) => ({
@@ -43,22 +45,6 @@ function Cart() {
     return unsubscribe
   }, [])
 
-  const ids = useMemo(() => cart.items.map((item) => item.id), [cart.items])
-
-  useEffect(() => {
-    if (isOpen && ids.length) {
-      const search = new URLSearchParams()
-      ids.forEach((id) => search.append('product', id.toString()))
-      fetch(`/api/products?${search}`)
-        .then((res) => res.json())
-        .then(setProducts)
-    } else {
-      // wait for drawer exit animation before reseting state
-      setTimeout(() => {
-        setProducts([])
-      }, 500)
-    }
-  }, [isOpen, ids])
   return (
     <>
       <button
@@ -105,8 +91,13 @@ function Cart() {
                 </button>
               </div>
             </div>
-            {!products.length && !ids.length && <EmptyCart />}
-            {!!products.length && (
+            {isLoading ? (
+              <div className="mt-8 divide-y">
+                {new Array(ids.length).fill(null).map((_, i) => {
+                  return <ProductFallback key={i} />
+                })}
+              </div>
+            ) : products?.length ? (
               <div className="-mx-4 mt-8 sm:-mx-6 ">
                 <CartProducts
                   products={cart.items
@@ -115,18 +106,12 @@ function Cart() {
                     .filter((p) => p.id)}
                 />
               </div>
-            )}
-
-            {!products.length && (
-              <div className="mt-8 divide-y">
-                {new Array(ids.length).fill(null).map((_, i) => {
-                  return <ProductFallback key={i} />
-                })}
-              </div>
+            ) : (
+              <EmptyCart />
             )}
           </div>
 
-          {!!products.length && (
+          {!!products?.length && (
             <div className="animate-in fade-in-0 slide-in-from-bottom-4 border-t border-gray-200 px-4 py-6 sm:px-6">
               <div className="mb-4 flex justify-between text-base font-medium text-gray-900">
                 <p>Subtotal</p>
