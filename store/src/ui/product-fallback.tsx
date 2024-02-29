@@ -1,6 +1,13 @@
-function ProductFallback() {
+import { clsx } from '@/utils/clsx'
+
+function ProductFallback({ size = 'base' }: { size?: 'base' | 'sm' }) {
   return (
-    <div className="flex h-[120px] items-center p-3">
+    <div
+      className={clsx(
+        'flex items-center p-3',
+        size === 'base' ? 'h-[120px]' : 'h-[64px]',
+      )}
+    >
       <div className="flex flex-1 animate-pulse space-x-4">
         <div className="h-12 w-12 rounded-full bg-slate-200"></div>
         <div className="flex-1 space-y-6 py-1">

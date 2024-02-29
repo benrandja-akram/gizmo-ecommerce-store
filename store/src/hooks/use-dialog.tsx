@@ -14,8 +14,9 @@ function useDialog(key: string) {
     params.delete(key)
     window.history.pushState(null, '', `?${params.toString()}`)
   }
+  const setOpen = (open: boolean) => (open ? onOpen() : onClose())
 
-  return { isOpen, onClose, onOpen }
+  return { isOpen, onClose, onOpen, setOpen }
 }
 
 export { useDialog }

@@ -1,9 +1,9 @@
 import { getCategories } from '@/db/category'
 import { Cart } from '@/ui/cart'
 import { Logo } from '@/ui/logo'
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { Suspense } from 'react'
+import { Search } from '../ui/search'
 import { MobileMenu } from './mobile-menu'
 
 async function Header() {
@@ -45,11 +45,8 @@ async function Header() {
 
           <div className="flex flex-1 items-center justify-end">
             <div className="flex items-center space-x-4">
-              <a href="#" className="text-gray-400 hover:text-gray-500">
-                <span className="sr-only">Search</span>
-                <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
-              </a>
               <Suspense>
+                <Search />
                 <Cart />
               </Suspense>
             </div>

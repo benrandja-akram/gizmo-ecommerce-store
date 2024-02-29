@@ -1,11 +1,17 @@
+import { clsx } from '@/utils/clsx'
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 
 function Drawer({
   children,
-  show,
+  isOpen: show,
   onClose,
-}: React.PropsWithChildren<{ show: boolean; onClose(open: boolean): void }>) {
+  side = 'right',
+}: React.PropsWithChildren<{
+  isOpen: boolean
+  onClose(open: boolean): void
+  side?: 'right' | 'left'
+}>) {
   return (
     <Transition.Root show={show} as={Fragment}>
       <Dialog as="div" className="relative z-20" onClose={onClose}>
@@ -21,19 +27,28 @@ function Drawer({
           <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
         </Transition.Child>
 
-        <div className="fixed inset-0 overflow-hidden">
+        <div className="fixed inset-0 overflow-hidden ">
           <div className="absolute inset-0 overflow-hidden">
-            <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full">
+            <div
+              className={clsx(
+                'pointer-events-none fixed inset-y-0 flex max-w-full',
+                side === 'right' ? ' right-0' : 'left-0',
+              )}
+            >
               <Transition.Child
                 as={Fragment}
                 enter="transform transition ease-in-out duration-500 sm:duration-700"
-                enterFrom="translate-x-full"
+                enterFrom={clsx(
+                  side === 'right' ? 'translate-x-full' : '-translate-x-full',
+                )}
                 enterTo="translate-x-0"
-                leave="transform transition ease-in-out duration-500 sm:duration-700"
+                leave="transform transition ease-in-out duration-500 sm:duration-700 "
                 leaveFrom="translate-x-0"
-                leaveTo="translate-x-full"
+                leaveTo={clsx(
+                  side === 'right' ? 'translate-x-full' : '-translate-x-full',
+                )}
               >
-                <Dialog.Panel className="pointer-events-auto w-screen max-w-md">
+                <Dialog.Panel className="pointer-events-auto w-screen max-w-[min(90vw,448px)] bg-white">
                   {children}
                 </Dialog.Panel>
               </Transition.Child>

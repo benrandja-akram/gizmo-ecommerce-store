@@ -26,8 +26,6 @@ export const Input = forwardRef<
     <span
       data-slot="control"
       className={clsx([
-        className,
-
         // Basic layout
         'relative block h-10 w-full',
 
@@ -45,6 +43,8 @@ export const Input = forwardRef<
 
         // Invalid state
         'before:has-[[data-invalid]]:shadow-red-500/10',
+
+        className,
       ])}
     >
       <HeadlessInput

@@ -1,6 +1,6 @@
 'use client'
 
-import { Dialog, DialogBody, DialogClose } from '@/components/dialog'
+import { Drawer } from '@/components/drawer'
 import { useDialog } from '@/hooks/use-dialog'
 import { Bars3Icon } from '@heroicons/react/24/outline'
 import type { Category } from '@prisma/client'
@@ -31,30 +31,27 @@ function MobileMenu({ categories }: Props) {
         </button>
       </div>
 
-      <Dialog open={isOpen} onClose={onClose}>
-        <DialogClose onClick={onClose} />
-        <DialogBody className=" z-50">
-          <ul className="divide-y">
-            <Link href="/" className="flex justify-between py-2.5 font-medium">
-              Home
-              <MoveRightIcon className="w-5 text-gray-800" />
-            </Link>
-            {categories.map((category) => {
-              return (
-                <Link
-                  key={category.id}
-                  href={`/#category-${category.id}`}
-                  className="flex justify-between py-2.5 font-medium"
-                >
-                  {category.name}
+      <Drawer isOpen={isOpen} onClose={onClose} side="left">
+        <ul className="divide-y p-6">
+          <Link href="/" className="flex justify-between py-2.5 font-medium">
+            Home
+            <MoveRightIcon className="w-5 text-gray-800" />
+          </Link>
+          {categories.map((category) => {
+            return (
+              <Link
+                key={category.id}
+                href={`/#category-${category.id}`}
+                className="flex justify-between py-2.5 font-medium"
+              >
+                {category.name}
 
-                  <MoveRightIcon className="w-5 text-gray-800" />
-                </Link>
-              )
-            })}
-          </ul>
-        </DialogBody>
-      </Dialog>
+                <MoveRightIcon className="w-5 text-gray-800" />
+              </Link>
+            )
+          })}
+        </ul>
+      </Drawer>
     </>
   )
 }
