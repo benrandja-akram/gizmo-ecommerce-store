@@ -17,7 +17,7 @@ async function Header() {
           <div className="hidden space-x-4 lg:flex lg:items-center">
             <Link href="/" className="mr-12">
               <span className="sr-only">Your Company</span>
-              <Logo width={28} height={28} />
+              <Logo />
             </Link>
             {categories.map((category) => {
               return (
@@ -40,7 +40,7 @@ async function Header() {
           {/* Logo (lg-) */}
           <Link href="/" className="lg:hidden">
             <span className="sr-only">Your Company</span>
-            <Logo width={28} height={28} />
+            <Logo />
           </Link>
 
           <div className="flex flex-1 items-center justify-end">
