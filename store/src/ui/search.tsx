@@ -3,7 +3,6 @@
 import { Badge } from '@/components/badge'
 import { Button } from '@/components/button'
 import { CommandPaletteDialog } from '@/components/command-palette-dialog'
-import { useCart } from '@/hooks/use-cart'
 import { useDialog } from '@/hooks/use-dialog'
 import { ProductFallback } from '@/ui/product-fallback'
 import { clsx } from '@/utils/clsx'
@@ -16,14 +15,14 @@ import type { Category, Product } from '@prisma/client'
 import { MoveRightIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { ChangeEvent, useState, useTransition } from 'react'
 import useSWR from 'swr'
 import { useDebounce } from 'use-debounce'
 
 function Search() {
   const router = useRouter()
+  const [pending, startTransition] = useTransition()
   const { isOpen: open, setOpen } = useDialog('search')
-  const cart = useCart()
 
   const [inputQuery, setQuery] = useState('')
   const [query] = useDebounce(inputQuery, 300)
@@ -50,11 +49,17 @@ function Search() {
       >
         <Combobox
           onChange={(product) => {
-            router.push(`/product/${product}`)
+            startTransition(() => void router.push(`/product/${product}`))
           }}
           value={inputQuery}
         >
-          <div className="relative flex items-center">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault()
+              startTransition(() => void router.push(`/search/${query}`))
+            }}
+            className="relative flex items-center"
+          >
             <MagnifyingGlassIcon
               className="pointer-events-none absolute left-4 top-3.5 h-5 w-5 text-gray-400"
               aria-hidden="true"
@@ -62,20 +67,25 @@ function Search() {
             <Combobox.Input
               className="h-12 w-full flex-1 border-0 bg-transparent pl-11 pr-4 text-sm text-gray-900 outline-none placeholder:text-gray-400 focus:ring-0"
               placeholder="Search..."
-              onChange={(event) => setQuery(event.target.value)}
+              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                setQuery(event.target.value)
+              }
               autoFocus
               value={inputQuery}
+              name="query"
             />
-            <Link href={`/search/${query}`} className="mr-2">
-              <Button className={'overflow-hidden rounded-full'}>
-                <span className="hidden sm:inline">Rechercher</span>
-                <MoveRightIcon
-                  className="h-4 w-4 !text-white "
-                  aria-hidden="true"
-                />
-              </Button>
-            </Link>
-          </div>
+            <Button
+              type="submit"
+              className={'mr-3 overflow-hidden rounded-full'}
+              disabled={pending}
+            >
+              <span className="hidden sm:inline">Rechercher</span>
+              <MoveRightIcon
+                className="h-4 w-4 !text-white "
+                aria-hidden="true"
+              />
+            </Button>
+          </form>
           {isLoading && (
             <div className="divide-y">
               {new Array(3).fill(null).map((_, i) => {

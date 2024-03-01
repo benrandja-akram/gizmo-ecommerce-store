@@ -257,7 +257,7 @@ function AddToCart({
     >
       {!selected ? (
         <>
-          <ShoppingBagIcon className="xs:w-5 !w-4" />
+          <ShoppingBagIcon className="xs:inline xs:w-5 hidden !w-4" />
           Ajouter au panier
         </>
       ) : (

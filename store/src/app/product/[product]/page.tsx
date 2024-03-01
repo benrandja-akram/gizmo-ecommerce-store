@@ -51,7 +51,7 @@ export default async function ProductPage({
       where: { id: +id },
       include: { category: true },
     }),
-    db.product.findMany({ take: 4 }),
+    db.product.findMany({ take: 4, include: { category: true } }),
   ])
   if (!product) notFound()
 
@@ -149,7 +149,7 @@ export default async function ProductPage({
         <ProductsList>
           {recommendedProducts.map((product) => (
             <li className="h-full" key={product.id}>
-              <ProductCard {...product} />
+              <ProductCard {...product} showCategory />
             </li>
           ))}
         </ProductsList>

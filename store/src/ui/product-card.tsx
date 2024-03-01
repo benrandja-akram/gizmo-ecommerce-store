@@ -1,10 +1,13 @@
-import type { Product } from '@/db'
+import type { Category, Product } from '@/db'
 import Link from 'next/link'
 import { AddToCart } from './cart'
 
-type Props = Product
+type Props = Product & {
+  category: Category
+  showCategory?: boolean
+}
 
-function ProductCard({ ...product }: Props) {
+function ProductCard({ showCategory, ...product }: Props) {
   return (
     <div
       key={product.id}
@@ -25,8 +28,10 @@ function ProductCard({ ...product }: Props) {
           href={`/product/${product.id}`}
           className="mt-4 block cursor-pointer text-xs sm:mt-6 sm:text-base"
         >
-          {product.model && (
-            <p className="mb-1 text-sm text-gray-500">{product.model}</p>
+          {showCategory && (
+            <p className="mb-1 text-sm text-gray-500">
+              {product.category.name}
+            </p>
           )}
 
           <div>

@@ -20,7 +20,7 @@ async function main() {
             price: Math.floor(Math.random() * 30) * 1000,
             image: faker.image.urlPicsumPhotos(),
             name: faker.commerce.productName(),
-            colors: new Array(3).fill(null).map(() => faker.color.rgb()),
+            // colors: new Array(3).fill(null).map(() => faker.color.rgb()),
           })),
         })
       }),

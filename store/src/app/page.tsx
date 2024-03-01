@@ -63,7 +63,10 @@ export default async function Home() {
                   <ProductsList>
                     {category.products.map((product) => (
                       <li className="h-full" key={product.id}>
-                        <ProductCard {...product} />
+                        <ProductCard
+                          {...{ ...product, category }}
+                          showCategory
+                        />
                       </li>
                     ))}
                   </ProductsList>

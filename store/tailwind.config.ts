@@ -5,7 +5,7 @@ const config: Config = {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     extend: {
-      screens: { xs: '360px' },
+      screens: { xs: '359px' },
       maxWidth: {
         '8xl': '90rem',
       },
