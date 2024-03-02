@@ -6,6 +6,7 @@ import { ProductCard } from '@/ui/product-card'
 import { ProductsHeader, ProductsList, ProductsRoot } from '@/ui/products-list'
 import { Zoom } from '@/ui/zoom'
 import { clsx } from '@/utils/clsx'
+import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react'
 import { CheckIcon, StarIcon } from '@heroicons/react/20/solid'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -60,7 +61,7 @@ export default async function ProductPage({
     <div className="mx-auto grid max-w-7xl px-4 py-4 sm:px-6 sm:py-6 lg:px-8 lg:py-8 ">
       <div className="mx-auto grid max-w-xl gap-y-6 lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8">
         {/* Product details */}
-        <div className="order-2 lg:order-1 lg:max-w-lg lg:self-end">
+        <div className="order-2 lg:order-1 lg:self-end">
           <Link href={`/#category-${product.category.id}`}>
             <Badge color="indigo">
               <div className="text-sm font-bold">{product?.category.name}</div>
@@ -128,24 +129,55 @@ export default async function ProductPage({
                 </div>
               ))}
             </div>
+
+            <TabGroup as="div" className={'mt-8'}>
+              <TabList
+                className=" -mb-px mt-4 flex space-x-8 border-b border-gray-200"
+                aria-label="Tabs"
+              >
+                {['Description', 'Tech specs'].map((tab) => {
+                  return (
+                    <Tab
+                      key={tab}
+                      className={clsx(
+                        '[whitespace-nowrap border-b-2 px-1 py-4 text-sm font-medium outline-none',
+                        'ui-selected:border-indigo-500 ui-selected:text-indigo-600',
+                        'ui-not-selected:border-transparent ui-not-selected:text-gray-500 ui-not-selected:hover:border-gray-300 ui-not-selected:hover:text-gray-700',
+                      )}
+                    >
+                      {tab}
+                    </Tab>
+                  )
+                })}
+              </TabList>
+
+              <TabPanels className={'prose py-6'}>
+                <TabPanel>
+                  <Markdown content={product.description ?? ''} />
+                </TabPanel>
+                <TabPanel>
+                  <Markdown content={product.techSpecs ?? ''} />
+                </TabPanel>
+              </TabPanels>
+            </TabGroup>
           </section>
         </div>
 
         {/* Product image */}
-        <div className="order-1 mt-10 lg:order-2 lg:col-start-2 lg:row-span-2 lg:mt-0 lg:self-center">
-          <div className="aspect-h-1 aspect-w-1 flex items-center justify-center overflow-hidden rounded-lg">
+        <div className="order-1 mt-10 lg:order-2 lg:col-start-2 lg:row-span-2 lg:mt-0">
+          <div className="aspect-h-1 aspect-w-1 flex items-start justify-center overflow-hidden rounded-lg">
             <Zoom>
               <img
                 src={product.image}
                 alt={''}
-                className="h-full w-full max-w-sm object-cover object-center"
+                className="h-full w-full max-w-md rounded object-cover object-center"
               />
             </Zoom>
           </div>
         </div>
       </div>
 
-      <ProductsRoot className="pt-16 md:pt-32">
+      <ProductsRoot className="pt-8 lg:pt-16">
         <ProductsHeader>Les clients ont également acheté</ProductsHeader>
         <ProductsList>
           {recommendedProducts.map((product) => (

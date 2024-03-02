@@ -30,6 +30,7 @@ model Product {
   id          String  @id
   name        String
   description String? @db.Text
+  techSpecs   String? @db.Text
   /// [ProductVariant]
   colors      Json?
   /// [ProductVariant]
