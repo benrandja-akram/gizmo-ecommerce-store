@@ -26,10 +26,10 @@ function ProductCard({ showCategory, ...product }: Props) {
         </Link>
         <Link
           href={`/product/${product.id}`}
-          className="mt-4 block cursor-pointer text-xs sm:mt-6 sm:text-base"
+          className="mt-2 block cursor-pointer text-xs sm:text-sm md:text-base lg:mt-4"
         >
           {showCategory && (
-            <p className="mb-1 text-sm text-gray-500">
+            <p className="mb-1 text-gray-500 sm:text-sm">
               {product.category.name}
             </p>
           )}

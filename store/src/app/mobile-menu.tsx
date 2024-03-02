@@ -41,7 +41,7 @@ function MobileMenu({ categories }: Props) {
             return (
               <Link
                 key={category.id}
-                href={`/#category-${category.id}`}
+                href={`/category/${category.id}`}
                 className="flex justify-between py-2.5 font-medium"
               >
                 {category.name}

@@ -41,6 +41,7 @@ const policies = [
   },
 ]
 const features = ['In Stock', 'Livraison a domicile', '1~2 days delivery']
+
 export default async function ProductPage({
   params: { product: id },
 }: {
@@ -181,7 +182,7 @@ export const dynamicParams = false
 export async function generateStaticParams() {
   const products = await db.product.findMany()
 
-  return products.map((post) => ({
-    product: post.id.toString(),
+  return products.map((product) => ({
+    product: product.id.toString(),
   }))
 }

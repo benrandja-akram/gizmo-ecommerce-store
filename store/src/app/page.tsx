@@ -1,6 +1,7 @@
 import { getCategoriesWithProducts } from '@/db/category'
 import { ProductCard } from '@/ui/product-card'
 import { ProductsHeader, ProductsList, ProductsRoot } from '@/ui/products-list'
+
 const offers = [
   {
     name: 'Laivraison ',

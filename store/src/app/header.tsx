@@ -23,7 +23,7 @@ async function Header() {
               return (
                 <Link
                   key={category.id}
-                  href={`/#category-${category.id}`}
+                  href={`/category/${category.id}`}
                   type="button"
                   className="flex-1 whitespace-nowrap border-b-2  border-transparent px-1 py-4 text-base font-medium  text-gray-700 transition-all hover:text-gray-900"
                 >
@@ -34,7 +34,7 @@ async function Header() {
           </div>
 
           {/* Mobile menu and search (lg-) */}
-          <Suspense>
+          <Suspense fallback={<span className="flex-1" />}>
             <MobileMenu categories={categories} />
           </Suspense>
           {/* Logo (lg-) */}

@@ -9,6 +9,7 @@ async function main() {
         name: faker.commerce.department(),
         image: null,
         position,
+        description: faker.commerce.productDescription(),
       })),
     })
     const categories = await db.category.findMany()
@@ -20,6 +21,7 @@ async function main() {
             price: Math.floor(Math.random() * 30) * 1000,
             image: faker.image.urlPicsumPhotos(),
             name: faker.commerce.productName(),
+            description: faker.commerce.productDescription(),
             // colors: new Array(3).fill(null).map(() => faker.color.rgb()),
           })),
         })

@@ -1,6 +1,5 @@
 'use client'
 
-import { Badge } from '@/components/badge'
 import { Button } from '@/components/button'
 import { CommandPaletteDialog } from '@/components/command-palette-dialog'
 import { useDialog } from '@/hooks/use-dialog'
@@ -87,14 +86,18 @@ function Search() {
             </Button>
           </form>
           {isLoading && (
-            <div className="divide-y">
-              {new Array(3).fill(null).map((_, i) => {
-                return (
-                  <div key={i} className="py-3">
-                    <ProductFallback key={i} size="sm" />
-                  </div>
-                )
-              })}
+            <div className="">
+              <div className="divide-y">
+                {new Array(4).fill(null).map((_, i) => {
+                  return (
+                    <div key={i} className="py-3">
+                      <ProductFallback key={i} size="sm" />
+                    </div>
+                  )
+                })}
+              </div>
+
+              <div className="mx-3 my-4 h-10 animate-pulse rounded-lg bg-slate-200" />
             </div>
           )}
 
@@ -131,20 +134,16 @@ function Search() {
                             alt=""
                           />
                         </div>
-                        <div className="grid items-start gap-0.5">
-                          <div>
-                            <Badge className="leading-none">
-                              {product.category.name}
-                            </Badge>
-                          </div>
+                        <div className="grid items-start gap-0.5 text-sm">
                           <p
                             className={clsx(
-                              'truncate text-sm font-medium',
+                              'truncate font-medium',
                               focus ? 'text-gray-900' : 'text-gray-700',
                             )}
                           >
                             {product.name}
                           </p>
+                          <p className="font-semibold">{product.price}DA</p>
                         </div>
                       </Link>
                     )}

@@ -16,11 +16,12 @@ datasource db {
 }
 
 model Category {
-  id       Int       @id @default(autoincrement())
-  name     String
-  image    String?
-  position Int
-  products Product[]
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String?
+  image       String?
+  position    Int
+  products    Product[]
 
   @@map("categories")
 }
