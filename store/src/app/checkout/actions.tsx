@@ -6,7 +6,7 @@ import { cookies } from 'next/headers'
 import { SchemaValue, checkoutSchema } from './schema'
 
 async function checkout(
-  products: { id: number; quantity: number }[],
+  products: { id: string; quantity: number }[],
   shippingDetails: SchemaValue,
 ) {
   try {

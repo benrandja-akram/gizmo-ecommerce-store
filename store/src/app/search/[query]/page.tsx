@@ -20,7 +20,7 @@ async function SearchPage({
           contains: query,
           mode: 'insensitive',
         },
-        categoryId: searchParams.category ? +searchParams.category : undefined,
+        categoryId: searchParams.category || undefined,
       },
     }),
   ])

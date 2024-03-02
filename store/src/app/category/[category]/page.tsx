@@ -11,11 +11,13 @@ async function CategoryPage({
   const [products, category] = await Promise.all([
     db.product.findMany({
       where: {
-        categoryId: Number(categoryId),
+        categoryId: {
+          equals: categoryId,
+        },
       },
     }),
-    db.category.findUnique({
-      where: { id: Number(categoryId) },
+    db.category.findFirst({
+      where: { id: { equals: categoryId } },
     }),
   ])
 
@@ -54,7 +56,7 @@ export async function generateStaticParams() {
   const categories = await db.category.findMany()
 
   return categories.map((category) => ({
-    category: category.id.toString(),
+    category: category.id,
   }))
 }
 

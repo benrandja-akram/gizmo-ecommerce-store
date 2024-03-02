@@ -7,7 +7,7 @@ async function GET(request: NextRequest) {
     const products = await db.product.findMany({
       where: {
         id: {
-          in: searchParams.getAll('product').map((p) => +p),
+          in: searchParams.getAll('product'),
         },
       },
     })

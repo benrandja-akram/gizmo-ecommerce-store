@@ -16,7 +16,7 @@ datasource db {
 }
 
 model Category {
-  id          Int       @id @default(autoincrement())
+  id          String    @id
   name        String
   description String?
   image       String?
@@ -27,18 +27,19 @@ model Category {
 }
 
 model Product {
-  id            Int             @id @default(autoincrement())
-  name          String
-  description   String?         @db.Text
+  id          String  @id
+  name        String
+  description String? @db.Text
   /// [ProductVariant]
-  colors        Json?
+  colors      Json?
   /// [ProductVariant]
-  sizes         Json?
-  image         String
-  thumbnail     String?
-  price         Int
-  model         String?
-  categoryId    Int
+  sizes       Json?
+  image       String
+  thumbnail   String?
+  price       Int
+  model       String?
+
+  categoryId    String
   category      Category        @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   OrderProducts OrderProducts[]
 
@@ -84,7 +85,7 @@ model OrderProducts {
   product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   orderId   Int
-  productId Int
+  productId String
 
   price    Int
   quantity Int

@@ -8,7 +8,7 @@ function useCartProducts({ enabled }: { enabled: boolean }) {
   const ids = useMemo(() => cart.items.map((item) => item.id), [cart.items])
 
   const search = new URLSearchParams()
-  ids.forEach((id) => search.append('product', id.toString()))
+  ids.forEach((id) => search.append('product', id))
   const {
     data: products,
     isLoading,

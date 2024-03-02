@@ -49,7 +49,7 @@ export default async function ProductPage({
 }) {
   const [product, recommendedProducts] = await Promise.all([
     db.product.findUnique({
-      where: { id: +id },
+      where: { id },
       include: { category: true },
     }),
     db.product.findMany({ take: 4, include: { category: true } }),
@@ -183,6 +183,6 @@ export async function generateStaticParams() {
   const products = await db.product.findMany()
 
   return products.map((product) => ({
-    product: product.id.toString(),
+    product: product.id,
   }))
 }

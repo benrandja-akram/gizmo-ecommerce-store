@@ -11,7 +11,7 @@ function Filters({
   categories,
   selectedCategory = 'all',
 }: {
-  categories: (Category  )[]
+  categories: Category[]
   selectedCategory?: string
 }) {
   const router = useRouter()
@@ -40,7 +40,7 @@ function Filters({
 
         {categories.map((category) => (
           <RadioField key={category.id}>
-            <Radio value={category.id.toString()} />
+            <Radio value={category.id} />
             <Label>{category.name}</Label>
           </RadioField>
         ))}

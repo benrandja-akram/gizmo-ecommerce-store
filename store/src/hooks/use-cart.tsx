@@ -1,16 +1,16 @@
 import { create } from 'zustand'
 
 interface Item {
-  id: number
+  id: string
   quantity: number
 }
 
 interface CartState {
   items: Item[]
   addItem: (item: Item) => void
-  removeItem: (itemId: number) => void
+  removeItem: (itemId: string) => void
   clearCart: () => void
-  updateQuantity: (itemId: number, newQuantity: number) => void
+  updateQuantity: (itemId: string, newQuantity: number) => void
 }
 
 const useCart = create<CartState>((set) => ({
