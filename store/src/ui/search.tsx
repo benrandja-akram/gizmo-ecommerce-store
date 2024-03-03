@@ -30,6 +30,9 @@ function Search() {
     open && query ? `search?query=${query}` : null,
     () =>
       fetch(`/api/products/search?query=${query}`).then((res) => res.json()),
+    {
+      revalidateOnFocus: false,
+    },
   )
 
   return (

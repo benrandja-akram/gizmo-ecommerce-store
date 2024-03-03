@@ -16,7 +16,9 @@ function useCartProducts({ enabled }: { enabled: boolean }) {
   } = useSWR<Product[]>(
     enabled && ids.length ? `/api/products?${search}` : null,
     () => fetch(`/api/products?${search}`).then((res) => res.json()),
-    {},
+    {
+      revalidateOnFocus: false,
+    },
   )
 
   return {
