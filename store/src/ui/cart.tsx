@@ -42,7 +42,9 @@ function Cart() {
       )
     })
 
-    return unsubscribe
+    return () => {
+      unsubscribe()
+    }
   }, [])
 
   return (
@@ -172,7 +174,11 @@ function CartProducts({ products }: { products: Product[] }) {
             className="animate-in fade-in-0 flex px-4 py-6 sm:px-6"
           >
             <div className="flex-shrink-0">
-              <img src={product.image} alt={''} className="w-20 rounded-md" />
+              <img
+                src={product.images[0]}
+                alt={''}
+                className="w-20 rounded-md"
+              />
             </div>
 
             <div className="ml-6 flex flex-1 flex-col">
@@ -257,12 +263,12 @@ function AddToCart({
     >
       {!selected ? (
         <>
-          <ShoppingBagIcon className="xs:inline xs:w-5 hidden !w-4" />
+          <ShoppingBagIcon className="xs:inline xs:w-5 hidden w-4" />
           Ajouter au panier
         </>
       ) : (
         <>
-          <CheckCheckIcon className="fade-in-0 animate-in zoom-in-0 slide-in-from-bottom-4 xs:w-5 w-4" />
+          <CheckCheckIcon className="xs:inline xs:w-5 fade-in-0 animate-in zoom-in-0 slide-in-from-bottom-4 hidden w-4" />
           En panier
         </>
       )}

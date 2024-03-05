@@ -20,7 +20,7 @@ model Category {
   id          String    @id
   name        String
   description String?
-  image       String?
+  image       String
   position    Int
   products    Product[]
 
@@ -32,14 +32,15 @@ model Product {
   name        String
   description String? @db.Text
   techSpecs   String? @db.Text
-  /// [ProductVariant]
-  colors      Json?
-  /// [ProductVariant]
-  sizes       Json?
-  image       String
+
+  colors String[]
+  sizes  String[]
+
+  images      String[]
   thumbnail   String?
   price       Int
   model       String?
+  isFlashSale Boolean?
 
   categoryId    String
   category      Category        @relation(fields: [categoryId], references: [id], onDelete: Cascade)

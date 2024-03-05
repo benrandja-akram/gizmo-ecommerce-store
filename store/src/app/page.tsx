@@ -1,6 +1,16 @@
-import { getCategoriesWithProducts } from '@/db/category'
+import { db } from '@/db'
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/ui/carousel'
+import { CategoriesList } from '@/ui/categories'
+import { Policies } from '@/ui/policies'
 import { ProductCard } from '@/ui/product-card'
 import { ProductsHeader, ProductsList, ProductsRoot } from '@/ui/products-list'
+import { ZapIcon } from 'lucide-react'
 
 const offers = [
   {
@@ -11,29 +21,38 @@ const offers = [
     name: 'Fast delivery',
     description: '1~2 Days delivery',
   },
+  {
+    name: 'Fast delivery',
+    description: '1~2 Days delivery',
+  },
 ]
 
 export default async function Home() {
-  const categories = await getCategoriesWithProducts()
+  const [categories, flashProducts, popularProducts] = await Promise.all([
+    db.category.findMany(),
+    db.product.findMany({
+      where: { isFlashSale: true },
+      include: { category: true },
+    }),
+    db.product.findMany({
+      take: 6,
+      include: {
+        category: true,
+      },
+    }),
+  ])
 
   return (
-    <div className="grid gap-8 px-4 pb-4 sm:px-6 sm:pb-6 lg:px-8 lg:pb-8 ">
-      <main className="mx-auto max-w-7xl pt-6 sm:pt-8">
-        <h1 className="mb-6 text-center text-3xl font-extrabold leading-tight tracking-tighter sm:mb-8 sm:text-4xl sm:leading-tight md:text-5xl md:leading-tight lg:mb-16 lg:text-6xl lg:leading-tight">
-          le meilleur endroit pour acheter{' '}
-          <span className="bg-gradient-to-br from-indigo-400 to-indigo-600 bg-clip-text text-transparent">
-            des composants PC
-          </span>
-        </h1>
-
+    <div className="px-4 pb-4 sm:px-6 sm:pb-6 lg:px-8 lg:pb-8 ">
+      <main className="mx-auto max-w-7xl pt-6 sm:pt-12">
         <div
           aria-label="Offers"
-          className="mx-auto mb-4 max-w-3xl overflow-hidden rounded-lg border sm:mb-8 lg:-mt-2 lg:mb-16"
+          className="mb-4 overflow-hidden rounded-lg border bg-white sm:mb-8 lg:mb-16"
         >
           <div className=" lg:px-8">
             <ul
               role="list"
-              className="grid grid-cols-1 divide-y divide-gray-200 lg:grid-cols-2 lg:divide-x lg:divide-y-0"
+              className="grid grid-cols-1 divide-y divide-gray-200 lg:grid-cols-3 lg:divide-x lg:divide-y-0"
             >
               {offers.map((offer) => (
                 <li
@@ -49,32 +68,57 @@ export default async function Home() {
             </ul>
           </div>
         </div>
-
-        <div className="grid">
-          {categories
-            .filter((c) => c.products.length)
-            .map((category) => {
-              return (
-                <ProductsRoot
-                  key={category.id}
-                  id={`category-${category.id}`}
-                  className="pt-8 first:pt-4 md:pt-16"
-                >
-                  <ProductsHeader>{category.name}</ProductsHeader>
-                  <ProductsList>
-                    {category.products.map((product) => (
-                      <li className="h-full" key={product.id}>
-                        <ProductCard
-                          {...{ ...product, category }}
-                          showCategory
-                        />
-                      </li>
-                    ))}
-                  </ProductsList>
-                </ProductsRoot>
-              )
-            })}
+        <div className="mb-4 sm:mb-8 lg:mb-16 lg:gap-12">
+          <CategoriesList categories={categories} />
         </div>
+        <ProductsRoot className="pt-4 md:pt-16">
+          <ProductsHeader>
+            <div className="flex items-center space-x-2 text-amber-500 ">
+              <span>Ventes Flash</span>
+              <ZapIcon className="" />{' '}
+            </div>
+          </ProductsHeader>
+          <ProductsList>
+            {flashProducts.map((product) => (
+              <li className="h-full" key={product.id}>
+                <ProductCard {...product} showCategory />
+              </li>
+            ))}
+          </ProductsList>
+        </ProductsRoot>
+
+        <ProductsRoot className="pt-4 md:pt-16">
+          <ProductsHeader>
+            <div className="flex items-center space-x-2 text-amber-500 ">
+              <span>Popular items</span>
+              <ZapIcon className="" />{' '}
+            </div>
+          </ProductsHeader>
+          <Carousel
+            opts={{
+              align: 'start',
+              dragFree: true,
+            }}
+            className="mt-8 w-full pb-6"
+          >
+            <CarouselContent className="items-stretch">
+              {popularProducts.map((product) => {
+                return (
+                  <CarouselItem
+                    key={product.id}
+                    className="flex h-full min-w-0 shrink-0 basis-[60%] flex-col sm:basis-[40%] md:basis-[28%] lg:basis-1/4"
+                  >
+                    <ProductCard {...product} showCategory />
+                  </CarouselItem>
+                )
+              })}
+            </CarouselContent>
+            <CarouselPrevious className="top-1/3  " />
+            <CarouselNext className="top-1/3  " />
+          </Carousel>
+        </ProductsRoot>
+
+        <Policies />
       </main>
     </div>
   )

@@ -19,7 +19,7 @@ export default async function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="fr" className="scroll-smooth text-gray-900">
+    <html lang="fr" className="scroll-smooth bg-gray-50/60 text-gray-900">
       <body className={inter.className}>
         <a
           target="_blank"

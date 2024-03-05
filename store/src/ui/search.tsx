@@ -75,6 +75,13 @@ function Search() {
               autoFocus
               value={inputQuery}
               name="query"
+              autoComplete="off"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault()
+                  startTransition(() => void router.push(`/search/${query}`))
+                }
+              }}
             />
             <Button
               type="submit"
@@ -117,7 +124,7 @@ function Search() {
                     className={({ focus }) =>
                       clsx(
                         'cursor-default select-none rounded-xl p-2',
-                        focus && 'bg-gray-100',
+                        focus && 'bg-indigo-100',
                       )
                     }
                   >
@@ -128,12 +135,12 @@ function Search() {
                       >
                         <div
                           className={clsx(
-                            'flex h-12 w-12 flex-none items-start justify-center rounded-lg',
+                            'flex h-12 w-12 flex-none items-center justify-center overflow-hidden rounded-lg border bg-white',
                           )}
                         >
                           <img
-                            src={product.image}
-                            className="h-full w-full rounded border object-cover"
+                            src={product.images[0]}
+                            className="h-[90%] w-[90%] object-cover transition-all"
                             alt=""
                           />
                         </div>

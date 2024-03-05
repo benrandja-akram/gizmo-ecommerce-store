@@ -1,4 +1,5 @@
 import { db } from '@/db'
+import { CategoriesList } from '@/ui/categories'
 import { ProductCard } from '@/ui/product-card'
 import { ProductsList, ProductsRoot } from '@/ui/products-list'
 import { notFound } from 'next/navigation'
@@ -8,7 +9,7 @@ async function CategoryPage({
 }: {
   params: { category: string }
 }) {
-  const [products, category] = await Promise.all([
+  const [products, category, categories] = await Promise.all([
     db.product.findMany({
       where: {
         categoryId: {
@@ -19,6 +20,7 @@ async function CategoryPage({
     db.category.findFirst({
       where: { id: { equals: categoryId } },
     }),
+    db.category.findMany(),
   ])
 
   if (!category) notFound()
@@ -46,6 +48,13 @@ async function CategoryPage({
           ))}
         </ProductsList>
       </ProductsRoot>
+
+      <div className="mb-4 mt-4 space-y-8 px-4 sm:mt-8 sm:px-6 lg:mt-24 lg:gap-12 lg:px-0">
+        <h2 className="px-4 text-center text-xl font-bold tracking-tight text-gray-900 sm:text-2xl">
+          Shop by category
+        </h2>
+        <CategoriesList categories={categories} />
+      </div>
     </div>
   )
 }

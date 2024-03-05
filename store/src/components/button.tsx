@@ -4,7 +4,6 @@ import {
   type ButtonProps as HeadlessButtonProps,
 } from '@headlessui/react'
 import React from 'react'
-import { Link } from './link'
 
 const styles = {
   base: [
@@ -144,10 +143,7 @@ export type ButtonProps = (
   | { color?: keyof typeof styles.colors; outline?: never; plain?: never }
   | { color?: never; outline: true; plain?: never }
   | { color?: never; outline?: never; plain: true }
-) & { children: React.ReactNode; pending?: boolean } & (
-    | HeadlessButtonProps
-    | React.ComponentPropsWithoutRef<typeof Link>
-  )
+) & { children: React.ReactNode; pending?: boolean } & HeadlessButtonProps
 
 export const Button = React.forwardRef(function Button(
   {
@@ -172,15 +168,7 @@ export const Button = React.forwardRef(function Button(
     className,
   )
 
-  return 'href' in props ? (
-    <Link
-      {...props}
-      className={classes}
-      ref={ref as React.ForwardedRef<HTMLAnchorElement>}
-    >
-      <TouchTarget>{children}</TouchTarget>
-    </Link>
-  ) : (
+  return (
     <HeadlessButton
       disabled={pending}
       {...props}

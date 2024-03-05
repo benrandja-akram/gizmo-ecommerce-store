@@ -5,7 +5,7 @@ import Link from 'next/link'
 function ProductsRoot({ className, ...props }: DivProps) {
   return (
     <div
-      className={clsx('lg:w-7xl max-w-full  target:scroll-mt-60 ', className)}
+      className={clsx('lg:w-7xl max-w-full target:scroll-mt-60 ', className)}
       {...props}
     />
   )
@@ -22,7 +22,7 @@ function ProductsHeader({
       className={clsx('flex items-center justify-between', className)}
       {...props}
     >
-      <h2 className="text-2xl font-bold tracking-tight text-gray-900">
+      <h2 className="text-xl font-bold tracking-tight text-gray-900 sm:text-2xl">
         {props.children}
       </h2>
       {href && (

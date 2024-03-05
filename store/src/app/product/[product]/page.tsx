@@ -2,6 +2,7 @@ import { Badge } from '@/components/badge'
 import { db } from '@/db'
 import { AddToCart } from '@/ui/cart'
 import { Markdown } from '@/ui/markdown'
+import { Policies } from '@/ui/policies'
 import { ProductCard } from '@/ui/product-card'
 import { ProductsHeader, ProductsList, ProductsRoot } from '@/ui/products-list'
 import { Zoom } from '@/ui/zoom'
@@ -12,35 +13,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 const reviews = { average: 5, totalCount: Math.floor(Math.random() * 20) }
-const policies = [
-  {
-    name: 'Free delivery all year long',
-    description:
-      'Name another place that offers year long free delivery? We’ll be waiting. Order now and you’ll get delivery absolutely free.',
-    imageSrc:
-      'https://tailwindui.com/img/ecommerce/icons/icon-delivery-light.svg',
-  },
-  {
-    name: '24/7 Customer Support',
-    description:
-      'Or so we want you to believe. In reality our chat widget is powered by a naive series of if/else statements that churn out canned responses. Guaranteed to irritate.',
-    imageSrc: 'https://tailwindui.com/img/ecommerce/icons/icon-chat-light.svg',
-  },
-  {
-    name: 'Fast Shopping Cart',
-    description:
-      "Look at the cart in that icon, there's never been a faster cart. What does this mean for the actual checkout experience? I don't know.",
-    imageSrc:
-      'https://tailwindui.com/img/ecommerce/icons/icon-fast-checkout-light.svg',
-  },
-  {
-    name: 'Gift Cards',
-    description:
-      "We sell these hoping that you will buy them for your friends and they will never actually use it. Free money for us, it's great.",
-    imageSrc:
-      'https://tailwindui.com/img/ecommerce/icons/icon-gift-card-light.svg',
-  },
-]
+
 const features = ['In Stock', 'Livraison a domicile', '1~2 days delivery']
 
 export default async function ProductPage({
@@ -165,17 +138,21 @@ export default async function ProductPage({
 
         {/* Product image */}
         <div className="order-1 mt-10 lg:order-2 lg:col-start-2 lg:row-span-2 lg:mt-0">
-          <div className="aspect-h-1 aspect-w-1 flex items-start justify-center overflow-hidden rounded-lg">
-            <Zoom>
-              <img
-                src={product.image}
-                alt={''}
-                className="h-full w-full max-w-md rounded object-cover object-center"
-              />
-            </Zoom>
+          <div className="aspect-h-1 aspect-w-1 flex w-full items-start justify-center overflow-hidden rounded-lg">
+            <div className="rounded-lg border bg-white p-6 lg:p-12">
+              <Zoom>
+                <img
+                  src={product.images[0]}
+                  alt={''}
+                  className="w-[300px] max-w-md rounded object-cover object-center"
+                />
+              </Zoom>
+            </div>
           </div>
         </div>
       </div>
+
+      <Policies />
 
       <ProductsRoot className="pt-8 lg:pt-16">
         <ProductsHeader>Les clients ont également acheté</ProductsHeader>
@@ -187,25 +164,6 @@ export default async function ProductPage({
           ))}
         </ProductsList>
       </ProductsRoot>
-
-      <section aria-labelledby="policy-heading" className="my-16 lg:my-24">
-        <h2 id="policy-heading" className="sr-only">
-          Our policies
-        </h2>
-        <div className="grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 lg:gap-x-8">
-          {policies.map((policy) => (
-            <div key={policy.name}>
-              <img src={policy.imageSrc} alt="" className="h-24 w-auto" />
-              <h3 className="mt-6 text-base font-medium text-gray-900">
-                {policy.name}
-              </h3>
-              <p className="mt-3 text-base text-gray-500">
-                {policy.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
     </div>
   )
 }

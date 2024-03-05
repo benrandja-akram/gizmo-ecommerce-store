@@ -1,5 +1,6 @@
 import { useCart } from '@/hooks/use-cart'
 import { Product } from '@prisma/client'
+import cookies from 'js-cookie'
 import { useMemo } from 'react'
 import useSWR from 'swr'
 
@@ -18,6 +19,13 @@ function useCartProducts({ enabled }: { enabled: boolean }) {
     () => fetch(`/api/products?${search}`).then((res) => res.json()),
     {
       revalidateOnFocus: false,
+      onSuccess() {
+        // make sure to remove deleted products from carts
+        useCart.setState((state) => ({
+          ...state,
+          items: JSON.parse(cookies.get('cart') ?? '[]'),
+        }))
+      },
     },
   )
 
