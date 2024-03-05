@@ -1,5 +1,12 @@
 import { Badge } from '@/components/badge'
 import { db } from '@/db'
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/ui/carousel'
 import { AddToCart } from '@/ui/cart'
 import { Markdown } from '@/ui/markdown'
 import { Policies } from '@/ui/policies'
@@ -142,18 +149,35 @@ export default async function ProductPage({
           </div>
 
           {/* Product image */}
-          <div className="order-1 mt-10 lg:order-2 lg:col-start-2 lg:row-span-2 lg:mt-0">
-            <div className="aspect-h-1 aspect-w-1 flex w-full items-start justify-center overflow-hidden rounded-lg">
-              <div className="rounded-lg border bg-white p-6 lg:p-12">
-                <Zoom>
-                  <img
-                    src={product.images[0]}
-                    alt={''}
-                    className="w-[300px] max-w-full rounded object-cover object-center"
-                  />
-                </Zoom>
-              </div>
-            </div>
+          <div className="order-1 mt-10 flex items-start justify-center lg:order-2 lg:col-start-2 lg:row-span-2 lg:mt-0">
+            <Carousel
+              opts={{
+                align: 'start',
+              }}
+              className="mt-8 w-full max-w-md"
+            >
+              <CarouselContent className="items-stretch">
+                {product.images.map((image) => {
+                  return (
+                    <CarouselItem key={image} className="pl-4">
+                      <div className="aspect-h-1 aspect-w-1 flex w-[300px] items-start justify-center overflow-hidden rounded-lg">
+                        <div className="rounded-lg border bg-white p-6 lg:p-12">
+                          <Zoom>
+                            <img
+                              src={image}
+                              alt={''}
+                              className="w-[300px] max-w-full rounded object-cover object-center"
+                            />
+                          </Zoom>
+                        </div>
+                      </div>{' '}
+                    </CarouselItem>
+                  )
+                })}
+              </CarouselContent>
+              <CarouselPrevious />
+              <CarouselNext />
+            </Carousel>
           </div>
         </div>
 
