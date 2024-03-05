@@ -25,35 +25,37 @@ async function CategoryPage({
 
   if (!category) notFound()
   return (
-    <div className="mx-auto min-h-[600px] max-w-7xl py-12">
-      <div className="mx-auto  max-w-3xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-        <div className="py-8 text-center lg:py-16">
-          <h1 className="text-4xl font-bold tracking-tight text-gray-900">
-            {category.name}
-          </h1>
-          {category.description && (
-            <p className="mx-auto mt-4 max-w-3xl text-base text-gray-500">
-              {category.description}
-            </p>
-          )}
+    <div className="mx-auto min-h-[600px] px-4 py-12 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl">
+        <div className="mx-auto max-w-3xl lg:max-w-7xl">
+          <div className="py-8 text-center lg:py-16">
+            <h1 className="text-4xl font-bold tracking-tight text-gray-900">
+              {category.name}
+            </h1>
+            {category.description && (
+              <p className="mx-auto mt-4 max-w-3xl text-base text-gray-500">
+                {category.description}
+              </p>
+            )}
+          </div>
         </div>
-      </div>
 
-      <ProductsRoot className="px-4">
-        <ProductsList>
-          {products.map((product) => (
-            <li className="h-full" key={product.id}>
-              <ProductCard {...{ ...product, category }} showCategory />
-            </li>
-          ))}
-        </ProductsList>
-      </ProductsRoot>
+        <ProductsRoot>
+          <ProductsList>
+            {products.map((product) => (
+              <li className="h-full" key={product.id}>
+                <ProductCard {...{ ...product, category }} showCategory />
+              </li>
+            ))}
+          </ProductsList>
+        </ProductsRoot>
 
-      <div className="mb-4 mt-4 space-y-8 px-4 sm:mt-8 sm:px-6 lg:mt-24 lg:gap-12 lg:px-0">
-        <h2 className="px-4 text-center text-xl font-bold tracking-tight text-gray-900 sm:text-2xl">
-          Shop by category
-        </h2>
-        <CategoriesList categories={categories} />
+        <div className="mb-4 mt-4 space-y-8 sm:mt-8 lg:mt-24 lg:gap-12">
+          <h2 className="px-4 text-center text-xl font-bold tracking-tight text-gray-900 sm:text-2xl">
+            Shop by category
+          </h2>
+          <CategoriesList categories={categories} />
+        </div>
       </div>
     </div>
   )

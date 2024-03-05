@@ -94,8 +94,8 @@ function CheckoutForm({ fees, centers, communes }: Props) {
       : selectedWilayaFee?.desk_fee) ?? 0
 
   return (
-    <div className="bg-gray-50">
-      <div className="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8">
+    <div className="px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-2xl  pb-24 pt-16  lg:max-w-7xl ">
         <h2 className="sr-only">Checkout</h2>
 
         <form
