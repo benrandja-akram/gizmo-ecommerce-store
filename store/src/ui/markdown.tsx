@@ -7,7 +7,7 @@ function Markdown({
   ...props
 }: DivProps & { content: string }) {
   return (
-    <div className={clsx('prose', className)} {...props}>
+    <div className={clsx('prose max-w-full', className)} {...props}>
       <ReactMarkdown>{content}</ReactMarkdown>
     </div>
   )

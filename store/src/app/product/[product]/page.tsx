@@ -32,7 +32,7 @@ export default async function ProductPage({
 
   return (
     <div className="mx-auto grid max-w-7xl px-4 py-4 sm:px-6 sm:py-6 lg:px-8 lg:py-8 ">
-      <div className="mx-auto grid max-w-xl gap-y-6 lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8">
+      <div className="grid gap-y-6 lg:grid-cols-2 lg:gap-x-8">
         {/* Product details */}
         <div className="order-2 lg:order-1 lg:self-end">
           <Link href={`/#category-${product.category.id}`}>
@@ -124,7 +124,7 @@ export default async function ProductPage({
                 })}
               </TabList>
 
-              <TabPanels className={'prose py-6'}>
+              <TabPanels className={'py-6'}>
                 <TabPanel>
                   <Markdown content={product.description ?? ''} />
                 </TabPanel>
@@ -144,7 +144,7 @@ export default async function ProductPage({
                 <img
                   src={product.images[0]}
                   alt={''}
-                  className="w-[300px] max-w-md rounded object-cover object-center"
+                  className="w-[300px] max-w-full rounded object-cover object-center"
                 />
               </Zoom>
             </div>

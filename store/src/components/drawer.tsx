@@ -31,7 +31,7 @@ function Drawer({
           <div className="absolute inset-0 overflow-hidden">
             <div
               className={clsx(
-                'pointer-events-none fixed inset-y-0 flex max-w-full',
+                'pointer-events-none fixed inset-y-0 flex max-w-full ',
                 side === 'right' ? ' right-0' : 'left-0',
               )}
             >
@@ -48,7 +48,7 @@ function Drawer({
                   side === 'right' ? 'translate-x-full' : '-translate-x-full',
                 )}
               >
-                <Dialog.Panel className="pointer-events-auto w-screen max-w-[min(90vw,448px)] bg-white">
+                <Dialog.Panel className="pointer-events-auto w-screen max-w-[min(85vw,448px)] overflow-y-auto bg-white">
                   {children}
                 </Dialog.Panel>
               </Transition.Child>
