@@ -2,15 +2,11 @@
 
 import { Drawer } from '@/components/drawer'
 import { useDialog } from '@/hooks/use-dialog'
-import { Cart } from '@/ui/cart'
 import { Logo } from '@/ui/logo'
 import { Bars3Icon } from '@heroicons/react/24/outline'
 import type { Category } from '@prisma/client'
 import { MoveRightIcon, XIcon } from 'lucide-react'
-import Image from 'next/image'
 import Link from 'next/link'
-import { TopBanner } from './header'
-import messageUs from './messenger.webp'
 
 type Props = {
   categories: Category[]
@@ -34,23 +30,11 @@ function MobileMenu({ categories }: Props) {
       </div>
 
       <Drawer isOpen={isOpen} onClose={onClose} side="left">
-        <TopBanner />
         <div className=" flex items-center justify-between space-x-2 px-4 pt-4">
           <Logo />
-          <div className="flex flex-1 items-center justify-center space-x-2">
-            <a target="_blank" href="//m.me/226796627192300">
-              <Image
-                src={messageUs}
-                width={24}
-                height={24}
-                alt=""
-                unoptimized
-              />
-            </a>
-            <Cart />
-          </div>
-          <button className="outline-none" onClick={onClose}>
-            <XIcon />
+
+          <button className="group outline-none" onClick={onClose}>
+            <XIcon className="text-gray-500 transition-all group-hover:text-gray-900" />
           </button>
         </div>
         <ul className="divide-y overflow-y-auto p-4">
