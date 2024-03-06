@@ -22,7 +22,7 @@ const offers = [
     description: '1~2 Days delivery',
   },
   {
-    name: 'Fast delivery',
+    name: 'Fast deliveries',
     description: '1~2 Days delivery',
   },
 ]

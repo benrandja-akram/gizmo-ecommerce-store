@@ -208,7 +208,7 @@ function CartProducts({ products }: { products: Product[] }) {
 
               <div className="flex flex-1 items-end justify-between pt-2">
                 <p className="mt-1 text-sm font-bold tabular-nums text-gray-900">
-                  {product.price}DA
+                  {product.price.toLocaleString()} DA
                 </p>
 
                 <div className="">

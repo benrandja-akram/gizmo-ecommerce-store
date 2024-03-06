@@ -48,7 +48,7 @@ function ProductCard({ showCategory, ...product }: Props) {
           <div>
             <h3 className="font-semibold text-gray-900">{product.name}</h3>
             <p className="mt-1 text-sm font-bold tabular-nums text-gray-900 sm:text-lg">
-              {product.price} DA
+              {product.price.toLocaleString()} DA
             </p>
           </div>
 

@@ -55,13 +55,7 @@ function Search() {
           }}
           value={inputQuery}
         >
-          <form
-            onSubmit={(e) => {
-              e.preventDefault()
-              startTransition(() => void router.push(`/search/${query}`))
-            }}
-            className="relative flex items-center"
-          >
+          <form className="relative flex items-center">
             <MagnifyingGlassIcon
               className="pointer-events-none absolute left-4 top-3.5 h-5 w-5 text-gray-400"
               aria-hidden="true"
@@ -76,17 +70,16 @@ function Search() {
               value={inputQuery}
               name="query"
               autoComplete="off"
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  e.preventDefault()
-                  startTransition(() => void router.push(`/search/${query}`))
-                }
-              }}
             />
             <Button
-              type="submit"
+              type="button"
               className={'mr-3 overflow-hidden rounded-full'}
               disabled={pending}
+              onClick={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+                startTransition(() => void router.push(`/search/${query}`))
+              }}
             >
               <span className="hidden sm:inline">Rechercher</span>
               <MoveRightIcon
@@ -153,7 +146,9 @@ function Search() {
                           >
                             {product.name}
                           </p>
-                          <p className="font-semibold">{product.price}DA</p>
+                          <p className="font-semibold">
+                            {product.price.toLocaleString()} DA
+                          </p>
                         </div>
                       </Link>
                     )}

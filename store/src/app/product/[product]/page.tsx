@@ -15,18 +15,19 @@ import { ProductsHeader, ProductsList, ProductsRoot } from '@/ui/products-list'
 import { Zoom } from '@/ui/zoom'
 import { clsx } from '@/utils/clsx'
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react'
-import { CheckIcon, StarIcon } from '@heroicons/react/20/solid'
+import { CheckIcon } from '@heroicons/react/20/solid'
+import { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
-const reviews = { average: 5, totalCount: Math.floor(Math.random() * 20) }
-
 const features = ['In Stock', 'Livraison a domicile', '1~2 days delivery']
+
+type Params = { product: string }
 
 export default async function ProductPage({
   params: { product: id },
 }: {
-  params: { product: string }
+  params: Params
 }) {
   const [product, recommendedProducts] = await Promise.all([
     db.product.findUnique({
@@ -62,39 +63,9 @@ export default async function ProductPage({
                 Product information
               </h2>
 
-              <div className="flex items-center">
-                <p className="text-lg font-bold text-gray-900 sm:text-xl">
-                  {product.price} DA
-                </p>
-
-                <div className="ml-4 border-l border-gray-300 pl-4">
-                  <h2 className="sr-only">Reviews</h2>
-                  <div className="flex items-center">
-                    <div>
-                      <div className="flex items-center">
-                        {[0, 1, 2, 3, 4].map((rating) => (
-                          <StarIcon
-                            key={rating}
-                            className={clsx(
-                              reviews.average > rating
-                                ? 'text-yellow-400'
-                                : 'text-gray-300',
-                              'h-5 w-5 flex-shrink-0',
-                            )}
-                            aria-hidden="true"
-                          />
-                        ))}
-                      </div>
-                      <p className="sr-only">
-                        {reviews.average} out of 5 stars
-                      </p>
-                    </div>
-                    <p className="ml-2 text-sm text-gray-500">
-                      {reviews.totalCount} reviews
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <p className="text-lg font-extrabold tracking-tighter text-gray-900 sm:text-2xl">
+                {product.price.toLocaleString()} DA
+              </p>
               <div className="mt-4 flex flex-col-reverse gap-4 lg:flex-col">
                 {product.description && (
                   <div className="mt-4 space-y-6">
@@ -157,9 +128,9 @@ export default async function ProductPage({
               className="mt-8 w-full max-w-md"
             >
               <CarouselContent className="items-stretch">
-                {product.images.map((image) => {
+                {product.images.map((image, i) => {
                   return (
-                    <CarouselItem key={image} className="pl-4">
+                    <CarouselItem key={i} className="pl-4">
                       <div className="aspect-h-1 aspect-w-1 flex w-[300px] items-start justify-center overflow-hidden rounded-lg">
                         <div className="rounded-lg border bg-white p-6 lg:p-12">
                           <Zoom>
@@ -197,7 +168,6 @@ export default async function ProductPage({
     </div>
   )
 }
-export const dynamicParams = false
 
 export async function generateStaticParams() {
   const products = await db.product.findMany()
@@ -206,3 +176,26 @@ export async function generateStaticParams() {
     product: product.id,
   }))
 }
+
+export async function generateMetadata({
+  params: { product: id },
+}: {
+  params: Params
+}): Promise<Metadata> {
+  const product = await db.product.findUnique({
+    where: { id },
+  })
+
+  if (!product) return {}
+
+  return {
+    title: product.name,
+    description: product.description,
+    openGraph: {
+      title: product.name,
+      description: product.description ?? undefined,
+    },
+  }
+}
+
+export const dynamicParams = false

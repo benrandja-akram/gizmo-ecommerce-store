@@ -2,12 +2,15 @@ import { db } from '@/db'
 import { CategoriesList } from '@/ui/categories'
 import { ProductCard } from '@/ui/product-card'
 import { ProductsList, ProductsRoot } from '@/ui/products-list'
+import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+
+type Params = { category: string }
 
 async function CategoryPage({
   params: { category: categoryId },
 }: {
-  params: { category: string }
+  params: Params
 }) {
   const [products, category, categories] = await Promise.all([
     db.product.findMany({
@@ -17,8 +20,8 @@ async function CategoryPage({
         },
       },
     }),
-    db.category.findFirst({
-      where: { id: { equals: categoryId } },
+    db.category.findUnique({
+      where: { id: categoryId },
     }),
     db.category.findMany(),
   ])
@@ -71,4 +74,24 @@ export async function generateStaticParams() {
   }))
 }
 
+export async function generateMetadata({
+  params: { category: id },
+}: {
+  params: Params
+}): Promise<Metadata> {
+  const category = await db.category.findUnique({
+    where: { id },
+  })
+
+  if (!category) return {}
+
+  return {
+    title: category.name,
+    description: category.description,
+    openGraph: {
+      title: category.name,
+      description: category.description ?? undefined,
+    },
+  }
+}
 export default CategoryPage

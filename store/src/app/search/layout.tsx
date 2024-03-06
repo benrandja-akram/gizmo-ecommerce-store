@@ -1,4 +1,9 @@
+import { Metadata } from 'next'
 import { Search } from './search'
+
+export const metadata: Metadata = {
+  title: 'Rechercher',
+}
 
 async function SearchLayout({ children }: React.PropsWithChildren) {
   return (
