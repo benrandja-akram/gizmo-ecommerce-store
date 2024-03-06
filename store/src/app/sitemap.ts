@@ -1,5 +1,5 @@
 import { db } from '@/db'
-import { WWW } from '@/utils/constants'
+import { getURL } from '@/utils/utils'
 import { MetadataRoute } from 'next'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -47,7 +47,4 @@ async function getCategoriesSitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 1,
     }
   })
-}
-function getURL(path: string) {
-  return new URL(path, WWW).toString()
 }
