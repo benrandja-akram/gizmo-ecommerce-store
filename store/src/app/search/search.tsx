@@ -33,6 +33,7 @@ function Search() {
           required
           type="text"
           autoFocus
+          placeholder="Ryzen 5800X"
         />
         <Button type="submit" disabled={pending}>
           Rechercher

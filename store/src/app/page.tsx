@@ -88,12 +88,7 @@ export default async function Home() {
         </ProductsRoot>
 
         <ProductsRoot className="pt-4 md:pt-16">
-          <ProductsHeader>
-            <div className="flex items-center space-x-2 text-amber-500 ">
-              <span>Popular items</span>
-              <ZapIcon className="" />{' '}
-            </div>
-          </ProductsHeader>
+          <ProductsHeader>Produits populaires</ProductsHeader>
           <Carousel
             opts={{
               align: 'start',

@@ -20,7 +20,7 @@ function Filters({
 
   return (
     <div className={clsx(pending && 'opacity-50', 'transition-all')}>
-      <h3 className="sr-only">Categories</h3>
+      <h3 className="sr-only">Catégories</h3>
 
       <RadioGroup
         name="category"
@@ -35,7 +35,7 @@ function Filters({
       >
         <RadioField>
           <Radio value={'all'} />
-          <Label className={'font-medium'}>All categories</Label>
+          <Label className={'font-medium'}>Toutes catégories</Label>
         </RadioField>
 
         {categories.map((category) => (

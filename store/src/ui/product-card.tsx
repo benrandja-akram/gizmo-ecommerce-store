@@ -22,6 +22,7 @@ function ProductCard({ showCategory, ...product }: Props) {
             'relative flex aspect-square w-full items-center justify-center overflow-hidden rounded-md border bg-white',
             product.isFlashSale && 'border-amber-300',
           )}
+          aria-label={product.name}
         >
           <img
             src={product.images[0]}

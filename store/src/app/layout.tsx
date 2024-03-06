@@ -18,6 +18,7 @@ export default async function RootLayout({
       <body className={inter.className}>
         <a
           target="_blank"
+          aria-label="Contactez-nous sur Messenger"
           href="//m.me/226796627192300"
           className="fixed bottom-4 right-4 z-20 animate-bounce lg:bottom-10 lg:right-10"
         >

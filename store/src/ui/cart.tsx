@@ -53,6 +53,7 @@ function Cart() {
         type="button"
         className={'group relative -m-2 flex items-center p-2'}
         onClick={onOpen}
+        aria-label="Votre panier"
       >
         <ShoppingBagIcon
           className={clsx(
@@ -79,7 +80,7 @@ function Cart() {
           <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
             <div className="flex items-start justify-between">
               <Dialog.Title className="text-lg font-medium text-gray-900">
-                Shopping cart
+                Votre panier
               </Dialog.Title>
               <div className="ml-3 flex h-7 items-center">
                 <button
@@ -116,7 +117,7 @@ function Cart() {
           {!!products?.length && (
             <div className="animate-in fade-in-0 slide-in-from-bottom-4 border-t border-gray-200 px-4 py-6 sm:px-6">
               <div className="mb-4 flex justify-between text-base font-medium text-gray-900">
-                <p>Subtotal</p>
+                <p>Sous-total</p>
                 <p>
                   {products.reduce(
                     (acc, current) =>
@@ -131,7 +132,7 @@ function Cart() {
               </div>
 
               <Link href="/checkout" className="mt-6" onClick={onClose} scroll>
-                <Button className={'w-full sm:py-2.5'}>Checkout</Button>
+                <Button className={'w-full sm:py-2.5'}>Commander</Button>
               </Link>
             </div>
           )}
@@ -144,14 +145,15 @@ function Cart() {
 function EmptyCart() {
   return (
     <div className="mt-8 grid items-center justify-center gap-2 rounded-lg border border-dashed bg-gray-50 p-6 text-sm">
-      <h3 className="text-center text-lg font-bold">Cart is empty!!</h3>
+      <h3 className="text-center text-lg font-bold">Votre panier est vide</h3>
 
       <p className="text-gray-700">
-        Get started by adding products into your cart
+        Commencez par ajouter des produits à votre panier
       </p>
       <Link href="/" className="mx-auto mt-6">
         <Button>
-          Browse products <MoveRight className="w-5" />
+          Parcourir notre produits
+          <MoveRight className="w-5" />
         </Button>
       </Link>
     </div>

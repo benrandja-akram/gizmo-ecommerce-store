@@ -40,8 +40,9 @@ function Search() {
       <button
         onClick={setOpen.bind(undefined, true)}
         className="text-gray-400 outline-none hover:text-gray-500"
+        aria-label="Rechercher"
       >
-        <span className="sr-only">Search</span>
+        <span className="sr-only">Rechercher</span>
         <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
       </button>
       <CommandPaletteDialog
@@ -62,7 +63,7 @@ function Search() {
             />
             <Combobox.Input
               className="h-12 w-full flex-1 border-0 bg-transparent pl-11 pr-4 text-sm text-gray-900 outline-none placeholder:text-gray-400 focus:ring-0"
-              placeholder="Search..."
+              placeholder="I5 13600k"
               onChange={(event: ChangeEvent<HTMLInputElement>) =>
                 setQuery(event.target.value)
               }
@@ -156,7 +157,7 @@ function Search() {
                 ))}
               </Combobox.Options>
               <Link href={`/search/${query}`} className="mx-3 mb-3 block">
-                <Button className="w-full">View all</Button>
+                <Button className="w-full">Voir tout</Button>
               </Link>
             </>
           )}
@@ -166,13 +167,14 @@ function Search() {
               <ExclamationCircleIcon
                 type="outline"
                 name="exclamation-circle"
-                className="mx-auto h-6 w-6 text-gray-400"
+                className="mx-auto h-6 w-6 text-red-400"
               />
               <p className="mt-4 font-semibold text-gray-900">
-                No results found
+                Aucun résultat trouvé
               </p>
               <p className="mt-2 text-gray-500">
-                No components found for this search term. Please try again.
+                Aucun produit trouvé pour ce terme de recherche. Veuillez
+                réessayer.
               </p>
             </div>
           )}

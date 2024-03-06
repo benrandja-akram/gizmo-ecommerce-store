@@ -8,12 +8,10 @@ import {
   FieldGroup,
   Fieldset,
   Label,
-  Legend,
 } from '@/components/fieldset'
 import { Input } from '@/components/input'
 import { Listbox, ListboxLabel, ListboxOption } from '@/components/listbox'
 import { Radio, RadioField, RadioGroup } from '@/components/radio'
-import { Text } from '@/components/text'
 import { Textarea } from '@/components/textarea'
 import { useCart } from '@/hooks/use-cart'
 import { useCartProducts } from '@/hooks/use-cart-products'
@@ -203,7 +201,7 @@ function CheckoutForm({ fees, centers, communes }: Props) {
                         <RadioField>
                           <Radio value={STOP_DESK} />
                           <Label>
-                            Bureau d'agence Yalidine -{' '}
+                            la livraison au bureau d'agence Yalidine -{' '}
                             <strong>{selectedWilayaFee?.desk_fee}DA</strong>
                           </Label>
                           <Description>
@@ -267,7 +265,7 @@ function CheckoutForm({ fees, centers, communes }: Props) {
                           <Label>Commune</Label>
 
                           <Listbox
-                            placeholder="Select commune"
+                            placeholder="Sélectionnez une commune"
                             name="commune"
                             onChange={(commune: string) =>
                               setValue('commune', commune, {
@@ -320,23 +318,14 @@ function CheckoutForm({ fees, centers, communes }: Props) {
                     )}
                   </>
                 )}
-              </FieldGroup>
-            </Fieldset>
-            <Fieldset disabled={isMutating}>
-              <Legend>Shipping details</Legend>
-              <Text>Without this your odds of getting your order are low.</Text>
-              <FieldGroup>
                 <Field>
-                  <Label>Delivery notes</Label>
+                  <Label>Remarques (facultatif)</Label>
                   <Textarea {...register('notes')} invalid={!!errors.notes} />
                   {errors.notes && (
                     <ErrorMessage>
                       {errors.notes.message as string}
                     </ErrorMessage>
                   )}
-                  <Description>
-                    If you have a tiger, we'd like to know about it.
-                  </Description>
                 </Field>
               </FieldGroup>
             </Fieldset>
@@ -344,10 +333,10 @@ function CheckoutForm({ fees, centers, communes }: Props) {
 
           {/* Order summary */}
           <div className="mt-10 lg:mt-0">
-            <h2 className="text-lg font-medium text-gray-900">Order summary</h2>
+            <h2 className="text-lg font-medium text-gray-900">Résumé</h2>
 
             <div className="mt-4 rounded-lg border border-gray-200 bg-white shadow-sm">
-              <h3 className="sr-only">Items in your cart</h3>
+              <h3 className="sr-only">Produits dans votre panier</h3>
               {products ? (
                 <>
                   <CartProducts
@@ -359,19 +348,19 @@ function CheckoutForm({ fees, centers, communes }: Props) {
 
                   <dl className="space-y-6 border-t border-gray-200 px-4 py-6 sm:px-6">
                     <div className="flex items-center justify-between">
-                      <dt className="text-sm">Subtotal</dt>
+                      <dt className="text-sm">Sous-total</dt>
                       <dd className="text-sm font-medium text-gray-900">
                         {subtotal} DA
                       </dd>
                     </div>
                     <div className="flex items-center justify-between">
-                      <dt className="text-sm">Shipping</dt>
+                      <dt className="text-sm">Frais de livraison</dt>
                       <dd className="text-sm font-medium text-gray-900">
                         {deliveryFee ? (
                           `${deliveryFee} DA`
                         ) : (
                           <span className="text-red-500">
-                            Enter your address
+                            Entrez votre adresse
                           </span>
                         )}
                       </dd>
@@ -391,7 +380,9 @@ function CheckoutForm({ fees, centers, communes }: Props) {
                       disabled={isMutating}
                       type="submit"
                     >
-                      {!isMutating ? 'Confirm order' : 'Confirming ...'}
+                      {!isMutating
+                        ? 'Confirmer la commande'
+                        : 'Confirmation en cours ...'}
                     </Button>
                   </div>
                 </>

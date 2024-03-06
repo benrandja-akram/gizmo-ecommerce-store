@@ -27,6 +27,7 @@ async function CategoryPage({
   ])
 
   if (!category) notFound()
+
   return (
     <div className="mx-auto min-h-[600px] px-4 py-12 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
@@ -55,7 +56,7 @@ async function CategoryPage({
 
         <div className="mb-4 mt-4 space-y-8 sm:mt-8 lg:mt-24 lg:gap-12">
           <h2 className="px-4 text-center text-xl font-bold tracking-tight text-gray-900 sm:text-2xl">
-            Shop by category
+            Parcourir par catégorie
           </h2>
           <CategoriesList categories={categories} />
         </div>

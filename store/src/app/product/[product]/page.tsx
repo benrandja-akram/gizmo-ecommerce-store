@@ -20,7 +20,11 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
-const features = ['In Stock', 'Livraison a domicile', '1~2 days delivery']
+const features = [
+  'En stock',
+  'Livraison à domicile 58 Wilaya',
+  'Paiement à la livraison',
+]
 
 type Params = { product: string }
 
@@ -60,7 +64,7 @@ export default async function ProductPage({
 
             <section aria-labelledby="information-heading" className="mt-4">
               <h2 id="information-heading" className="sr-only">
-                Product information
+                Information produit
               </h2>
 
               <p className="text-lg font-extrabold tracking-tighter text-gray-900 sm:text-2xl">
@@ -89,9 +93,9 @@ export default async function ProductPage({
               <TabGroup as="div" className={'mt-8'}>
                 <TabList
                   className=" -mb-px mt-4 flex space-x-8 border-b border-gray-200"
-                  aria-label="Tabs"
+                  aria-label="informations"
                 >
-                  {['Description', 'Tech specs'].map((tab) => {
+                  {['Description', 'Spécifications techniques'].map((tab) => {
                     return (
                       <Tab
                         key={tab}

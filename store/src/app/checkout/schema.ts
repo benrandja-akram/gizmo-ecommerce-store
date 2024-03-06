@@ -3,11 +3,11 @@ import * as zod from 'zod'
 
 const schema = zod
   .object({
-    phone: zod.string().min(1, 'Phone is required'),
-    name: zod.string().min(1, 'Name is required'),
+    phone: zod.string().min(1, 'Le numéro de téléphone est obligatoire'),
+    name: zod.string().min(1, 'Le nom est obligatoire'),
     wilaya: zod
-      .string({ required_error: 'Wilaya type is required' })
-      .min(1, 'Wilaya is required'),
+      .string({ required_error: 'Le wilaya est obligatoire' })
+      .min(1, 'Le wilaya est obligatoire'),
     deliveryType: zod.union([zod.literal(STOP_DESK), zod.literal(TO_HOME)]),
     commune: zod.string().optional(),
     stopDesk: zod.string().optional(),
@@ -21,14 +21,14 @@ const schema = zod
           ctx.addIssue({
             code: zod.ZodIssueCode.custom,
             path: ['commune'],
-            message: 'Commune is required',
+            message: 'La commune est obligatoire',
           })
         }
         if (!address) {
           ctx.addIssue({
             code: zod.ZodIssueCode.custom,
             path: ['address'],
-            message: 'Address is required',
+            message: 'L’adresse est obligatoire',
           })
         }
       }
@@ -36,7 +36,7 @@ const schema = zod
         ctx.addIssue({
           code: zod.ZodIssueCode.custom,
           path: ['stopDesk'],
-          message: 'Stop desk is required',
+          message: "Un guichet d'arrêt est requis",
         })
       }
     }
