@@ -1,4 +1,5 @@
 import { getURL } from '@/utils/utils'
+import { Analytics } from '@vercel/analytics/react'
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import Image from 'next/image'
@@ -18,7 +19,12 @@ export default async function RootLayout({
   return (
     <html lang="fr" className="scroll-smooth bg-gray-50/60 text-gray-900">
       <body className={inter.className}>
-        {process.env.NODE_ENV === 'production' && <LogRocket />}
+        {process.env.NODE_ENV === 'production' && (
+          <>
+            <LogRocket />
+            <Analytics />
+          </>
+        )}
         <a
           target="_blank"
           aria-label="Contactez-nous sur Messenger"

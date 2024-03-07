@@ -95,6 +95,7 @@ export default async function ProductPage({
             <Carousel
               opts={{
                 align: 'start',
+                dragFree: true,
               }}
               className="mt-8 w-full"
             >
