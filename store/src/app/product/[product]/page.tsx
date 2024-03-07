@@ -45,7 +45,7 @@ export default async function ProductPage({
   return (
     <div className="grid px-4 py-4 sm:px-6 sm:py-6 lg:px-8 lg:py-8 ">
       <div className="mx-auto max-w-7xl">
-        <div className="grid gap-y-6 lg:grid-cols-2 lg:gap-x-8">
+        <div className="grid gap-y-6 lg:grid-cols-2 lg:gap-x-20">
           {/* Product details */}
           <div className="order-2 lg:order-1 lg:self-end">
             <Link href={`/category/${product.category.id}`}>
@@ -124,24 +124,27 @@ export default async function ProductPage({
           </div>
 
           {/* Product image */}
-          <div className="order-1 mt-10 flex items-start justify-center lg:order-2 lg:col-start-2 lg:row-span-2 lg:mt-0">
+          <div className="order-1 flex items-start justify-center lg:order-2 lg:col-start-2 lg:row-span-2">
             <Carousel
               opts={{
                 align: 'start',
               }}
-              className="mt-8 w-full max-w-md"
+              className="mt-8 w-full"
             >
-              <CarouselContent className="items-stretch">
+              <CarouselContent>
                 {product.images.map((image, i) => {
                   return (
-                    <CarouselItem key={i} className="pl-4">
-                      <div className="aspect-h-1 aspect-w-1 flex w-[300px] items-start justify-center overflow-hidden rounded-lg">
+                    <CarouselItem
+                      key={i}
+                      className="flex h-full min-w-0 shrink-0 basis-4/5 flex-col sm:basis-3/5 md:basis-2/5 lg:basis-4/5"
+                    >
+                      <div className="aspect-h-1 aspect-w-1 flex w-full  items-start justify-center overflow-hidden rounded-lg">
                         <div className="rounded-lg border bg-white p-6 lg:p-12">
                           <Zoom>
                             <img
                               src={image}
                               alt={''}
-                              className="w-[300px] max-w-full rounded object-cover object-center"
+                              className="w-full rounded object-cover object-center"
                             />
                           </Zoom>
                         </div>

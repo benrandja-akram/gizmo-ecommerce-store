@@ -1,6 +1,13 @@
+import {
+  Dropdown,
+  DropdownButton,
+  DropdownItem,
+  DropdownMenu,
+} from '@/components/dropdown'
 import { getCategories } from '@/db/category'
 import { Cart } from '@/ui/cart'
 import { Logo } from '@/ui/logo'
+import { ChevronDownIcon } from '@heroicons/react/16/solid'
 import Link from 'next/link'
 import { Suspense } from 'react'
 import { Search } from '../ui/search'
@@ -19,7 +26,7 @@ async function Header() {
               <span className="sr-only">Your Company</span>
               <Logo />
             </Link>
-            {categories.map((category) => {
+            {categories.slice(0, 5).map((category) => {
               return (
                 <Link
                   key={category.id}
@@ -31,6 +38,22 @@ async function Header() {
                 </Link>
               )
             })}
+            <Dropdown>
+              <DropdownButton plain>
+                Autres
+                <ChevronDownIcon />
+              </DropdownButton>
+              <DropdownMenu anchor="bottom start">
+                {categories.slice(5).map((category) => (
+                  <DropdownItem
+                    key={category.id}
+                    href={`/category/${category.id}`}
+                  >
+                    {category.name}
+                  </DropdownItem>
+                ))}
+              </DropdownMenu>
+            </Dropdown>
           </div>
 
           {/* Mobile menu and search (lg-) */}

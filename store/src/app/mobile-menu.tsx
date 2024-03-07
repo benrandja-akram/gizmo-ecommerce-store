@@ -5,7 +5,7 @@ import { useDialog } from '@/hooks/use-dialog'
 import { Logo } from '@/ui/logo'
 import { Bars3Icon } from '@heroicons/react/24/outline'
 import type { Category } from '@prisma/client'
-import { ArrowRightIcon, XIcon } from 'lucide-react'
+import { ChevronRightIcon, XIcon } from 'lucide-react'
 import Link from 'next/link'
 
 type Props = {
@@ -40,7 +40,7 @@ function MobileMenu({ categories }: Props) {
         <ul className="divide-y overflow-y-auto p-4">
           <Link href="/" className="flex justify-between py-2.5 font-medium">
             Home
-            <ArrowRightIcon className="w-5 text-gray-800" />
+            <ChevronRightIcon className="w-5 text-gray-600" />
           </Link>
           {categories.map((category) => {
             return (
@@ -51,7 +51,7 @@ function MobileMenu({ categories }: Props) {
               >
                 {category.name}
 
-                <ArrowRightIcon className="w-5 text-gray-800" />
+                <ChevronRightIcon className="w-5 text-gray-600" />
               </Link>
             )
           })}
