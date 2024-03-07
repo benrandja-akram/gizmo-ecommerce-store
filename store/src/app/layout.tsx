@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { Footer } from './footer'
 import './globals.css'
 import { Header, TopBanner } from './header'
+import { LogRocket } from './logrocket'
 import messageUs from './messenger.webp'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -17,6 +18,7 @@ export default async function RootLayout({
   return (
     <html lang="fr" className="scroll-smooth bg-gray-50/60 text-gray-900">
       <body className={inter.className}>
+        {process.env.NODE_ENV === 'production' && <LogRocket />}
         <a
           target="_blank"
           aria-label="Contactez-nous sur Messenger"
