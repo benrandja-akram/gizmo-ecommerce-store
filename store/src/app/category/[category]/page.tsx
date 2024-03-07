@@ -19,6 +19,9 @@ async function CategoryPage({
           equals: categoryId,
         },
       },
+      orderBy: {
+        price: 'asc',
+      },
     }),
     db.category.findUnique({
       where: { id: categoryId },

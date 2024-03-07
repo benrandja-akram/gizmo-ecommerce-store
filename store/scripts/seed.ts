@@ -1,30 +1,27 @@
 import { db } from '@/db'
 import { faker } from '@faker-js/faker'
 import slug from 'slug'
-
+import licbCategories from './categories.json'
+import licbProducts from './products.json'
 const images = [
-  'https://static.bhphoto.com/images/images150x150/1709622000000_1085232.jpg',
-  'https://static.bhphoto.com/images/images150x150/1709622000000_1616837.jpg',
-  'https://static.bhphoto.com/images/categoryImages/1709622000000_13341.jpg',
-  'https://static.bhphoto.com/images/images150x150/1709622000000_1723471.jpg',
-  'https://static.bhphoto.com/images/categoryImages/1709622000000_13341.jpg',
   'https://static.bhphoto.com/images/images150x150/1709622000000_1304347.jpg',
+  'https://static.bhphoto.com/images/images150x150/1709622000000_1723471.jpg',
+  'https://i.ebayimg.com/images/g/YsoAAOSw7R1hC1mm/s-l1600.jpg',
+  'https://static.bhphoto.com/images/categoryImages/1709622000000_13341.jpg',
+  'https://i.ebayimg.com/thumbs/images/g/ztgAAOSwkLVl2z~x/s-l300.webp',
+  'https://static.bhphoto.com/images/images150x150/1709622000000_1085232.jpg',
   'https://static.bhphoto.com/images/images150x150/1709622000000_1365559.jpg',
-  'https://static.bhphoto.com/images/images150x150/1709622000000_1764661.jpg',
+  'https://static.bhphoto.com/images/images150x150/1709622000000_1616837.jpg',
   'https://static.bhphoto.com/images/images150x150/1709622000000_1764661.jpg',
   'https://static.bhphoto.com/images/images150x150/1709622000000_1396144.jpg',
 ]
+
 async function main() {
   db.$transaction(async (db) => {
     await db.category.deleteMany()
-    faker.seed(10)
-    const names = [
-      ...new Set(
-        new Array(10).fill(null).map(() => faker.commerce.department()),
-      ),
-    ]
+
     await db.category.createMany({
-      data: names.map((name, position) => {
+      data: licbCategories.map(({ name }, position) => {
         return {
           id: slug(name, { locale: 'fr' }).toLocaleLowerCase(),
           name,
@@ -34,30 +31,24 @@ async function main() {
         }
       }),
     })
-    const categories = await db.category.findMany()
-    let count = 0
-    await Promise.all(
-      categories.map((category, c) => {
-        return db.product.createMany({
-          data: new Array(8).fill(null).map((_, p) => {
-            const name = faker.commerce.productName()
-            return {
-              id: slug(name, { locale: 'fr' }).toLocaleLowerCase(),
-              categoryId: category.id,
-              price: Math.floor(Math.random() * 30) * 1000,
-              images: new Array(3).fill(
-                images[Math.floor(Math.random() * images.length)],
-              ),
-              name,
-              description: faker.lorem.paragraphs(3, '\n'),
-              techSpecs: faker.lorem.paragraphs(3, '\n'),
-              isFlashSale: c < 4 && p === 0,
-              // colors: new Array(3).fill(null).map(() => faker.color.rgb()),
-            }
-          }),
-        })
+
+    await db.product.createMany({
+      data: licbProducts.map((product, i) => {
+        return {
+          id: slug(product.name, { locale: 'fr' }).toLocaleLowerCase(),
+          categoryId: slug(
+            licbCategories.find((c) => c.products.includes(product.url))!.name,
+            { locale: 'fr' },
+          ),
+          price: parseInt(product.price.replace(',', '')),
+          images: product.images.map((img) => img.replace('-100x100', '')),
+          name: product.name,
+          description: product.description ?? faker.lorem.paragraphs(3, '\n'),
+          techSpecs: faker.lorem.paragraphs(3, '\n'),
+          isFlashSale: i < 4,
+        }
       }),
-    )
+    })
   })
 }
 

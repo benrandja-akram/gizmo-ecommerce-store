@@ -12,7 +12,7 @@ async function Header() {
   return (
     <header className="sticky top-0 z-10">
       <nav className="border-b border-gray-200 bg-white px-4 shadow-sm sm:px-6 lg:px-8">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between">
+        <div className="mx-auto flex h-16 items-center justify-between">
           {/* Logo (lg+) */}
           <div className="hidden space-x-4 lg:flex lg:items-center">
             <Link href="/" className="mr-12">

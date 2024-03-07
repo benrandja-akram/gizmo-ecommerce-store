@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/button'
 import { Input } from '@/components/input'
-import { MoveRightIcon } from 'lucide-react'
+import { ArrowRightIcon } from 'lucide-react'
 import { useParams, useRouter } from 'next/navigation'
 import { useTransition } from 'react'
 
@@ -37,7 +37,7 @@ function Search() {
         />
         <Button type="submit" disabled={pending}>
           Rechercher
-          <MoveRightIcon className="w-5" />
+          <ArrowRightIcon className="w-5" />
         </Button>
       </fieldset>
     </form>

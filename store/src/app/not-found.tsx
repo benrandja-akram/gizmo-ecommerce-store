@@ -1,6 +1,6 @@
 import { Button } from '@/components/button'
 import { HomeIcon } from '@heroicons/react/24/outline'
-import { MoveRight } from 'lucide-react'
+import { ArrowRightIcon } from 'lucide-react'
 import Link from 'next/link'
 
 export default function NotFound() {
@@ -23,7 +23,7 @@ export default function NotFound() {
             </Link>
             <a href="#">
               <Button plain>
-                Contact support <MoveRight className="inline w-5" />
+                Contact support <ArrowRightIcon className="inline w-5" />
               </Button>
             </a>
           </div>

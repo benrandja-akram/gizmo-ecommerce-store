@@ -1,5 +1,5 @@
 import { clsx } from '@/utils/clsx'
-import { MoveRightIcon } from 'lucide-react'
+import { ArrowRightIcon } from 'lucide-react'
 import Link from 'next/link'
 
 function ProductsRoot({ className, ...props }: DivProps) {
@@ -28,10 +28,10 @@ function ProductsHeader({
       {href && (
         <Link
           href={href}
-          className="hidden items-center space-x-4 text-sm font-semibold text-indigo-600 hover:text-indigo-500 sm:flex"
+          className="hidden items-center space-x-2 text-sm font-semibold text-indigo-600 hover:text-indigo-500 sm:flex lg:text-base"
         >
-          <span>See everything</span>
-          <MoveRightIcon aria-hidden="true" />
+          <span>Voir tout</span>
+          <ArrowRightIcon className="w-5" aria-hidden="true" />
         </Link>
       )}
     </div>

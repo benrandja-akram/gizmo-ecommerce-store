@@ -28,19 +28,29 @@ const offers = [
 ]
 
 export default async function Home() {
-  const [categories, flashProducts, popularProducts] = await Promise.all([
-    db.category.findMany(),
-    db.product.findMany({
-      where: { isFlashSale: true },
-      include: { category: true },
-    }),
-    db.product.findMany({
-      take: 6,
-      include: {
-        category: true,
-      },
-    }),
-  ])
+  const [categories, flashProducts, popularProducts, accessories] =
+    await Promise.all([
+      db.category.findMany(),
+      db.product.findMany({
+        where: { isFlashSale: true },
+        include: { category: true },
+      }),
+      db.product.findMany({
+        take: 6,
+        include: {
+          category: true,
+        },
+      }),
+      db.product.findMany({
+        take: 6,
+        include: {
+          category: true,
+        },
+        where: {
+          categoryId: 'clavier-souris-tapis',
+        },
+      }),
+    ])
 
   return (
     <div className="px-4 pb-4 sm:px-6 sm:pb-6 lg:px-8 lg:pb-8 ">
@@ -89,6 +99,20 @@ export default async function Home() {
 
         <ProductsRoot className="pt-4 md:pt-16">
           <ProductsHeader>Produits populaires</ProductsHeader>
+
+          <ProductsList>
+            {popularProducts.map((product) => (
+              <li className="h-full" key={product.id}>
+                <ProductCard {...product} showCategory />
+              </li>
+            ))}
+          </ProductsList>
+        </ProductsRoot>
+
+        <ProductsRoot className="pt-4 md:pt-16">
+          <ProductsHeader href={`/category/${accessories[0]?.category.id}`}>
+            {accessories[0]?.category.name}
+          </ProductsHeader>
           <Carousel
             opts={{
               align: 'start',
@@ -97,7 +121,7 @@ export default async function Home() {
             className="mt-8 w-full pb-6"
           >
             <CarouselContent className="items-stretch">
-              {popularProducts.map((product) => {
+              {accessories.map((product) => {
                 return (
                   <CarouselItem
                     key={product.id}

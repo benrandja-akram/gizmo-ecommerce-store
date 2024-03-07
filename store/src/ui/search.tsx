@@ -11,7 +11,7 @@ import {
   MagnifyingGlassIcon,
 } from '@heroicons/react/24/outline'
 import type { Category, Product } from '@prisma/client'
-import { MoveRightIcon } from 'lucide-react'
+import { ArrowRightIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { ChangeEvent, useState, useTransition } from 'react'
@@ -83,7 +83,7 @@ function Search() {
               }}
             >
               <span className="hidden sm:inline">Rechercher</span>
-              <MoveRightIcon
+              <ArrowRightIcon
                 className="h-4 w-4 !text-white "
                 aria-hidden="true"
               />

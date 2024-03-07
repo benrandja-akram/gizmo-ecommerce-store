@@ -16,18 +16,21 @@ import {
 } from '@heroicons/react/24/solid'
 import { Product } from '@prisma/client'
 import cookies from 'js-cookie'
-import { CheckCheckIcon, MoveRight } from 'lucide-react'
+import { ArrowRightIcon, CheckCheckIcon } from 'lucide-react'
 import Link from 'next/link'
-import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import { useEffect, useTransition } from 'react'
 import { ProductFallback } from './product-fallback'
 
 function Cart() {
   const cart = useCart()
+  const router = useRouter()
+  const [pending, startTransition] = useTransition()
   const { isOpen, onOpen, onClose } = useDialog('cart')
-
   const { products, isLoading, ids } = useCartProducts({ enabled: isOpen })
 
   useEffect(() => {
+    router.prefetch('/checkout')
     useCart.setState((state) => ({
       ...state,
       items: JSON.parse(cookies.get('cart') ?? '[]'),
@@ -45,7 +48,7 @@ function Cart() {
     return () => {
       unsubscribe()
     }
-  }, [])
+  }, [router])
 
   return (
     <>
@@ -130,10 +133,16 @@ function Cart() {
                   DA
                 </p>
               </div>
-
-              <Link href="/checkout" className="mt-6" onClick={onClose} scroll>
-                <Button className={'w-full sm:py-2.5'}>Commander</Button>
-              </Link>
+              <Button
+                type="button"
+                className={'mt-6 w-full sm:py-2.5'}
+                disabled={pending}
+                onClick={() => {
+                  startTransition(() => router.push('/checkout'))
+                }}
+              >
+                Commander
+              </Button>
             </div>
           )}
         </div>
@@ -153,7 +162,7 @@ function EmptyCart() {
       <Link href="/" className="mx-auto mt-6">
         <Button>
           Parcourir notre produits
-          <MoveRight className="w-5" />
+          <ArrowRightIcon className="w-5" />
         </Button>
       </Link>
     </div>
