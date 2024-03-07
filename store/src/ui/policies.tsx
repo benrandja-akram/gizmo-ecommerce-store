@@ -2,24 +2,24 @@ import { clsx } from '@/utils/clsx'
 
 const policies = [
   {
-    name: '24/7 Customer Support',
+    name: 'Livraison dans les 58 Wilayas',
     description:
-      'Or so we want you to believe. In reality our chat widget is powered by a naive series of if/else statements that churn out canned responses. Guaranteed to irritate.',
-    imageSrc: 'https://tailwindui.com/img/ecommerce/icons/icon-chat-light.svg',
+      'Nous offrons fièrement la livraison dans les 58 Wilayas, garantissant que nos produits vous parviennent où que vous soyez dans la région.',
+    imageSrc:
+      'https://tailwindui.com/img/ecommerce/icons/icon-gift-card-light.svg',
   },
   {
-    name: 'Fast Shopping Cart',
+    name: 'Paiement à la Livraison',
     description:
-      "Look at the cart in that icon, there's never been a faster cart. What does this mean for the actual checkout experience? I don't know.",
+      "Vous pouvez payer votre commande au moment de la livraison, vous offrant ainsi flexibilité et tranquillité d'esprit. Il vous suffit de passer votre commande et de payer lorsque vos articles arrivent.",
     imageSrc:
       'https://tailwindui.com/img/ecommerce/icons/icon-fast-checkout-light.svg',
   },
   {
-    name: 'Gift Cards',
+    name: 'Assistance client 24h/24 et 7j/7',
     description:
-      "We sell these hoping that you will buy them for your friends and they will never actually use it. Free money for us, it's great.",
-    imageSrc:
-      'https://tailwindui.com/img/ecommerce/icons/icon-gift-card-light.svg',
+      'Notre équipe de support dévouée est toujours disponible pour vous aider, de jour comme de nuit, garantissant une assistance rapide et fiable à tout moment',
+    imageSrc: 'https://tailwindui.com/img/ecommerce/icons/icon-chat-light.svg',
   },
 ]
 

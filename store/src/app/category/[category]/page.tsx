@@ -39,11 +39,11 @@ async function CategoryPage({
             <h1 className="text-4xl font-bold tracking-tight text-gray-900">
               {category.name}
             </h1>
-            {category.description && (
+            {/* {category.description && (
               <p className="mx-auto mt-4 max-w-3xl text-base text-gray-500">
                 {category.description}
               </p>
-            )}
+            )} */}
           </div>
         </div>
 

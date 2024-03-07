@@ -13,8 +13,6 @@ import { Policies } from '@/ui/policies'
 import { ProductCard } from '@/ui/product-card'
 import { ProductsHeader, ProductsList, ProductsRoot } from '@/ui/products-list'
 import { Zoom } from '@/ui/zoom'
-import { clsx } from '@/utils/clsx'
-import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react'
 import { CheckIcon } from '@heroicons/react/20/solid'
 import { Metadata } from 'next'
 import Link from 'next/link'
@@ -89,37 +87,6 @@ export default async function ProductPage({
                   </div>
                 ))}
               </div>
-
-              <TabGroup as="div" className={'mt-8'}>
-                <TabList
-                  className=" -mb-px mt-4 flex space-x-8 border-b border-gray-200"
-                  aria-label="informations"
-                >
-                  {['Description', 'Spécifications techniques'].map((tab) => {
-                    return (
-                      <Tab
-                        key={tab}
-                        className={clsx(
-                          '[whitespace-nowrap border-b-2 px-1 py-4 text-sm font-medium outline-none',
-                          'ui-selected:border-indigo-500 ui-selected:text-indigo-600',
-                          'ui-not-selected:border-transparent ui-not-selected:text-gray-500 ui-not-selected:hover:border-gray-300 ui-not-selected:hover:text-gray-700',
-                        )}
-                      >
-                        {tab}
-                      </Tab>
-                    )
-                  })}
-                </TabList>
-
-                <TabPanels className={'py-6'}>
-                  <TabPanel>
-                    <Markdown content={product.description ?? ''} />
-                  </TabPanel>
-                  <TabPanel>
-                    <Markdown content={product.techSpecs ?? ''} />
-                  </TabPanel>
-                </TabPanels>
-              </TabGroup>
             </section>
           </div>
 

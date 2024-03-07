@@ -23,7 +23,7 @@ async function Header() {
           {/* Logo (lg+) */}
           <div className="hidden space-x-4 lg:flex lg:items-center">
             <Link href="/" className="mr-12">
-              <span className="sr-only">Your Company</span>
+              <span className="sr-only">Gizmo tech dz</span>
               <Logo />
             </Link>
             {categories.slice(0, 5).map((category) => {
@@ -84,7 +84,7 @@ function TopBanner() {
     <div className="relative z-20 bg-gray-900">
       <div className=" px-4 py-2.5 sm:px-6 lg:px-8">
         <p className=" text-center text-sm font-medium text-white lg:flex-none">
-          Call us on phone 0777558899
+          Appelez-nous au téléphone 0559 21 74 83
         </p>
       </div>
     </div>

@@ -14,21 +14,21 @@ import { ZapIcon } from 'lucide-react'
 
 const offers = [
   {
-    name: 'Laivraison ',
-    description: 'Laivraison a domicile 58 wilayas.',
+    name: 'Paiement',
+    description: 'Paiement à la livraison',
   },
   {
-    name: 'Fast delivery',
-    description: '1~2 Days delivery',
+    name: 'Laivraison',
+    description: 'Livraison à domicile 58 wilayas.',
   },
   {
-    name: 'Fast deliveries',
-    description: '1~2 Days delivery',
+    name: 'Livraison rapide',
+    description: 'Livraison 1 à 2 jours',
   },
 ]
 
 export default async function Home() {
-  const [categories, flashProducts, popularProducts, accessories] =
+  const [categories, flashProducts, popularProducts, accessories, cpus] =
     await Promise.all([
       db.category.findMany(),
       db.product.findMany({
@@ -48,6 +48,24 @@ export default async function Home() {
         },
         where: {
           categoryId: 'clavier-souris-tapis',
+          price: {
+            gt: 3000,
+          },
+        },
+        orderBy: {
+          price: 'asc',
+        },
+      }),
+      db.product.findMany({
+        take: 6,
+        include: {
+          category: true,
+        },
+        where: {
+          categoryId: 'cpu',
+        },
+        orderBy: {
+          price: 'asc',
         },
       }),
     ])
@@ -122,6 +140,34 @@ export default async function Home() {
           >
             <CarouselContent className="items-stretch">
               {accessories.map((product) => {
+                return (
+                  <CarouselItem
+                    key={product.id}
+                    className="flex h-full min-w-0 shrink-0 basis-[60%] flex-col sm:basis-[40%] md:basis-[28%] lg:basis-1/4"
+                  >
+                    <ProductCard {...product} showCategory />
+                  </CarouselItem>
+                )
+              })}
+            </CarouselContent>
+            <CarouselPrevious className="top-1/3  " />
+            <CarouselNext className="top-1/3  " />
+          </Carousel>
+        </ProductsRoot>
+
+        <ProductsRoot className="pt-4 md:pt-16">
+          <ProductsHeader href={`/category/${cpus[0]?.category.id}`}>
+            {cpus[0]?.category.name}
+          </ProductsHeader>
+          <Carousel
+            opts={{
+              align: 'start',
+              dragFree: true,
+            }}
+            className="mt-8 w-full pb-6"
+          >
+            <CarouselContent className="items-stretch">
+              {cpus.map((product) => {
                 return (
                   <CarouselItem
                     key={product.id}

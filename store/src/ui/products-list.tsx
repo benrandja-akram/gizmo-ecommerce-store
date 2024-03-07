@@ -22,17 +22,28 @@ function ProductsHeader({
       className={clsx('flex items-center justify-between', className)}
       {...props}
     >
-      <h2 className="text-xl font-bold tracking-tight text-gray-900 sm:text-2xl">
-        {props.children}
-      </h2>
-      {href && (
-        <Link
-          href={href}
-          className="hidden items-center space-x-2 text-sm font-semibold text-indigo-600 hover:text-indigo-500 sm:flex lg:text-base"
-        >
-          <span>Voir tout</span>
-          <ArrowRightIcon className="w-5" aria-hidden="true" />
-        </Link>
+      {href ? (
+        <>
+          <Link
+            href={href}
+            className="flex items-center space-x-2 text-xl font-bold tracking-tight text-indigo-700 sm:text-2xl"
+          >
+            <span>{props.children}</span>
+
+            <ArrowRightIcon className="w-5 md:hidden" aria-hidden="true" />
+          </Link>
+          <Link
+            href={href}
+            className="hidden items-center space-x-2 text-sm font-semibold text-indigo-600 hover:text-indigo-500 sm:flex md:text-base"
+          >
+            <span>Voir tout</span>
+            <ArrowRightIcon className="w-5" aria-hidden="true" />
+          </Link>
+        </>
+      ) : (
+        <h2 className="text-xl font-bold tracking-tight text-gray-900 sm:text-2xl">
+          {props.children}
+        </h2>
       )}
     </div>
   )
