@@ -1,6 +1,7 @@
 import type { Category, Product } from '@/db'
 import { clsx } from '@/utils/clsx'
 import { ZapIcon } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { AddToCart } from './cart'
 
@@ -24,11 +25,14 @@ function ProductCard({ showCategory, ...product }: Props) {
           )}
           aria-label={product.name}
         >
-          <img
-            src={product.images[0]}
-            alt={''}
-            className="h-[80%] w-[80%] rounded-md object-cover object-center group-hover:opacity-75"
-          />
+          <div className="relative h-[80%] w-[80%] group-hover:opacity-75">
+            <Image
+              src={product.images[0]}
+              alt={''}
+              fill
+              className="rounded-md object-cover object-center "
+            />
+          </div>
 
           {product.isFlashSale && (
             <span className="absolute right-0 top-0 rounded-bl bg-amber-400 px-1 py-1.5">

@@ -8,6 +8,14 @@ const nextConfig = {
       '@heroicons/react',
     ],
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'www.licbplus.com.dz',
+      },
+    ],
+  },
 }
 
 export default nextConfig

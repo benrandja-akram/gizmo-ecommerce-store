@@ -1,4 +1,3 @@
-import { getURL } from '@/utils/utils'
 import { Analytics } from '@vercel/analytics/react'
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
@@ -49,13 +48,7 @@ export const metadata: Metadata = {
   },
   description:
     'Découvrez des composants PC de premier ordre chez Gizmo Tech DZ - votre guichet unique pour tout ce dont vous avez besoin pour construire ou mettre à niveau votre PC avec facilité et confiance.',
-  openGraph: {
-    images: [
-      {
-        url: getURL('/opengraph-image.png'),
-      },
-    ],
-  },
+
   icons: {
     icon: {
       url: '/icon.png',
