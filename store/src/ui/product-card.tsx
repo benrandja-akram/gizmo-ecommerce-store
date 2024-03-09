@@ -3,7 +3,7 @@ import { clsx } from '@/utils/clsx'
 import { ZapIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { AddToCart } from './cart'
+import { ProductCartToggle } from './cart'
 
 type Props = Product & {
   category: Category
@@ -74,7 +74,7 @@ function ProductCard({ showCategory, ...product }: Props) {
         </Link>
       </div>
       <div className="mt-3 flex flex-1 flex-col justify-end">
-        <AddToCart size="sm" product={product.id} />
+        <ProductCartToggle size="sm" product={product.id} />
       </div>
     </div>
   )

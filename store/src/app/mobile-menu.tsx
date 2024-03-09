@@ -39,7 +39,7 @@ function MobileMenu({ categories }: Props) {
         </div>
         <ul className="divide-y overflow-y-auto p-4">
           <Link href="/" className="flex justify-between py-2.5 font-medium">
-            Home
+            Accueil
             <ChevronRightIcon className="w-5 text-gray-600" />
           </Link>
           {categories.map((category) => {

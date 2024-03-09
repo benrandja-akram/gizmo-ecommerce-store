@@ -16,7 +16,7 @@ import {
 } from '@heroicons/react/24/solid'
 import { Product } from '@prisma/client'
 import cookies from 'js-cookie'
-import { ArrowRightIcon, CheckCheckIcon } from 'lucide-react'
+import { ArrowRightIcon, CheckCheckIcon, ShoppingCartIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useEffect, useTransition } from 'react'
@@ -153,7 +153,7 @@ function Cart() {
 
 function EmptyCart() {
   return (
-    <div className="mt-8 grid items-center justify-center gap-2 rounded-lg border border-dashed bg-gray-50 p-6 text-sm">
+    <div className="mt-8 grid items-center justify-center gap-2 rounded-lg border border-dashed bg-white p-6 text-sm">
       <h3 className="text-center text-lg font-bold">Votre panier est vide</h3>
 
       <p className="text-gray-700">
@@ -161,7 +161,7 @@ function EmptyCart() {
       </p>
       <Link href="/" className="mx-auto mt-6">
         <Button>
-          Parcourir notre produits
+          Explorer nos produits
           <ArrowRightIcon className="w-5" />
         </Button>
       </Link>
@@ -250,6 +250,31 @@ function CartProducts({ products }: { products: Product[] }) {
 
 function AddToCart({
   product,
+  size,
+  children,
+}: React.PropsWithChildren<{ product: string; size?: 'sm' | 'base' }>) {
+  const cart = useCart()
+
+  return (
+    <Button
+      onClick={() => {
+        cart.addItem({ id: product, quantity: 1 })
+      }}
+      outline
+      className={clsx(
+        'w-full truncate',
+        size === 'base'
+          ? 'sm:px-3 sm:py-3'
+          : 'px-1 py-1.5 text-xs sm:px-2 sm:py-2 sm:text-sm/6',
+      )}
+    >
+      <ShoppingCartIcon className="w-5" />
+      {children}
+    </Button>
+  )
+}
+function ProductCartToggle({
+  product,
   size = 'base',
 }: {
   product: string
@@ -287,4 +312,4 @@ function AddToCart({
   )
 }
 
-export { AddToCart, Cart, CartProducts, EmptyCart }
+export { AddToCart, Cart, CartProducts, EmptyCart, ProductCartToggle }

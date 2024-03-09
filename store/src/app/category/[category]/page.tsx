@@ -1,7 +1,7 @@
 import { db } from '@/db'
 import { CategoriesList } from '@/ui/categories'
 import { ProductCard } from '@/ui/product-card'
-import { ProductsList, ProductsRoot } from '@/ui/products-list'
+import { ProductsHeader, ProductsList, ProductsRoot } from '@/ui/products-list'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
@@ -36,18 +36,14 @@ async function CategoryPage({
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto max-w-3xl lg:max-w-7xl">
           <div className="py-8 text-center lg:py-16">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900">
+            <h1 className="text-4xl font-bold tracking-tight text-gray-900 lg:text-6xl">
               {category.name}
             </h1>
-            {/* {category.description && (
-              <p className="mx-auto mt-4 max-w-3xl text-base text-gray-500">
-                {category.description}
-              </p>
-            )} */}
           </div>
         </div>
 
         <ProductsRoot>
+          <ProductsHeader>{products.length} produits trouvés</ProductsHeader>
           <ProductsList>
             {products.map((product) => (
               <li className="h-full" key={product.id}>

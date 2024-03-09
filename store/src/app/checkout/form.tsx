@@ -42,7 +42,7 @@ function CheckoutForm({ fees, centers, communes }: Props) {
     ) => checkout(data.arg[0], data.arg[1]),
   )
   const cart = useCart()
-  const { products } = useCartProducts({ enabled: true })
+  const { products, isLoading } = useCartProducts({ enabled: true })
 
   const {
     register,
@@ -61,7 +61,7 @@ function CheckoutForm({ fees, centers, communes }: Props) {
   if (data?.success) {
     return <OrderConfirmed name={getValues().name} />
   }
-  if (products && !products.length) {
+  if (!isLoading && !products?.length) {
     return (
       <div className="mx-4">
         <div className="mx-auto my-12 mb-96 max-w-lg">

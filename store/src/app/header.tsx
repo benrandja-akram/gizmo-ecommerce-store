@@ -1,3 +1,4 @@
+import { Button } from '@/components/button'
 import {
   Dropdown,
   DropdownButton,
@@ -21,7 +22,7 @@ async function Header() {
       <nav className="border-b border-gray-200 bg-white px-4 shadow-sm sm:px-6 lg:px-8">
         <div className="mx-auto flex h-16 items-center justify-between">
           {/* Logo (lg+) */}
-          <div className="hidden space-x-4 lg:flex lg:items-center">
+          <div className="hidden space-x-2 lg:flex lg:items-center">
             <Link href="/" className="mr-12">
               <span className="sr-only">Gizmo tech dz</span>
               <Logo />
@@ -32,14 +33,15 @@ async function Header() {
                   key={category.id}
                   href={`/category/${category.id}`}
                   type="button"
-                  className="flex-1 whitespace-nowrap border-b-2  border-transparent px-1 py-4 text-base font-medium  text-gray-700 transition-all hover:text-gray-900"
                 >
-                  {category.name}
+                  <Button plain className="text-base">
+                    {category.name}
+                  </Button>
                 </Link>
               )
             })}
             <Dropdown>
-              <DropdownButton plain>
+              <DropdownButton plain className="text-base">
                 Autres
                 <ChevronDownIcon />
               </DropdownButton>
@@ -82,9 +84,10 @@ async function Header() {
 function TopBanner() {
   return (
     <div className="relative z-20 bg-gray-900">
-      <div className=" px-4 py-3.5 sm:px-6 lg:px-8">
-        <p className=" text-center text-base font-semibold text-white lg:flex-none">
-          Appelez-nous au téléphone 0559 21 74 83
+      <div className="px-4 py-3.5 sm:px-6 lg:px-8">
+        <p className="text-center text-sm font-semibold text-white sm:text-base lg:flex-none">
+          Appelez-nous au téléphone{' '}
+          <span className="inline-block">0559 21 74 83</span>
         </p>
       </div>
     </div>

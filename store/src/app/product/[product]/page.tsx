@@ -7,7 +7,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/ui/carousel'
-import { AddToCart } from '@/ui/cart'
+import { AddToCart, ProductCartToggle } from '@/ui/cart'
 import { Markdown } from '@/ui/markdown'
 import { Policies } from '@/ui/policies'
 import { ProductCard } from '@/ui/product-card'
@@ -76,7 +76,14 @@ export default async function ProductPage({
                     <Markdown content={product.description} />
                   </div>
                 )}
-                <AddToCart size="base" product={product.id} />
+                <div className="flex flex-col gap-4">
+                  <ProductCartToggle size="base" product={product.id} />
+                  <Link href="/checkout">
+                    <AddToCart size="base" product={product.id}>
+                      Buy now
+                    </AddToCart>
+                  </Link>
+                </div>
               </div>
               <div className="mt-6 grid gap-3">
                 {features.map((feature, i) => (
@@ -112,7 +119,7 @@ export default async function ProductPage({
                         <div className="absolute inset-0 animate-pulse bg-slate-300" />
                         <Zoom>
                           <Image
-                            className="fill w-full rounded object-cover object-center"
+                            className="fill w-full rounded bg-white object-cover object-center"
                             src={image}
                             width={600}
                             height={600}
@@ -131,8 +138,6 @@ export default async function ProductPage({
           </div>
         </div>
 
-        <Policies />
-
         <ProductsRoot className="pt-8 lg:pt-16">
           <ProductsHeader>Les clients ont également acheté</ProductsHeader>
           <ProductsList>
@@ -143,6 +148,8 @@ export default async function ProductPage({
             ))}
           </ProductsList>
         </ProductsRoot>
+
+        <Policies />
       </div>
     </div>
   )
