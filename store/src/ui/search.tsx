@@ -4,8 +4,6 @@ import { Button } from '@/components/button'
 import { CommandPaletteDialog } from '@/components/command-palette-dialog'
 import { useDialog } from '@/hooks/use-dialog'
 import { ProductFallback } from '@/ui/product-fallback'
-import { clsx } from '@/utils/clsx'
-import { Combobox } from '@headlessui/react'
 import {
   ExclamationCircleIcon,
   MagnifyingGlassIcon,
@@ -14,7 +12,7 @@ import type { Category, Product } from '@prisma/client'
 import { ArrowRightIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { ChangeEvent, useState, useTransition } from 'react'
+import { ChangeEvent, useEffect, useRef, useState, useTransition } from 'react'
 import useSWR from 'swr'
 import { useDebounce } from 'use-debounce'
 
@@ -22,6 +20,7 @@ function Search() {
   const router = useRouter()
   const [pending, startTransition] = useTransition()
   const { isOpen: open, setOpen } = useDialog('search')
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const [inputQuery, setQuery] = useState('')
   const [query] = useDebounce(inputQuery, 300)
@@ -34,6 +33,10 @@ function Search() {
       revalidateOnFocus: false,
     },
   )
+
+  useEffect(() => {
+    if (open) queueMicrotask(() => inputRef.current?.focus())
+  }, [open])
 
   return (
     <>
@@ -50,37 +53,33 @@ function Search() {
         open={open}
         onOpenChange={setOpen}
       >
-        <Combobox
-          onChange={(product) => {
-            startTransition(() => void router.push(`/product/${product}`))
-          }}
-          value={inputQuery}
-        >
-          <form className="relative flex items-center">
+        <div>
+          <form
+            className="relative flex items-center"
+            onSubmit={(e) => {
+              e.preventDefault()
+              startTransition(() => void router.push(`/search/${query}`))
+            }}
+          >
             <MagnifyingGlassIcon
               className="pointer-events-none absolute left-4 top-3.5 h-5 w-5 text-gray-400"
               aria-hidden="true"
             />
-            <Combobox.Input
+            <input
+              ref={inputRef}
               className="h-12 w-full flex-1 border-0 bg-transparent pl-11 pr-4 text-sm text-gray-900 outline-none placeholder:text-gray-400 focus:ring-0"
               placeholder="I5 13600k"
               onChange={(event: ChangeEvent<HTMLInputElement>) =>
                 setQuery(event.target.value)
               }
-              autoFocus
               value={inputQuery}
               name="query"
               autoComplete="off"
             />
             <Button
-              type="button"
+              type="submit"
               className={'mr-3 overflow-hidden rounded-full'}
               disabled={pending}
-              onClick={(e) => {
-                e.preventDefault()
-                e.stopPropagation()
-                startTransition(() => void router.push(`/search/${query}`))
-              }}
             >
               <span className="hidden sm:inline">Rechercher</span>
               <ArrowRightIcon
@@ -101,61 +100,46 @@ function Search() {
                 })}
               </div>
 
-              <div className="mx-3 my-4 h-10 animate-pulse rounded-lg bg-slate-200" />
+              <div className="mx-3 my-4 h-10 animate-pulse rounded-lg bg-slate-300" />
             </div>
           )}
 
           {!!data?.length && (
             <>
-              <Combobox.Options
-                static
-                className="max-h-96 transform-gpu scroll-py-3 overflow-y-auto p-3"
-              >
+              <ul className="max-h-96 transform-gpu scroll-py-3 overflow-y-auto p-3">
                 {data.map((product) => (
-                  <Combobox.Option
+                  <li
                     key={product.id}
                     value={product.id}
-                    className={({ focus }) =>
-                      clsx(
-                        'cursor-default select-none rounded-xl p-2',
-                        focus && 'bg-indigo-100',
-                      )
-                    }
+                    className={'cursor-default select-none rounded-xl p-2'}
                   >
-                    {({ focus }) => (
-                      <Link
-                        className="flex items-center space-x-3"
-                        href={`/product/${product.id}`}
+                    <Link
+                      className="flex items-center space-x-3"
+                      href={`/product/${product.id}`}
+                    >
+                      <div
+                        className={
+                          'flex h-12 w-12 flex-none items-center justify-center overflow-hidden rounded-lg border bg-white'
+                        }
                       >
-                        <div
-                          className={clsx(
-                            'flex h-12 w-12 flex-none items-center justify-center overflow-hidden rounded-lg border bg-white',
-                          )}
-                        >
-                          <img
-                            src={product.images[0]}
-                            className="h-[90%] w-[90%] object-cover transition-all"
-                            alt=""
-                          />
-                        </div>
-                        <div className="grid items-start gap-0.5 text-sm">
-                          <p
-                            className={clsx(
-                              'truncate font-medium',
-                              focus ? 'text-gray-900' : 'text-gray-700',
-                            )}
-                          >
-                            {product.name}
-                          </p>
-                          <p className="font-semibold">
-                            {product.price.toLocaleString()} DA
-                          </p>
-                        </div>
-                      </Link>
-                    )}
-                  </Combobox.Option>
+                        <img
+                          src={product.images[0]}
+                          className="h-[90%] w-[90%] object-cover transition-all"
+                          alt=""
+                        />
+                      </div>
+                      <div className="grid items-start gap-0.5 text-sm">
+                        <p className={'truncate font-medium text-gray-700'}>
+                          {product.name}
+                        </p>
+                        <p className="font-semibold">
+                          {product.price.toLocaleString()} DA
+                        </p>
+                      </div>
+                    </Link>
+                  </li>
                 ))}
-              </Combobox.Options>
+              </ul>
               <Link href={`/search/${query}`} className="mx-3 mb-3 block">
                 <Button className="w-full">Voir tout</Button>
               </Link>
@@ -178,7 +162,7 @@ function Search() {
               </p>
             </div>
           )}
-        </Combobox>
+        </div>
       </CommandPaletteDialog>
     </>
   )

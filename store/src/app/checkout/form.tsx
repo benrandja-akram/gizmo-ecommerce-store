@@ -394,7 +394,7 @@ function CheckoutForm({ fees, centers, communes }: Props) {
                     })}
                   </div>
                   <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
-                    <div className="h-10 animate-pulse rounded bg-slate-200"></div>
+                    <div className="h-10 animate-pulse rounded bg-slate-300"></div>
                   </div>
                 </>
               )}
