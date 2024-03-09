@@ -82,8 +82,8 @@ async function Header() {
 function TopBanner() {
   return (
     <div className="relative z-20 bg-gray-900">
-      <div className=" px-4 py-2.5 sm:px-6 lg:px-8">
-        <p className=" text-center text-sm font-medium text-white lg:flex-none">
+      <div className=" px-4 py-3.5 sm:px-6 lg:px-8">
+        <p className=" text-center text-base font-semibold text-white lg:flex-none">
           Appelez-nous au téléphone 0559 21 74 83
         </p>
       </div>
