@@ -17,6 +17,7 @@
   "packageManager": "npm@9.8.1",
   "workspaces": [
     "store",
+    "db",
     "apps/*",
     "packages/*"
   ]

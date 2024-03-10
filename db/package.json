@@ -1,0 +1,16 @@
+{
+  "name": "@monorepo/database",
+  "version": "0.0.0",
+  "scripts": {
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push --skip-generate",
+    "postinstall": "prisma generate"
+  },
+  "dependencies": {
+    "@prisma/adapter-neon": "^5.10.2",
+    "@prisma/client": "^5.10.2",
+    "prisma": "^5.10.2"
+  },
+  "main": "./index.ts",
+  "types": "./index.ts"
+}

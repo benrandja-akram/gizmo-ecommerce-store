@@ -3,13 +3,6 @@ generator client {
   previewFeatures = ["driverAdapters"]
 }
 
-generator json {
-  provider = "prisma-json-types-generator"
-  // namespace = "PrismaJson"
-  // clientOutput = "<finds it automatically>"
-  // (./ -> relative to schema, or an importable path to require() it)
-}
-
 datasource db {
   provider  = "postgresql"
   url       = env("DATABASE_URL")

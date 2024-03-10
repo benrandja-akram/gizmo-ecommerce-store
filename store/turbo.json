@@ -2,12 +2,16 @@
   "extends": ["//"],
   "pipeline": {
     "build": {
+      "dependsOn": ["^db:generate"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
     "dev": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build", "^db:generate"],
       "cache": false,
       "persistent": true
+    },
+    "db:generate": {
+      "cache": false
     }
   }
 }

@@ -7,7 +7,7 @@ import {
 } from '@/components/atoms/dropdown'
 import { Cart } from '@/components/ui/cart'
 import { Logo } from '@/components/ui/logo'
-import { getCategories } from '@/db/category'
+import { db } from '@/db'
 import { ChevronDownIcon } from '@heroicons/react/16/solid'
 import Link from 'next/link'
 import { Suspense } from 'react'
@@ -15,7 +15,9 @@ import { Search } from '../components/ui/search'
 import { MobileMenu } from './mobile-menu'
 
 async function Header() {
-  const categories = await getCategories()
+  const categories = await db.category.findMany({
+    orderBy: { position: 'asc' },
+  })
 
   return (
     <header className="sticky top-0 z-10">
