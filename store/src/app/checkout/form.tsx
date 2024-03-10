@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from '@/components/button'
+import { Button } from '@/components/atoms/button'
 import {
   Description,
   ErrorMessage,
@@ -8,18 +8,23 @@ import {
   FieldGroup,
   Fieldset,
   Label,
-} from '@/components/fieldset'
-import { Input } from '@/components/input'
-import { Listbox, ListboxLabel, ListboxOption } from '@/components/listbox'
-import { Radio, RadioField, RadioGroup } from '@/components/radio'
-import { Textarea } from '@/components/textarea'
+} from '@/components/atoms/fieldset'
+import { Input } from '@/components/atoms/input'
+import {
+  Listbox,
+  ListboxLabel,
+  ListboxOption,
+} from '@/components/atoms/listbox'
+import { Radio, RadioField, RadioGroup } from '@/components/atoms/radio'
+import { Textarea } from '@/components/atoms/textarea'
+import { CartProducts, EmptyCart } from '@/components/ui/cart'
+import { ProductFallback } from '@/components/ui/product-fallback'
 import { useCart } from '@/hooks/use-cart'
 import { useCartProducts } from '@/hooks/use-cart-products'
-import { CartProducts, EmptyCart } from '@/ui/cart'
-import { ProductFallback } from '@/ui/product-fallback'
 import { clsx } from '@/utils/clsx'
 import { STOP_DESK, TO_HOME } from '@/utils/constants'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useSyncExternalStore } from 'react'
 import { useForm } from 'react-hook-form'
 import useSWRMutation from 'swr/mutation'
 import { checkout } from './actions'
@@ -32,6 +37,11 @@ type Props = {
   communes: CommunesRoot['data']
 }
 function CheckoutForm({ fees, centers, communes }: Props) {
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  )
   const { data, isMutating, trigger } = useSWRMutation(
     '/actions/checkout',
     (
@@ -61,7 +71,7 @@ function CheckoutForm({ fees, centers, communes }: Props) {
   if (data?.success) {
     return <OrderConfirmed name={getValues().name} />
   }
-  if (!isLoading && !products?.length) {
+  if (!isLoading && !products?.length && mounted) {
     return (
       <div className="mx-4">
         <div className="mx-auto my-12 mb-96 max-w-lg">

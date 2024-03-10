@@ -1,5 +1,5 @@
-import { Link } from '@/components/link'
 import { Category } from '@prisma/client'
+import Link from 'next/link'
 import {
   Carousel,
   CarouselContent,

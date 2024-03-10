@@ -1,7 +1,7 @@
 'use client'
 
-import { Button } from '@/components/button'
-import { Input } from '@/components/input'
+import { Button } from '@/components/atoms/button'
+import { Input } from '@/components/atoms/input'
 import { ArrowRightIcon } from 'lucide-react'
 import { useParams, useRouter } from 'next/navigation'
 import { useTransition } from 'react'

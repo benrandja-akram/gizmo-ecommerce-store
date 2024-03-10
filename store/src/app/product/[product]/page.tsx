@@ -1,18 +1,22 @@
-import { Badge } from '@/components/badge'
-import { db } from '@/db'
+import { Badge } from '@/components/atoms/badge'
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from '@/ui/carousel'
-import { AddToCart, ProductCartToggle } from '@/ui/cart'
-import { Markdown } from '@/ui/markdown'
-import { Policies } from '@/ui/policies'
-import { ProductCard } from '@/ui/product-card'
-import { ProductsHeader, ProductsList, ProductsRoot } from '@/ui/products-list'
-import { Zoom } from '@/ui/zoom'
+} from '@/components/ui/carousel'
+import { AddToCart, ProductCartToggle } from '@/components/ui/cart'
+import { Markdown } from '@/components/ui/markdown'
+import { Policies } from '@/components/ui/policies'
+import { ProductCard } from '@/components/ui/product-card'
+import {
+  ProductsHeader,
+  ProductsList,
+  ProductsRoot,
+} from '@/components/ui/products-list'
+import { Zoom } from '@/components/ui/zoom'
+import { db } from '@/db'
 import { CheckIcon } from '@heroicons/react/20/solid'
 import { Metadata } from 'next'
 import Image from 'next/image'
@@ -80,7 +84,7 @@ export default async function ProductPage({
                   <ProductCartToggle size="base" product={product.id} />
                   <Link href="/checkout">
                     <AddToCart size="base" product={product.id}>
-                      Buy now
+                      Acheter maintenant
                     </AddToCart>
                   </Link>
                 </div>

@@ -1,9 +1,9 @@
 'use client'
 
-import { Button } from '@/components/button'
-import { CommandPaletteDialog } from '@/components/command-palette-dialog'
+import { Button } from '@/components/atoms/button'
+import { CommandPaletteDialog } from '@/components/atoms/command-palette-dialog'
+import { ProductFallback } from '@/components/ui/product-fallback'
 import { useDialog } from '@/hooks/use-dialog'
-import { ProductFallback } from '@/ui/product-fallback'
 import {
   ExclamationCircleIcon,
   MagnifyingGlassIcon,
@@ -111,7 +111,9 @@ function Search() {
                   <li
                     key={product.id}
                     value={product.id}
-                    className={'cursor-default select-none rounded-xl p-2'}
+                    className={
+                      'cursor-default select-none rounded-xl p-2 hover:bg-blue-50'
+                    }
                   >
                     <Link
                       className="flex items-center space-x-3"

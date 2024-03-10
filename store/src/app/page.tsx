@@ -1,15 +1,19 @@
-import { db } from '@/db'
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from '@/ui/carousel'
-import { CategoriesList } from '@/ui/categories'
-import { Policies } from '@/ui/policies'
-import { ProductCard } from '@/ui/product-card'
-import { ProductsHeader, ProductsList, ProductsRoot } from '@/ui/products-list'
+} from '@/components/ui/carousel'
+import { CategoriesList } from '@/components/ui/categories'
+import { Policies } from '@/components/ui/policies'
+import { ProductCard } from '@/components/ui/product-card'
+import {
+  ProductsHeader,
+  ProductsList,
+  ProductsRoot,
+} from '@/components/ui/products-list'
+import { db } from '@/db'
 import { ZapIcon } from 'lucide-react'
 
 const offers = [
@@ -30,7 +34,7 @@ const offers = [
 export default async function Home() {
   const [categories, flashProducts, popularProducts, accessories, cpus] =
     await Promise.all([
-      db.category.findMany(),
+      db.category.findMany({ orderBy: { position: 'asc' } }),
       db.product.findMany({
         where: { isFlashSale: true },
         include: { category: true },

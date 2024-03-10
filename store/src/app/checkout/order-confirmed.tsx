@@ -1,6 +1,6 @@
 import messenger from '@/app/messenger.webp'
-import { Button } from '@/components/button'
-import { Copy } from '@/ui/copy'
+import { Button } from '@/components/atoms/button'
+import { Copy } from '@/components/ui/copy'
 import { CheckCircleIcon } from '@heroicons/react/24/solid'
 import { ArrowUpRightIcon } from 'lucide-react'
 import Image from 'next/image'

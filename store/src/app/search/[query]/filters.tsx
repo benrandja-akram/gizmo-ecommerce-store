@@ -1,7 +1,7 @@
 'use client'
 
-import { Label } from '@/components/fieldset'
-import { Radio, RadioField, RadioGroup } from '@/components/radio'
+import { Label } from '@/components/atoms/fieldset'
+import { Radio, RadioField, RadioGroup } from '@/components/atoms/radio'
 import { clsx } from '@/utils/clsx'
 import { Category } from '@prisma/client'
 import { usePathname, useRouter } from 'next/navigation'

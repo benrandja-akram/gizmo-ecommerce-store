@@ -1,6 +1,10 @@
+import { ProductCard } from '@/components/ui/product-card'
+import {
+  ProductsHeader,
+  ProductsList,
+  ProductsRoot,
+} from '@/components/ui/products-list'
 import { db } from '@/db'
-import { ProductCard } from '@/ui/product-card'
-import { ProductsHeader, ProductsList, ProductsRoot } from '@/ui/products-list'
 import { Filters } from './filters'
 
 async function SearchPage({

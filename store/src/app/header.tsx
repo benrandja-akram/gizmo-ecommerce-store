@@ -1,17 +1,17 @@
-import { Button } from '@/components/button'
+import { Button } from '@/components/atoms/button'
 import {
   Dropdown,
   DropdownButton,
   DropdownItem,
   DropdownMenu,
-} from '@/components/dropdown'
+} from '@/components/atoms/dropdown'
+import { Cart } from '@/components/ui/cart'
+import { Logo } from '@/components/ui/logo'
 import { getCategories } from '@/db/category'
-import { Cart } from '@/ui/cart'
-import { Logo } from '@/ui/logo'
 import { ChevronDownIcon } from '@heroicons/react/16/solid'
 import Link from 'next/link'
 import { Suspense } from 'react'
-import { Search } from '../ui/search'
+import { Search } from '../components/ui/search'
 import { MobileMenu } from './mobile-menu'
 
 async function Header() {
@@ -34,14 +34,14 @@ async function Header() {
                   href={`/category/${category.id}`}
                   type="button"
                 >
-                  <Button plain className="text-base">
+                  <Button variant="plain" className="text-base">
                     {category.name}
                   </Button>
                 </Link>
               )
             })}
             <Dropdown>
-              <DropdownButton plain className="text-base">
+              <DropdownButton variant="plain" className="text-base">
                 Autres
                 <ChevronDownIcon />
               </DropdownButton>

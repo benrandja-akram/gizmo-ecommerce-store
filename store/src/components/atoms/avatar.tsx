@@ -4,7 +4,7 @@ import {
   type ButtonProps as HeadlessButtonProps,
 } from '@headlessui/react'
 import React from 'react'
-import { TouchTarget } from './button'
+import { Button } from './button'
 import { Link } from './link'
 
 type AvatarProps = {
@@ -92,15 +92,15 @@ export const AvatarButton = React.forwardRef(function AvatarButton(
       className={classes}
       ref={ref as React.ForwardedRef<HTMLAnchorElement>}
     >
-      <TouchTarget>
+      <Button>
         <Avatar src={src} square={square} initials={initials} alt={alt} />
-      </TouchTarget>
+      </Button>
     </Link>
   ) : (
     <HeadlessButton {...props} className={classes} ref={ref}>
-      <TouchTarget>
+      <Button>
         <Avatar src={src} square={square} initials={initials} alt={alt} />
-      </TouchTarget>
+      </Button>
     </HeadlessButton>
   )
 })

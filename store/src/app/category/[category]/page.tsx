@@ -1,7 +1,11 @@
+import { CategoriesList } from '@/components/ui/categories'
+import { ProductCard } from '@/components/ui/product-card'
+import {
+  ProductsHeader,
+  ProductsList,
+  ProductsRoot,
+} from '@/components/ui/products-list'
 import { db } from '@/db'
-import { CategoriesList } from '@/ui/categories'
-import { ProductCard } from '@/ui/product-card'
-import { ProductsHeader, ProductsList, ProductsRoot } from '@/ui/products-list'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 

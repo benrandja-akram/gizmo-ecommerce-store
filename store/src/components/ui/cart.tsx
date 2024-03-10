@@ -1,8 +1,12 @@
 'use client'
 
-import { Button } from '@/components/button'
-import { Drawer } from '@/components/drawer'
-import { Listbox, ListboxLabel, ListboxOption } from '@/components/listbox'
+import { Button } from '@/components/atoms/button'
+import { Drawer } from '@/components/atoms/drawer'
+import {
+  Listbox,
+  ListboxLabel,
+  ListboxOption,
+} from '@/components/atoms/listbox'
 import { useCart } from '@/hooks/use-cart'
 import { useCartProducts } from '@/hooks/use-cart-products'
 import { useDialog } from '@/hooks/use-dialog'
@@ -260,9 +264,9 @@ function AddToCart({
       onClick={() => {
         cart.addItem({ id: product, quantity: 1 })
       }}
-      outline
+      variant={'outline'}
       className={clsx(
-        'w-full truncate',
+        'w-full truncate bg-white shadow-sm',
         size === 'base'
           ? 'sm:px-3 sm:py-3'
           : 'px-1 py-1.5 text-xs sm:px-2 sm:py-2 sm:text-sm/6',

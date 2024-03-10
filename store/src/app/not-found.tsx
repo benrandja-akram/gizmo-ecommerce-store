@@ -1,4 +1,4 @@
-import { Button } from '@/components/button'
+import { Button } from '@/components/atoms/button'
 import { HomeIcon } from '@heroicons/react/24/outline'
 import { ChatBubbleLeftIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
@@ -22,7 +22,7 @@ export default function NotFound() {
               </Button>
             </Link>
             <a target="_blank" href="//m.me/226796627192300">
-              <Button plain>
+              <Button variant="plain">
                 <ChatBubbleLeftIcon className="inline w-5" />
                 Contacter le support
               </Button>
