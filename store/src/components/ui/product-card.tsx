@@ -1,8 +1,8 @@
 import type { Category, Product } from '@/db'
 import { clsx } from '@/utils/clsx'
 import { ZapIcon } from 'lucide-react'
+import { Link } from 'next-view-transitions'
 import Image from 'next/image'
-import Link from 'next/link'
 import { ProductCartToggle } from './cart'
 
 type Props = Product & {
@@ -15,6 +15,7 @@ function ProductCard({ showCategory, ...product }: Props) {
     <div
       key={product.id}
       className="flex h-full w-full flex-col text-center md:w-auto"
+      id={`product_${product.id}`}
     >
       <div className="group relative">
         <Link
@@ -45,13 +46,15 @@ function ProductCard({ showCategory, ...product }: Props) {
           className="mt-2 block cursor-pointer text-xs sm:text-sm md:text-base lg:mt-4"
         >
           {showCategory && (
-            <p className="mb-1 text-gray-500 sm:text-sm">
+            <h2 className="mb-1 text-gray-500 sm:text-sm">
               {product.category.name}
-            </p>
+            </h2>
           )}
 
           <div>
-            <h3 className="font-semibold text-gray-900">{product.name}</h3>
+            <h3 className="font-semibold text-gray-900" id={product.id}>
+              {product.name}
+            </h3>
             <p className="mt-1 text-sm font-bold tabular-nums text-gray-900 sm:text-lg">
               {product.price.toLocaleString()} DA
             </p>

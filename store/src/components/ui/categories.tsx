@@ -1,5 +1,5 @@
 import { Category } from '@prisma/client'
-import Link from 'next/link'
+import { Link } from 'next-view-transitions'
 import {
   Carousel,
   CarouselContent,

@@ -40,7 +40,10 @@ async function CategoryPage({
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto max-w-3xl lg:max-w-7xl">
           <div className="py-8 text-center lg:py-16">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900 lg:text-6xl">
+            <h1
+              id={category.id}
+              className="text-4xl font-bold tracking-tight text-gray-900 lg:text-6xl"
+            >
               {category.name}
             </h1>
           </div>

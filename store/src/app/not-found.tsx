@@ -1,7 +1,7 @@
 import { Button } from '@/components/atoms/button'
 import { HomeIcon } from '@heroicons/react/24/outline'
 import { ChatBubbleLeftIcon } from '@heroicons/react/24/solid'
-import Link from 'next/link'
+import { Link } from 'next-view-transitions'
 
 export default function NotFound() {
   return (

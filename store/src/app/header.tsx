@@ -9,7 +9,7 @@ import { Cart } from '@/components/ui/cart'
 import { Logo } from '@/components/ui/logo'
 import { db } from '@/db'
 import { ChevronDownIcon } from '@heroicons/react/16/solid'
-import Link from 'next/link'
+import { Link } from 'next-view-transitions'
 import { Suspense } from 'react'
 import { Search } from '../components/ui/search'
 import { MobileMenu } from './mobile-menu'
@@ -35,6 +35,7 @@ async function Header() {
                   key={category.id}
                   href={`/category/${category.id}`}
                   type="button"
+                  id={category.id}
                 >
                   <Button variant="plain" className="text-base">
                     {category.name}

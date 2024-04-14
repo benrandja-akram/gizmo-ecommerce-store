@@ -6,7 +6,7 @@ import { useDialog } from '@/hooks/use-dialog'
 import { Bars3Icon } from '@heroicons/react/24/outline'
 import type { Category } from '@prisma/client'
 import { ChevronRightIcon, XIcon } from 'lucide-react'
-import Link from 'next/link'
+import { Link } from 'next-view-transitions'
 
 type Props = {
   categories: Category[]

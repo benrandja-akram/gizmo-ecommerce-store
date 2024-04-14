@@ -19,8 +19,8 @@ import { Zoom } from '@/components/ui/zoom'
 import { db } from '@/db'
 import { CheckIcon } from '@heroicons/react/20/solid'
 import { Metadata } from 'next'
+import { Link } from 'next-view-transitions'
 import Image from 'next/image'
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 const features = [
@@ -47,7 +47,10 @@ export default async function ProductPage({
   if (!product) notFound()
 
   return (
-    <div className="grid px-4 py-4 sm:px-6 sm:py-6 lg:px-8 lg:py-8 ">
+    <div
+      id={`product_${product.id}`}
+      className="grid px-4 py-4 sm:px-6 sm:py-6 lg:px-8 lg:py-8 "
+    >
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-y-6 lg:grid-cols-2 lg:gap-x-20">
           {/* Product details */}
@@ -61,9 +64,12 @@ export default async function ProductPage({
             </Link>
 
             <div className="mt-4">
-              <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              <h2
+                id={product.id}
+                className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
+              >
                 {product.name}
-              </h1>
+              </h2>
             </div>
 
             <section aria-labelledby="information-heading" className="mt-4">
