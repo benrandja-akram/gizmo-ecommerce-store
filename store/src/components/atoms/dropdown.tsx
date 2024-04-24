@@ -109,9 +109,6 @@ export function DropdownItem(
         // Disabled state
         'data-[disabled]:opacity-50',
 
-        // Forced colors mode
-        'forced-color-adjust-none forced-colors:data-[focus]:bg-[Highlight] forced-colors:data-[focus]:text-[HighlightText] forced-colors:[&>[data-slot=icon]]:data-[focus]:text-[HighlightText]',
-
         // Use subgrid when available but fallback to an explicit grid layout if not
         'col-span-full grid grid-cols-[auto_1fr_1.5rem_0.5rem_auto] items-center supports-[grid-template-columns:subgrid]:grid-cols-subgrid',
 
