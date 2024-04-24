@@ -1,8 +1,8 @@
 import type { Category, Product } from '@/db'
 import { clsx } from '@/utils/clsx'
 import { ZapIcon } from 'lucide-react'
-import { Link } from 'next-view-transitions'
 import Image from 'next/image'
+import Link from 'next/link'
 import { ProductCartToggle } from './cart'
 
 type Props = Product & {

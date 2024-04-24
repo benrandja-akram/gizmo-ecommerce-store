@@ -19,8 +19,8 @@ import { Zoom } from '@/components/ui/zoom'
 import { db } from '@/db'
 import { CheckIcon } from '@heroicons/react/20/solid'
 import { Metadata } from 'next'
-import { Link } from 'next-view-transitions'
 import Image from 'next/image'
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 const features = [

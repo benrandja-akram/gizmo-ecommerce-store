@@ -10,7 +10,7 @@ import {
 } from '@heroicons/react/24/outline'
 import type { Category, Product } from '@prisma/client'
 import { ArrowRightIcon } from 'lucide-react'
-import { Link } from 'next-view-transitions'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { ChangeEvent, useEffect, useRef, useState, useTransition } from 'react'
 import useSWR from 'swr'
@@ -37,6 +37,8 @@ function Search() {
   useEffect(() => {
     if (open) queueMicrotask(() => inputRef.current?.focus())
   }, [open])
+
+  console.log({ open })
 
   return (
     <>

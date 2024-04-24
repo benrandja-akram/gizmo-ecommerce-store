@@ -1,6 +1,5 @@
 import { Analytics } from '@vercel/analytics/react'
 import type { Metadata, Viewport } from 'next'
-import { ViewTransitions } from 'next-view-transitions'
 import { Inter } from 'next/font/google'
 import Image from 'next/image'
 import { Footer } from './footer'
@@ -17,30 +16,28 @@ export default async function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <ViewTransitions>
-      <html lang="fr" className="scroll-smooth bg-gray-50/60 text-gray-900">
-        <body className={inter.className}>
-          {process.env.NODE_ENV === 'production' && (
-            <>
-              <LogRocket />
-              <Analytics />
-            </>
-          )}
-          <a
-            target="_blank"
-            aria-label="Contactez-nous sur Messenger"
-            href="//m.me/226796627192300"
-            className="fixed bottom-4 right-4 z-20 animate-bounce lg:bottom-10 lg:right-10"
-          >
-            <Image src={messageUs} width={52} height={52} alt="" unoptimized />
-          </a>
-          <TopBanner />
-          <Header />
-          <div className="mx-auto">{children}</div>
-          <Footer />
-        </body>
-      </html>
-    </ViewTransitions>
+    <html lang="fr" className="scroll-smooth bg-gray-50/60 text-gray-900">
+      <body className={inter.className}>
+        {process.env.NODE_ENV === 'production' && (
+          <>
+            <LogRocket />
+            <Analytics />
+          </>
+        )}
+        <a
+          target="_blank"
+          aria-label="Contactez-nous sur Messenger"
+          href="//m.me/226796627192300"
+          className="fixed bottom-4 right-4 z-20 animate-bounce lg:bottom-10 lg:right-10"
+        >
+          <Image src={messageUs} width={52} height={52} alt="" unoptimized />
+        </a>
+        <TopBanner />
+        <Header />
+        <div className="mx-auto">{children}</div>
+        <Footer />
+      </body>
+    </html>
   )
 }
 

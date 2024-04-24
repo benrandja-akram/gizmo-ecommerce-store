@@ -21,7 +21,7 @@ import {
 import { Product } from '@prisma/client'
 import cookies from 'js-cookie'
 import { ArrowRightIcon, CheckCheckIcon, ShoppingCartIcon } from 'lucide-react'
-import { Link } from 'next-view-transitions'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useEffect, useTransition } from 'react'
 import { ProductFallback } from './product-fallback'

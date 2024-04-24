@@ -1,6 +1,6 @@
 import { clsx } from '@/utils/clsx'
 import { ArrowRightIcon } from 'lucide-react'
-import { Link } from 'next-view-transitions'
+import Link from 'next/link'
 
 function ProductsRoot({ className, ...props }: DivProps) {
   return (
