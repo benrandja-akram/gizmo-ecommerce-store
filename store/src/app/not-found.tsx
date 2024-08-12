@@ -1,4 +1,4 @@
-import { Button } from '@/components/atoms/button'
+import { Button } from '@gizmo/ui'
 import { HomeIcon } from '@heroicons/react/24/outline'
 import { ChatBubbleLeftIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'

@@ -1,4 +1,4 @@
-import { clsx } from '@/utils/clsx'
+import { clsx } from '@/components/ui/clsx'
 
 const policies = [
   {

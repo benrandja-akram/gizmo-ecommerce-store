@@ -1,4 +1,4 @@
-import { clsx } from '@/utils/clsx'
+import { clsx } from '@gizmo/ui'
 
 function ProductFallback({ size = 'base' }: { size?: 'base' | 'sm' }) {
   return (

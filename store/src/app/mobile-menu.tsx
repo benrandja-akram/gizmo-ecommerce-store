@@ -1,8 +1,8 @@
 'use client'
 
-import { Drawer } from '@/components/atoms/drawer'
 import { Logo } from '@/components/ui/logo'
 import { useDialog } from '@/hooks/use-dialog'
+import { Drawer } from '@gizmo/ui'
 import { Bars3Icon } from '@heroicons/react/24/outline'
 import type { Category } from '@prisma/client'
 import { ChevronRightIcon, XIcon } from 'lucide-react'

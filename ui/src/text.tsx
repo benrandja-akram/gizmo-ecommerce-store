@@ -1,4 +1,4 @@
-import { clsx } from '@/utils/clsx'
+import { clsx } from './clsx'
 import { Link } from './link'
 
 export function Text({

@@ -1,4 +1,4 @@
-import { clsx } from '@/utils/clsx'
+import { clsx } from '@/components/ui/clsx'
 import { ArrowRightIcon } from 'lucide-react'
 import Link from 'next/link'
 

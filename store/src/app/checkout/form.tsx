@@ -1,28 +1,28 @@
 'use client'
 
-import { Button } from '@/components/atoms/button'
+import { CartProducts, EmptyCart } from '@/components/ui/cart'
+import { ProductFallback } from '@/components/ui/product-fallback'
+import { useCart } from '@/hooks/use-cart'
+import { useCartProducts } from '@/hooks/use-cart-products'
+import { STOP_DESK, TO_HOME } from '@/utils/constants'
 import {
+  Button,
   Description,
   ErrorMessage,
   Field,
   FieldGroup,
   Fieldset,
+  Input,
   Label,
-} from '@/components/atoms/fieldset'
-import { Input } from '@/components/atoms/input'
-import {
   Listbox,
   ListboxLabel,
   ListboxOption,
-} from '@/components/atoms/listbox'
-import { Radio, RadioField, RadioGroup } from '@/components/atoms/radio'
-import { Textarea } from '@/components/atoms/textarea'
-import { CartProducts, EmptyCart } from '@/components/ui/cart'
-import { ProductFallback } from '@/components/ui/product-fallback'
-import { useCart } from '@/hooks/use-cart'
-import { useCartProducts } from '@/hooks/use-cart-products'
-import { clsx } from '@/utils/clsx'
-import { STOP_DESK, TO_HOME } from '@/utils/constants'
+  Radio,
+  RadioField,
+  RadioGroup,
+  Textarea,
+  clsx,
+} from '@gizmo/ui'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useSyncExternalStore } from 'react'
 import { useForm } from 'react-hook-form'

@@ -1,6 +1,5 @@
 'use client'
 
-import { clsx } from '@/utils/clsx'
 import {
   Description as HeadlessDescription,
   Label as HeadlessLabel,
@@ -24,6 +23,7 @@ import {
 import type React from 'react'
 import { Fragment } from 'react'
 import { Button } from './button'
+import { clsx } from './clsx'
 import { Link } from './link'
 
 export function Dropdown(props: HeadlessMenuProps) {

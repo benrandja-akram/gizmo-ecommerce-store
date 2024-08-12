@@ -1,4 +1,4 @@
-import { clsx } from '@/utils/clsx'
+import { clsx } from '@gizmo/ui'
 import ReactMarkdown from 'react-markdown'
 
 function Markdown({

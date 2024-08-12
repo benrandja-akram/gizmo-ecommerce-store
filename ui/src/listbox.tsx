@@ -1,6 +1,5 @@
 'use client'
 
-import { clsx } from '@/utils/clsx'
 import {
   Listbox as HeadlessListbox,
   ListboxButton as HeadlessListboxButton,
@@ -12,6 +11,7 @@ import {
   type ListboxProps as HeadlessListboxProps,
 } from '@headlessui/react'
 import { Fragment } from 'react'
+import { clsx } from './clsx'
 
 export function Listbox<T>({
   className,

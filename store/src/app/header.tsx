@@ -1,13 +1,13 @@
-import { Button } from '@/components/atoms/button'
+import { Cart } from '@/components/ui/cart'
+import { Logo } from '@/components/ui/logo'
+import { db } from '@/db'
 import {
+  Button,
   Dropdown,
   DropdownButton,
   DropdownItem,
   DropdownMenu,
-} from '@/components/atoms/dropdown'
-import { Cart } from '@/components/ui/cart'
-import { Logo } from '@/components/ui/logo'
-import { db } from '@/db'
+} from '@gizmo/ui'
 import { ChevronDownIcon } from '@heroicons/react/16/solid'
 import Link from 'next/link'
 import { Suspense } from 'react'

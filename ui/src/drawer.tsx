@@ -1,6 +1,6 @@
-import { clsx } from '@/utils/clsx'
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
+import { clsx } from './clsx'
 
 function Drawer({
   children,

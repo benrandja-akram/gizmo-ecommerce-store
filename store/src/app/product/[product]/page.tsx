@@ -1,4 +1,3 @@
-import { Badge } from '@/components/atoms/badge'
 import {
   Carousel,
   CarouselContent,
@@ -16,6 +15,7 @@ import {
 } from '@/components/ui/products-list'
 import { Zoom } from '@/components/ui/zoom'
 import { db } from '@/db'
+import { Badge } from '@gizmo/ui'
 import { CheckIcon } from '@heroicons/react/20/solid'
 import { Metadata } from 'next'
 import Image from 'next/image'

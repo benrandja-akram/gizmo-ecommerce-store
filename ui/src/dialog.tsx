@@ -1,4 +1,3 @@
-import { clsx } from '@/utils/clsx'
 import {
   Description as HeadlessDescription,
   Dialog as HeadlessDialog,
@@ -11,6 +10,7 @@ import {
 import { XIcon } from 'lucide-react'
 import type React from 'react'
 import { Fragment } from 'react'
+import { clsx } from './clsx'
 import { Text } from './text'
 
 const sizes = {

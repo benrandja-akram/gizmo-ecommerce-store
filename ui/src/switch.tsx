@@ -1,4 +1,3 @@
-import { clsx } from '@/utils/clsx'
 import {
   Field as HeadlessField,
   Switch as HeadlessSwitch,
@@ -6,6 +5,7 @@ import {
   type SwitchProps as HeadlessSwitchProps,
 } from '@headlessui/react'
 import type React from 'react'
+import { clsx } from './clsx'
 
 export function SwitchGroup({
   className,

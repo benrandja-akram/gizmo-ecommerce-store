@@ -1,9 +1,9 @@
-import { clsx } from '@/utils/clsx'
 import {
   Input as HeadlessInput,
   type InputProps as HeadlessInputProps,
 } from '@headlessui/react'
 import { forwardRef } from 'react'
+import { clsx } from './clsx'
 
 const dateTypes = ['date', 'datetime-local', 'month', 'time', 'week']
 type DateType = (typeof dateTypes)[number]

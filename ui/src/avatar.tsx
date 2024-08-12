@@ -1,10 +1,10 @@
-import { clsx } from '@/utils/clsx'
 import {
   Button as HeadlessButton,
   type ButtonProps as HeadlessButtonProps,
 } from '@headlessui/react'
 import React from 'react'
 import { Button } from './button'
+import { clsx } from './clsx'
 import { Link } from './link'
 
 type AvatarProps = {

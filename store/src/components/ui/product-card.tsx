@@ -1,5 +1,5 @@
+import { clsx } from '@/components/ui/clsx'
 import type { Category, Product } from '@/db'
-import { clsx } from '@/utils/clsx'
 import { ZapIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'

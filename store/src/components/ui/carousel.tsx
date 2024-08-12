@@ -1,6 +1,6 @@
 'use client'
 
-import { clsx } from '@/utils/clsx'
+import { clsx } from '@gizmo/ui'
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from 'embla-carousel-react'

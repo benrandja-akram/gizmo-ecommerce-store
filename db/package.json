@@ -1,5 +1,5 @@
 {
-  "name": "@monorepo/database",
+  "name": "@gizmo/database",
   "version": "0.0.0",
   "scripts": {
     "db:generate": "prisma generate",
@@ -7,7 +7,6 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
-    "@prisma/adapter-neon": "^5.10.2",
     "@prisma/client": "^5.10.2",
     "prisma": "^5.10.2"
   },

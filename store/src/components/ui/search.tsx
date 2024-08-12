@@ -1,10 +1,8 @@
 'use client'
 
-import { Button } from '@/components/atoms/button'
-import { CommandPaletteDialog } from '@/components/atoms/command-palette-dialog'
 import { ProductFallback } from '@/components/ui/product-fallback'
 import { useDialog } from '@/hooks/use-dialog'
-import { clsx } from '@/utils/clsx'
+import { Button, CommandPaletteDialog, clsx } from '@gizmo/ui'
 import {
   ExclamationCircleIcon,
   MagnifyingGlassIcon,
