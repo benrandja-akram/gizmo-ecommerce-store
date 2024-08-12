@@ -1,6 +1,6 @@
-import { db } from '@/db'
 import { faker } from '@faker-js/faker'
 import slug from 'slug'
+import { db } from '..'
 import licbCategories from './categories.json'
 import licbProducts from './products.json'
 const images = [
@@ -40,7 +40,7 @@ async function main() {
             licbCategories.find((c) => c.products.includes(product.url))!.name,
             { locale: 'fr' },
           ),
-          price: parseInt(product.price.replace(',', '')),
+          price: parseInt(product.price.replace(',', '').replace(' ', '')),
           images: product.images.map((img) => img.replace('-100x100', '')),
           name: product.name,
           description: product.description ?? faker.lorem.paragraphs(3, '\n'),

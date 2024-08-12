@@ -12,7 +12,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'www.licbplus.com.dz',
+        hostname: 'www.licbplus.com',
       },
     ],
   },

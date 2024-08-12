@@ -7,7 +7,6 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel'
 import { AddToCart, ProductCartToggle } from '@/components/ui/cart'
-import { Markdown } from '@/components/ui/markdown'
 import { Policies } from '@/components/ui/policies'
 import { ProductCard } from '@/components/ui/product-card'
 import {
@@ -82,9 +81,7 @@ export default async function ProductPage({
               </p>
               <div className="mt-4 flex flex-col-reverse gap-4 lg:flex-col">
                 {product.description && (
-                  <div className="mt-4 space-y-6">
-                    <Markdown content={product.description} />
-                  </div>
+                  <div className="mt-4 space-y-6">{product.description}</div>
                 )}
                 <div className="flex flex-col gap-4">
                   <ProductCartToggle size="base" product={product.id} />
