@@ -10,14 +10,6 @@ export default defineConfig((options) => ({
   },
   dts: true,
   sourcemap: true,
-  external: [
-    'react',
-    '@headlessui/react',
-    'tailwind-merge',
-    'clsx',
-    'next',
-    'lucide-react',
-    'class-variance-authority',
-  ],
+  external: ['next'],
   ...options,
 }))

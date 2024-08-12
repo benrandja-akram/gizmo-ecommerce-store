@@ -1,4 +1,6 @@
-import { clsx } from '@/components/ui/clsx'
+'use client'
+
+import { clsx } from '@gizmo/ui'
 import { ArrowRightIcon } from 'lucide-react'
 import Link from 'next/link'
 
