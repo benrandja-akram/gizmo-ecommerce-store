@@ -4,6 +4,7 @@ import { Button } from '@/components/atoms/button'
 import { CommandPaletteDialog } from '@/components/atoms/command-palette-dialog'
 import { ProductFallback } from '@/components/ui/product-fallback'
 import { useDialog } from '@/hooks/use-dialog'
+import { clsx } from '@/utils/clsx'
 import {
   ExclamationCircleIcon,
   MagnifyingGlassIcon,
@@ -38,17 +39,20 @@ function Search() {
     if (open) queueMicrotask(() => inputRef.current?.focus())
   }, [open])
 
-  console.log({ open })
-
   return (
     <>
       <button
         onClick={setOpen.bind(undefined, true)}
-        className="text-gray-400 outline-none hover:text-gray-500"
+        className="group flex items-center gap-2 rounded-md text-sm text-gray-400 outline-none hover:text-gray-500 md:bg-gray-100 md:px-2.5 md:py-2 md:pr-8"
         aria-label="Rechercher"
       >
-        <span className="sr-only">Rechercher</span>
-        <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
+        <MagnifyingGlassIcon
+          className="h-6 w-6 md:h-5 md:w-5"
+          aria-hidden="true"
+        />
+        <span className="hidden text-gray-500 group-hover:text-gray-700 md:block">
+          Rechercher
+        </span>
       </button>
       <CommandPaletteDialog
         afterLeave={() => setQuery('')}
@@ -57,7 +61,10 @@ function Search() {
       >
         <div>
           <form
-            className="relative flex items-center"
+            className={clsx(
+              'relative flex items-center border-b',
+              query && 'border-b',
+            )}
             onSubmit={(e) => {
               e.preventDefault()
               startTransition(() => void router.push(`/search/${query}`))

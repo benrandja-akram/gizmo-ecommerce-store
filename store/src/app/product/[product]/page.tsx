@@ -122,15 +122,14 @@ export default async function ProductPage({
                       key={i}
                       className="flex h-full min-w-0 shrink-0 basis-4/5 flex-col sm:basis-3/5 md:basis-2/5 lg:basis-4/5"
                     >
-                      <div className="relative flex aspect-square min-h-full w-full min-w-full items-start justify-center overflow-hidden rounded-lg border bg-white">
-                        <div className="absolute inset-0 animate-pulse bg-slate-300" />
-                        <Zoom>
+                      <div className="relative flex aspect-square min-h-full w-full min-w-full items-center justify-center overflow-hidden rounded-lg border bg-white">
+                        <Zoom classDialog="min-w-full">
                           <Image
-                            className="fill w-full rounded bg-white object-cover object-center"
+                            className="fill h-full w-full rounded bg-white object-cover object-center"
                             src={image}
                             width={600}
                             height={600}
-                            quality={100}
+                            quality={80}
                             alt={''}
                           />
                         </Zoom>

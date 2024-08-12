@@ -31,7 +31,7 @@ function ProductCard({ showCategory, ...product }: Props) {
               src={product.images[0]}
               alt={''}
               fill
-              className="rounded-md object-cover object-center "
+              className="rounded-md object-cover object-center"
             />
           </div>
 

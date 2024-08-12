@@ -230,7 +230,7 @@ const CarouselNext = React.forwardRef<
     <button
       ref={ref}
       className={clsx(
-        'absolute hidden h-8 w-8 items-center justify-center rounded-full border bg-white lg:flex lg:h-12 lg:w-10 xl:h-12 xl:w-12',
+        'absolute hidden h-8 w-8 items-center justify-center rounded-full border bg-white lg:flex lg:h-10 lg:w-10 xl:h-12 xl:w-12',
         orientation === 'horizontal'
           ? '-right-3 top-1/2 -translate-y-1/2 sm:-right-5'
           : '-bottom-5 left-1/2 -translate-x-1/2 rotate-90',
