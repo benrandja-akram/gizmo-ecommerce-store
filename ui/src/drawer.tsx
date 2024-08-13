@@ -1,9 +1,4 @@
-import {
-  Dialog,
-  DialogPanel,
-  Transition,
-  TransitionChild,
-} from '@headlessui/react'
+import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 import { clsx } from './clsx'
 
@@ -18,9 +13,9 @@ function Drawer({
   side?: 'right' | 'left'
 }>) {
   return (
-    <Transition show={show} as={Fragment}>
+    <Transition.Root show={show} as={Fragment}>
       <Dialog as="div" className="relative z-20" onClose={onClose}>
-        <TransitionChild
+        <Transition.Child
           as={Fragment}
           enter="ease-in-out duration-500"
           enterFrom="opacity-0"
@@ -30,7 +25,7 @@ function Drawer({
           leaveTo="opacity-0"
         >
           <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
-        </TransitionChild>
+        </Transition.Child>
 
         <div className="fixed inset-0 overflow-hidden ">
           <div className="absolute inset-0 overflow-hidden">
@@ -40,7 +35,7 @@ function Drawer({
                 side === 'right' ? ' right-0' : 'left-0',
               )}
             >
-              <TransitionChild
+              <Transition.Child
                 as={Fragment}
                 enter="transform transition ease-in-out duration-500 sm:duration-700"
                 enterFrom={clsx(
@@ -53,15 +48,15 @@ function Drawer({
                   side === 'right' ? 'translate-x-full' : '-translate-x-full',
                 )}
               >
-                <DialogPanel className="pointer-events-auto w-screen max-w-[min(85vw,448px)] overflow-y-auto bg-white">
+                <Dialog.Panel className="pointer-events-auto w-screen max-w-[min(85vw,448px)] overflow-y-auto bg-white">
                   {children}
-                </DialogPanel>
-              </TransitionChild>
+                </Dialog.Panel>
+              </Transition.Child>
             </div>
           </div>
         </div>
       </Dialog>
-    </Transition>
+    </Transition.Root>
   )
 }
 

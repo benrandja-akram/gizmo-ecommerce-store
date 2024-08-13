@@ -27,11 +27,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "../ui/src/index.tsx",
-    "../ui/src/carousel.tsx",
-    "../ui/src/markdown.tsx",
-    "../ui/src/zoom.tsx",
-    "../ui/src/copy.tsx"
+    "../ui/src/index.tsx"
   ],
   "exclude": ["node_modules"]
 }

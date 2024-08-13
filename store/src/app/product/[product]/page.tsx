@@ -1,3 +1,10 @@
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel'
 import { AddToCart, ProductCartToggle } from '@/components/ui/cart'
 import { Policies } from '@/components/ui/policies'
 import { ProductCard } from '@/components/ui/product-card'
@@ -6,22 +13,15 @@ import {
   ProductsList,
   ProductsRoot,
 } from '@/components/ui/products-list'
+import { Zoom } from '@/components/ui/zoom'
 import { db } from '@/db'
-import {
-  Badge,
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-  Zoom,
-} from '@gizmo/ui'
+import { Badge } from '@gizmo/ui'
 import { CheckIcon } from '@heroicons/react/20/solid'
 import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import 'react-medium-image-zoom/dist/styles.css'
+
 const features = [
   'En stock',
   'Livraison à domicile 58 Wilaya',

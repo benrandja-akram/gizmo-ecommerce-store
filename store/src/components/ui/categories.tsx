@@ -1,12 +1,12 @@
+import { Category } from '@prisma/client'
+import Link from 'next/link'
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from '@gizmo/ui'
-import { Category } from '@prisma/client'
-import Link from 'next/link'
+} from './carousel'
 
 function CategoriesList({ categories }: { categories: Category[] }) {
   return (

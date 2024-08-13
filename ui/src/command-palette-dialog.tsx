@@ -1,6 +1,6 @@
 'use client'
 
-import { Dialog, Transition, TransitionChild } from '@headlessui/react'
+import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 
 function CommandPaletteDialog({
@@ -14,9 +14,9 @@ function CommandPaletteDialog({
   afterLeave(): void
 }>) {
   return (
-    <Transition show={open} as={Fragment} appear afterLeave={afterLeave}>
+    <Transition.Root show={open} as={Fragment} appear afterLeave={afterLeave}>
       <Dialog as="div" className="relative z-50" onClose={setOpen}>
-        <TransitionChild
+        <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
           enterFrom="opacity-0"
@@ -26,10 +26,10 @@ function CommandPaletteDialog({
           leaveTo="opacity-0"
         >
           <div className="fixed inset-0 bg-zinc-950/50 transition-opacity" />
-        </TransitionChild>
+        </Transition.Child>
 
         <div className="fixed inset-0 z-50 w-screen overflow-y-auto p-4 sm:p-6 md:p-20">
-          <TransitionChild
+          <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
             enterFrom="opacity-0 scale-95"
@@ -41,10 +41,10 @@ function CommandPaletteDialog({
             <Dialog.Panel className="z-50 mx-auto max-w-xl transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all">
               {children}
             </Dialog.Panel>
-          </TransitionChild>
+          </Transition.Child>
         </div>
       </Dialog>
-    </Transition>
+    </Transition.Root>
   )
 }
 
