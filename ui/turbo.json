@@ -2,11 +2,11 @@
   "extends": ["//"],
   "tasks": {
     "build": {
-      "dependsOn": ["^build", "^db:generate"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
     },
     "dev": {
-      "dependsOn": ["^build", "^db:generate"],
+      "dependsOn": ["^build"],
       "cache": false,
       "persistent": true
     },

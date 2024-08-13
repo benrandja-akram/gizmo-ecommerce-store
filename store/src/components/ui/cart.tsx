@@ -12,7 +12,6 @@ import {
   ListboxOption,
   clsx,
 } from '@gizmo/ui'
-import { Dialog } from '@headlessui/react'
 import {
   ShoppingBagIcon,
   TrashIcon,
@@ -86,9 +85,9 @@ function Cart() {
         <div className="flex h-full flex-col bg-white shadow-xl">
           <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
             <div className="flex items-start justify-between">
-              <Dialog.Title className="text-lg font-medium text-gray-900">
+              <h2 className="text-lg font-medium text-gray-900">
                 Votre panier
-              </Dialog.Title>
+              </h2>
               <div className="ml-3 flex h-7 items-center">
                 <button
                   type="button"

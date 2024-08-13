@@ -7,8 +7,8 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
-    "@prisma/client": "^5.10.2",
-    "prisma": "^5.10.2"
+    "@prisma/client": "^5.18.0",
+    "prisma": "^5.18.0"
   },
   "main": "./index.ts",
   "types": "./index.ts"
