@@ -19,6 +19,6 @@ npm run dev
 
 ## Screenshots
 
-![ Desktop ](/_screenshots/desktop-home.png)
-![ Desktop ](/_screenshots/desktop-cart.png)
-| ![ Mobile ](/_screenshots/mobile-home.png 'Title') | ![ Mobile ](/_screenshots/mobile-product.png 'Title') |
+![ Desktop ](/_screenshots/desktop.png)
+
+![ Desktop ](/_screenshots/mobile.png)
