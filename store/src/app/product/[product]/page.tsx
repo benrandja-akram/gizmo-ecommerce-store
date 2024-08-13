@@ -14,7 +14,7 @@ import {
   ProductsRoot,
 } from '@/components/ui/products-list'
 import { Zoom } from '@/components/ui/zoom'
-import { db } from '@/db'
+import { cmsClient } from '@/lib'
 import { Badge } from '@gizmo/ui'
 import { CheckIcon } from '@heroicons/react/20/solid'
 import { Metadata } from 'next'
@@ -36,11 +36,8 @@ export default async function ProductPage({
   params: Params
 }) {
   const [product, recommendedProducts] = await Promise.all([
-    db.product.findUnique({
-      where: { id },
-      include: { category: true },
-    }),
-    db.product.findMany({ take: 4, include: { category: true } }),
+    cmsClient.getProductById(id),
+    cmsClient.getRecommendedProducts(id),
   ])
 
   if (!product) notFound()
@@ -162,7 +159,7 @@ export default async function ProductPage({
 }
 
 export async function generateStaticParams() {
-  const products = await db.product.findMany()
+  const products = await cmsClient.getAllProducts()
 
   return products.map((product) => ({
     product: product.id,
@@ -174,9 +171,7 @@ export async function generateMetadata({
 }: {
   params: Params
 }): Promise<Metadata> {
-  const product = await db.product.findUnique({
-    where: { id },
-  })
+  const product = await cmsClient.getProductById(id)
 
   if (!product) return {}
 

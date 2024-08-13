@@ -2,12 +2,13 @@
 
 import { ProductFallback } from '@/components/ui/product-fallback'
 import { useDialog } from '@/hooks/use-dialog'
+import type { CMSCategory } from '@gizmo/cms'
 import { Button, CommandPaletteDialog, clsx } from '@gizmo/ui'
 import {
   ExclamationCircleIcon,
   MagnifyingGlassIcon,
 } from '@heroicons/react/24/outline'
-import type { Category, Product } from '@prisma/client'
+import type { Product } from '@prisma/client'
 import { ArrowRightIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -24,7 +25,7 @@ function Search() {
   const [inputQuery, setQuery] = useState('')
   const [query] = useDebounce(inputQuery, 300)
 
-  const { data, isLoading } = useSWR<(Product & { category: Category })[]>(
+  const { data, isLoading } = useSWR<(Product & { category: CMSCategory })[]>(
     open && query ? `search?query=${query}` : null,
     () =>
       fetch(`/api/products/search?query=${query}`).then((res) => res.json()),

@@ -1,4 +1,4 @@
-import { Category } from '@prisma/client'
+import type { CMSCategory } from '@gizmo/cms'
 import Link from 'next/link'
 import {
   Carousel,
@@ -8,7 +8,7 @@ import {
   CarouselPrevious,
 } from './carousel'
 
-function CategoriesList({ categories }: { categories: Category[] }) {
+function CategoriesList({ categories }: { categories: CMSCategory[] }) {
   return (
     <Carousel
       opts={{

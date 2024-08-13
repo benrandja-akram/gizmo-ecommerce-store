@@ -1,6 +1,6 @@
 import { Cart } from '@/components/ui/cart'
 import { Logo } from '@/components/ui/logo'
-import { db } from '@/db'
+import { cmsClient } from '@/lib'
 import {
   Button,
   Dropdown,
@@ -15,10 +15,7 @@ import { Search } from '../components/ui/search'
 import { MobileMenu } from './mobile-menu'
 
 async function Header() {
-  const categories = await db.category.findMany({
-    orderBy: { position: 'asc' },
-  })
-
+  const categories = await cmsClient.getCategories()
   return (
     <header className="sticky top-0 z-10">
       <nav className="border-b border-gray-200 bg-white px-4 shadow-sm sm:px-6 lg:px-8">

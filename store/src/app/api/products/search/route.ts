@@ -1,4 +1,4 @@
-import { db } from '@/db'
+import { cmsClient } from '@/lib'
 import { NextRequest, NextResponse } from 'next/server'
 
 async function GET(request: NextRequest) {
@@ -13,18 +13,7 @@ async function GET(request: NextRequest) {
   }
 
   try {
-    const products = await db.product.findMany({
-      where: {
-        name: {
-          contains: query,
-          mode: 'insensitive',
-        },
-      },
-      include: {
-        category: true,
-      },
-      take: 4,
-    })
+    const products = await cmsClient.searchProducts({ query, limit: 4 })
     if (process.env.NODE_ENV === 'development')
       await new Promise((res) => setTimeout(res, 1000))
     return NextResponse.json(products)

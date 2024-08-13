@@ -1,7 +1,7 @@
 'use client'
 
+import type { CMSCategory } from '@gizmo/cms'
 import { Label, Radio, RadioField, RadioGroup, clsx } from '@gizmo/ui'
-import { Category } from '@prisma/client'
 import { usePathname, useRouter } from 'next/navigation'
 import { useTransition } from 'react'
 
@@ -9,7 +9,7 @@ function Filters({
   categories,
   selectedCategory = 'all',
 }: {
-  categories: Category[]
+  categories: CMSCategory[]
   selectedCategory?: string
 }) {
   const router = useRouter()

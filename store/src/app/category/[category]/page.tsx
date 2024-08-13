@@ -5,7 +5,7 @@ import {
   ProductsList,
   ProductsRoot,
 } from '@/components/ui/products-list'
-import { db } from '@/db'
+import { cmsClient } from '@/lib'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
@@ -17,20 +17,9 @@ async function CategoryPage({
   params: Params
 }) {
   const [products, category, categories] = await Promise.all([
-    db.product.findMany({
-      where: {
-        categoryId: {
-          equals: categoryId,
-        },
-      },
-      orderBy: {
-        price: 'asc',
-      },
-    }),
-    db.category.findUnique({
-      where: { id: categoryId },
-    }),
-    db.category.findMany(),
+    cmsClient.getProductsByCategory(categoryId),
+    cmsClient.getCategoryById(categoryId),
+    cmsClient.getCategories(),
   ])
 
   if (!category) notFound()
@@ -74,7 +63,7 @@ async function CategoryPage({
 export const dynamicParams = false
 
 export async function generateStaticParams() {
-  const categories = await db.category.findMany()
+  const categories = await cmsClient.getCategories()
 
   return categories.map((category) => ({
     category: category.id,
@@ -86,18 +75,14 @@ export async function generateMetadata({
 }: {
   params: Params
 }): Promise<Metadata> {
-  const category = await db.category.findUnique({
-    where: { id },
-  })
+  const category = await cmsClient.getCategoryById(id)
 
   if (!category) return {}
 
   return {
     title: category.name,
-    description: category.description,
     openGraph: {
       title: category.name,
-      description: category.description ?? undefined,
     },
   }
 }

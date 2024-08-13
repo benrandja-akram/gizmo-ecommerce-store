@@ -4,7 +4,7 @@ import {
   ProductsList,
   ProductsRoot,
 } from '@/components/ui/products-list'
-import { db } from '@/db'
+import { cmsClient } from '@/lib'
 import { Filters } from './filters'
 
 async function SearchPage({
@@ -15,17 +15,10 @@ async function SearchPage({
   searchParams: { category?: string }
 }) {
   const [categories, products] = await Promise.all([
-    db.category.findMany(),
-    db.product.findMany({
-      include: { category: true },
-      orderBy: { price: 'asc' },
-      where: {
-        name: {
-          contains: query,
-          mode: 'insensitive',
-        },
-        categoryId: searchParams.category || undefined,
-      },
+    cmsClient.getCategories(),
+    cmsClient.searchProducts({
+      query,
+      category: searchParams.category || undefined,
     }),
   ])
 

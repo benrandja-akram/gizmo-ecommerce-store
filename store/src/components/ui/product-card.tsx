@@ -1,14 +1,13 @@
 'use client'
 
-import type { Category, Product } from '@/db'
+import type { CMSProductWithCategory } from '@gizmo/cms'
 import { clsx } from '@gizmo/ui'
 import { ZapIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ProductCartToggle } from './cart'
 
-type Props = Product & {
-  category: Category
+type Props = CMSProductWithCategory & {
   showCategory?: boolean
 }
 

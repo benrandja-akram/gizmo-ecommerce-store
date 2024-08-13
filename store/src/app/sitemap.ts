@@ -1,4 +1,4 @@
-import { db } from '@/db'
+import { cmsClient } from '@/lib'
 import { getURL } from '@/utils/utils'
 import { MetadataRoute } from 'next'
 
@@ -27,7 +27,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 }
 
 async function getProductsSitemap(): Promise<MetadataRoute.Sitemap> {
-  const products = await db.product.findMany({ select: { id: true } })
+  const products = await cmsClient.getAllProducts()
   return products.map((product) => {
     return {
       url: getURL(`/product/${product.id}`),
@@ -38,7 +38,7 @@ async function getProductsSitemap(): Promise<MetadataRoute.Sitemap> {
   })
 }
 async function getCategoriesSitemap(): Promise<MetadataRoute.Sitemap> {
-  const categories = await db.category.findMany({ select: { id: true } })
+  const categories = await cmsClient.getCategories()
   return categories.map((category) => {
     return {
       url: getURL(`/category/${category.id}`),

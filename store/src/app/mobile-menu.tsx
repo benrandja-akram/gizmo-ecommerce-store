@@ -2,14 +2,14 @@
 
 import { Logo } from '@/components/ui/logo'
 import { useDialog } from '@/hooks/use-dialog'
+import type { CMSCategory } from '@gizmo/cms'
 import { Drawer } from '@gizmo/ui'
 import { Bars3Icon } from '@heroicons/react/24/outline'
-import type { Category } from '@prisma/client'
 import { ChevronRightIcon, XIcon } from 'lucide-react'
 import Link from 'next/link'
 
 type Props = {
-  categories: Category[]
+  categories: CMSCategory[]
 }
 
 function MobileMenu({ categories }: Props) {

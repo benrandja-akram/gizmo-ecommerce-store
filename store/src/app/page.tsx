@@ -13,7 +13,7 @@ import {
   ProductsList,
   ProductsRoot,
 } from '@/components/ui/products-list'
-import { db } from '@/db'
+import { cmsClient } from '@/lib'
 import { ZapIcon } from 'lucide-react'
 
 const offers = [
@@ -32,46 +32,12 @@ const offers = [
 ]
 
 export default async function Home() {
-  const [categories, flashProducts, popularProducts, accessories, cpus] =
+  const [categories, flashProducts, popularProducts, featured] =
     await Promise.all([
-      db.category.findMany({ orderBy: { position: 'asc' } }),
-      db.product.findMany({
-        where: { isFlashSale: true },
-        include: { category: true },
-      }),
-      db.product.findMany({
-        take: 6,
-        include: {
-          category: true,
-        },
-      }),
-      db.product.findMany({
-        take: 6,
-        include: {
-          category: true,
-        },
-        where: {
-          categoryId: 'clavier-souris-tapis',
-          price: {
-            gt: 3000,
-          },
-        },
-        orderBy: {
-          price: 'asc',
-        },
-      }),
-      db.product.findMany({
-        take: 6,
-        include: {
-          category: true,
-        },
-        where: {
-          categoryId: 'cpu',
-        },
-        orderBy: {
-          price: 'asc',
-        },
-      }),
+      cmsClient.getCategories(),
+      cmsClient.getFlashSaleProducts(),
+      cmsClient.getPopularProducts(),
+      cmsClient.getFeaturedProducts(),
     ])
 
   return (
@@ -113,7 +79,11 @@ export default async function Home() {
           <ProductsList>
             {flashProducts.map((product) => (
               <li className="h-full" key={product.id}>
-                <ProductCard {...product} showCategory />
+                <ProductCard
+                  {...product}
+                  category={product.category}
+                  showCategory
+                />
               </li>
             ))}
           </ProductsList>
@@ -131,61 +101,41 @@ export default async function Home() {
           </ProductsList>
         </ProductsRoot>
 
-        <ProductsRoot className="pt-4 md:pt-16">
-          <ProductsHeader href={`/category/${accessories[0]?.category.id}`}>
-            {accessories[0]?.category.name}
-          </ProductsHeader>
-          <Carousel
-            opts={{
-              align: 'start',
-              dragFree: true,
-            }}
-            className="mt-8 w-full pb-6"
-          >
-            <CarouselContent className="items-stretch">
-              {accessories.map((product) => {
-                return (
-                  <CarouselItem
-                    key={product.id}
-                    className="flex h-full min-w-0 shrink-0 basis-[60%] flex-col sm:basis-[40%] md:basis-[28%] lg:basis-1/4"
-                  >
-                    <ProductCard {...product} showCategory />
-                  </CarouselItem>
-                )
-              })}
-            </CarouselContent>
-            <CarouselPrevious className="top-1/3  " />
-            <CarouselNext className="top-1/3  " />
-          </Carousel>
-        </ProductsRoot>
-
-        <ProductsRoot className="pt-4 md:pt-16">
-          <ProductsHeader href={`/category/${cpus[0]?.category.id}`}>
-            {cpus[0]?.category.name}
-          </ProductsHeader>
-          <Carousel
-            opts={{
-              align: 'start',
-              dragFree: true,
-            }}
-            className="mt-8 w-full pb-6"
-          >
-            <CarouselContent className="items-stretch">
-              {cpus.map((product) => {
-                return (
-                  <CarouselItem
-                    key={product.id}
-                    className="flex h-full min-w-0 shrink-0 basis-[60%] flex-col sm:basis-[40%] md:basis-[28%] lg:basis-1/4"
-                  >
-                    <ProductCard {...product} showCategory />
-                  </CarouselItem>
-                )
-              })}
-            </CarouselContent>
-            <CarouselPrevious className="top-1/3  " />
-            <CarouselNext className="top-1/3  " />
-          </Carousel>
-        </ProductsRoot>
+        {featured.map(({ category, products }) => {
+          return (
+            <ProductsRoot key={category.id} className="pt-4 md:pt-16">
+              <ProductsHeader href={`/category/${category.id}`}>
+                {category.name}
+              </ProductsHeader>
+              <Carousel
+                opts={{
+                  align: 'start',
+                  dragFree: true,
+                }}
+                className="mt-8 w-full pb-6"
+              >
+                <CarouselContent className="items-stretch">
+                  {products.map((product) => {
+                    return (
+                      <CarouselItem
+                        key={product.id}
+                        className="flex h-full min-w-0 shrink-0 basis-[60%] flex-col sm:basis-[40%] md:basis-[28%] lg:basis-1/4"
+                      >
+                        <ProductCard
+                          {...product}
+                          category={category}
+                          showCategory
+                        />
+                      </CarouselItem>
+                    )
+                  })}
+                </CarouselContent>
+                <CarouselPrevious className="top-1/3  " />
+                <CarouselNext className="top-1/3  " />
+              </Carousel>
+            </ProductsRoot>
+          )
+        })}
 
         <Policies />
       </main>

@@ -1,17 +1,13 @@
-import { db } from '@/db'
+import { cmsClient } from '@/lib'
 import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
 
 async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams
   try {
-    const products = await db.product.findMany({
-      where: {
-        id: {
-          in: searchParams.getAll('product'),
-        },
-      },
-    })
+    const products = await cmsClient.getProductsByIds(
+      searchParams.getAll('product'),
+    )
     const cartProducts = JSON.parse(cookies().get('cart')?.value ?? '') as {
       id: string
     }[]
