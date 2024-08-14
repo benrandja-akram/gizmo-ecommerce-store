@@ -1,11 +1,11 @@
 'use client'
 
-import { clsx } from '@gizmo/ui'
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from 'embla-carousel-react'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import * as React from 'react'
+import { clsx } from './clsx'
 
 type CarouselApi = UseEmblaCarouselType[1]
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>
@@ -42,7 +42,7 @@ function useCarousel() {
 
 const Carousel = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & CarouselProps
+  React.ComponentProps<'div'> & CarouselProps
 >(
   (
     {
@@ -150,7 +150,7 @@ Carousel.displayName = 'Carousel'
 
 const CarouselContent = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
+  React.ComponentProps<'div'>
 >(({ className, ...props }, ref) => {
   const { carouselRef, orientation } = useCarousel()
 
@@ -172,7 +172,7 @@ CarouselContent.displayName = 'CarouselContent'
 
 const CarouselItem = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
+  React.ComponentProps<'div'>
 >(({ className, ...props }, ref) => {
   const { orientation } = useCarousel()
 

@@ -23,5 +23,8 @@
     "apps/*",
     "packages/*"
   ],
-  "packageManager": "npm@10.1.0"
+  "packageManager": "npm@10.1.0",
+  "dependencies": {
+    "zustand": "^5.0.0-rc.1"
+  }
 }

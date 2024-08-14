@@ -1,12 +1,12 @@
 import type { CMSCategory } from '@gizmo/cms'
-import Link from 'next/link'
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from './carousel'
+} from '@gizmo/ui'
+import Link from 'next/link'
 
 function CategoriesList({ categories }: { categories: CMSCategory[] }) {
   return (

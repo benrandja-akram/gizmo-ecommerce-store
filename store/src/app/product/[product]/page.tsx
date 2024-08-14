@@ -1,10 +1,3 @@
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '@/components/ui/carousel'
 import { AddToCart, ProductCartToggle } from '@/components/ui/cart'
 import { Policies } from '@/components/ui/policies'
 import { ProductCard } from '@/components/ui/product-card'
@@ -15,7 +8,14 @@ import {
 } from '@/components/ui/products-list'
 import { Zoom } from '@/components/ui/zoom'
 import { cmsClient } from '@/lib'
-import { Badge } from '@gizmo/ui'
+import {
+  Badge,
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@gizmo/ui'
 import { CheckIcon } from '@heroicons/react/20/solid'
 import { Metadata } from 'next'
 import Image from 'next/image'

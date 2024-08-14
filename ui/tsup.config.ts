@@ -10,6 +10,14 @@ export default defineConfig((options) => ({
   },
   dts: true,
   sourcemap: true,
-  external: ['next'],
+  external: [
+    'next',
+    '@headlessui/react',
+    '@headlessui/tailwindcss',
+    'react',
+    'lucide-react',
+    'tailwind-merge',
+    'embla-carousel-react',
+  ],
   ...options,
 }))

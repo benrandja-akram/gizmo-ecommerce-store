@@ -21,6 +21,7 @@ import {
 import { Product } from '@prisma/client'
 import cookies from 'js-cookie'
 import { ArrowRightIcon, CheckCheckIcon, ShoppingCartIcon } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useEffect, useTransition } from 'react'
@@ -186,17 +187,20 @@ function CartProducts({ products }: { products: Product[] }) {
         .map((product) => (
           <li
             key={product.id}
-            className="animate-in fade-in-0 flex px-4 py-6 sm:px-6"
+            className="animate-in fade-in-0 flex items-start px-2 py-4 sm:px-6 sm:py-6"
           >
-            <div className="flex-shrink-0">
-              <img
-                src={product.images[0]}
-                alt={''}
-                className="w-20 rounded-md"
-              />
+            <div className="rounded-md border p-0.5 shadow-sm">
+              <div className="relative aspect-video   flex-shrink-0 ">
+                <Image
+                  src={product.images[0]}
+                  width={80}
+                  height={80}
+                  alt={''}
+                />
+              </div>
             </div>
 
-            <div className="ml-6 flex flex-1 flex-col">
+            <div className="ml-3 flex flex-1 flex-col sm:ml-6">
               <div className="flex">
                 <div className="min-w-0 flex-1">
                   <h4 className="text-sm">
@@ -213,7 +217,7 @@ function CartProducts({ products }: { products: Product[] }) {
                   <button
                     onClick={() => cart.removeItem(product.id)}
                     type="button"
-                    className="-m-2.5  flex items-center justify-center bg-white p-2.5 text-gray-600 hover:text-red-500"
+                    className="-m-2.5  flex items-center justify-center   p-2.5 text-gray-600 hover:text-red-500"
                   >
                     <span className="sr-only">Remove</span>
                     <TrashIcon className="h-6 w-6" aria-hidden="true" />
@@ -221,7 +225,7 @@ function CartProducts({ products }: { products: Product[] }) {
                 </div>
               </div>
 
-              <div className="flex flex-1 items-end justify-between pt-2">
+              <div className="flex flex-1 items-center justify-between pt-2">
                 <p className="mt-1 text-sm font-bold tabular-nums text-gray-900">
                   {product.price.toLocaleString()} DA
                 </p>
@@ -234,7 +238,7 @@ function CartProducts({ products }: { products: Product[] }) {
                         cart.updateQuantity(product.id, value)
                       }
                     >
-                      {new Array(4).fill(0).map((_, i) => {
+                      {new Array(5).fill(0).map((_, i) => {
                         return (
                           <ListboxOption key={i} value={i + 1}>
                             <ListboxLabel>{i + 1}</ListboxLabel>

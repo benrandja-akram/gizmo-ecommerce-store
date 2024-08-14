@@ -1,10 +1,3 @@
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '@/components/ui/carousel'
 import { CategoriesList } from '@/components/ui/categories'
 import { Policies } from '@/components/ui/policies'
 import { ProductCard } from '@/components/ui/product-card'
@@ -14,6 +7,13 @@ import {
   ProductsRoot,
 } from '@/components/ui/products-list'
 import { cmsClient } from '@/lib'
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@gizmo/ui'
 import { ZapIcon } from 'lucide-react'
 
 const offers = [
